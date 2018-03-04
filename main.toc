@@ -1,8 +1,11 @@
 \contentsline {chapter}{\numberline {1}Introduction}{2}
+\contentsline {section}{\numberline {1.1}Sentence Meaning as Representations}{4}
+\contentsline {section}{\numberline {1.2}Computational Semantic Representations}{4}
+\contentsline {section}{\numberline {1.3}Project Overview}{4}
 \contentsline {chapter}{\numberline {2}Background}{5}
-\contentsline {subsection}{\numberline {2.0.1}Semantic Textual Similarity (STS)}{5}
-\contentsline {subsection}{\numberline {2.0.2}STS Applications}{7}
-\contentsline {subsection}{\numberline {2.0.3}Word and Sentence Representions}{7}
+\contentsline {section}{\numberline {2.1}Semantic Textual Similarity (STS)}{5}
+\contentsline {subsection}{\numberline {2.1.1}STS Applications}{7}
+\contentsline {subsection}{\numberline {2.1.2}Word and Sentence Representions}{7}
 \contentsline {subsubsection}{Brief History}{7}
 \contentsline {subsubsection}{Neural Networks}{9}
 \contentsline {subsubsection}{Word Representation}{11}

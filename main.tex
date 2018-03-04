@@ -83,18 +83,21 @@
 	 In this project, we propose to systematically compare models that achieved the state of the art performance in Sem-Eval STS shared tasks \citep{cer2017semeval}.  In addition to the comparative study, we will also analyse the internal component of various architectures and their impact on STS task performance.
 	 
 	 The rest of the document is organized as follows. Section 2 gives a background of the techniques used to capture semantics in languages. Section 3 discusses about the existing sentence representation models and its limitations on sentence similarity task. Section 4 and 5 discusses about the proposed comparision study and its evalution metrics. In section 6, we explain the implementation details. In section 7,we present the timeline for the project.
-	
+	 
+\section{Sentence Meaning as Representations}
+\section{Computational Semantic Representations}
+\section{Project Overview}	
 %	There are numerous ways in which words can be combined to generate valid meaning full sentence.  In addition, languages are highly ambigous and variable in terms of syntactics and semantics where a sentence can have two different meaning or a two sentences with different syntactic structure can have same meaning. So just capturing the meaning of the words will never help in understanding the text.   
 	
 	
 %	For  The importance of languange processing has gone up in commercial space on arrival of question-answering systems like Apple's SIRI, Google Assistant, Facebook M, Microsoft Cortana and Amazon's Alexa that uses language processing to communicate with users.    
 
 \chapter{Background}
-\subsection{Semantic Textual Similarity (STS)}
+\section{Semantic Textual Similarity (STS)}
 
 Semantic Textual Similarity (STS) is the task of finding how two sentences are closely related in regard to its meaning \citep{agirre2012semeval}. It is used as a primary component in many natural language processing (NLP) applications. Until 2012, there was no unified framework available to study problems related to semantic analysis of text data. Because of this, it was difficult to measure the performance and impact of different sentence representation approaches on NLP applications. In 2012, Association of Computer Linguistics (ACL) introduced a shared task conference for STS. The main objective of the event was to clearly define the STS research problem and standardize the dataset for it. This shared task event encouraged extensive evaluation of the proposed approaches every year. \citep{agirre2012semeval}. STS task has two sub-tasks: 1) Sentence Relatedness, and 2) Recognizing Textual Entailment (RTE). Sentence Relatedness aims to find the semantic similarity score ranging from 0 to 5 between two sentences. The reasoning for the similarity score is further discussed in Table \ref{STS score}. Recognizing Textual Entailment measures the existence of meaning overlap between two sentences and classifies the relationship into three categories: 1) Entailment (E); 2) Contradiction (C); 3) Neutral (N).
 
-\subsubsection*{Task Description}
+\subsection*{Task Description}
 
 When it comes to predicting the measure of textual similarity, a list of sentence pairs $X =$ \{($S_{a1},S_{b1}$),.., ($S_{aN},S_{bN}$)\} is given as input. The sentence pairs come with similarity scores $Y$ = \{$Y_{ab1}, Y_{ab1},...., Y_{abN}$\} that takes a value ranging from 0 indicating no similarity to 5 indicating the high similarity between the sentences. The goal is to build a model that is able to produce the correct similarity score $Y_{ab}$ for each sentence pair \textbf($S_{ai},S_{bi}$).
 
@@ -182,7 +185,7 @@ To measure similarity between words, term-context matrix using words as its colu
 
 \begin{figure}[!tbp]
 	\centering
-	\includegraphics[scale=0.50]{neuron.jpg}
+	\includegraphics[scale=0.50]{image/neuron.jpg}
 	\caption{A simple neuron}
 	\label{neuron}
 \end{figure}
@@ -203,7 +206,7 @@ In this section, the working of a simple neural network is explained. A simple n
 	\centering
 	\caption{Netural Network}
 	\label{net}
-	\includegraphics[scale=0.44]{Trace_Back_Prop.jpg}
+	\includegraphics[scale=0.44]{image/Trace_Back_Prop.jpg}
 \end{figure} 
 
 
@@ -269,7 +272,7 @@ Inspired by these models, \cite{mikolov2014word2vec} proposed two novel methods:
 
 \begin{figure}[!tbp]
 	\centering
-	\includegraphics[scale=0.70]{train_samples.png}
+	\includegraphics[scale=0.70]{image/train_samples.png}
 	\caption{Training samples for skip-gram - Words pairs from raw corpus}
 	\label{train_sam}
 \end{figure}
@@ -291,7 +294,7 @@ p(w_{k} | w_{j}) = y_{k} = \frac{\exp( c_{k} \cdot v_{j})}{\sum_{i=1}^{|v|} \exp
 
 \begin{figure}[!tbp]
 	\centering
-	\includegraphics[scale=0.50]{cbows.png}
+	\includegraphics[scale=0.50]{image/cbows.png}
 	\caption{Context and Word matrices \citep{jurafsky2014speech}}
 	\label{C_W_matrics}
 \end{figure}
@@ -307,7 +310,7 @@ The prediction error is calculated by taking the derivative of $L$ with respect 
 
 \begin{figure}[!tbp]
 	\centering
-	\includegraphics[scale=0.50]{skip-gram.png}
+	\includegraphics[scale=0.50]{image/skip-gram.png}
 	\caption{Skip-gram Model \citep{jurafsky2014speech}}
 	\label{skipgram}
 \end{figure}
@@ -423,7 +426,7 @@ I have implemented the models proposed in \cite{shao2017hcti} and measured their
 		\begin{minipage}[b]{0.43\textwidth}
 		\centering
 		\label{CNN_1}
-		\includegraphics[scale=0.20]{CNN_sentModel.png}
+		\includegraphics[scale=0.20]{image/CNN_sentModel.png}
 		\caption{CNN Sentence Model \cite{severyn2015learning}}
 		\end{minipage}
 		\hfill
@@ -432,7 +435,7 @@ I have implemented the models proposed in \cite{shao2017hcti} and measured their
 		\caption{Hyperparameters for FCNN \cite{shao2017hcti}}
 		\label{params}
 		
-		\includegraphics[scale=0.35]{hyperparameters.png}
+		\includegraphics[scale=0.35]{image/hyperparameters.png}
 		
 		\end{minipage}
 	\end{figure}

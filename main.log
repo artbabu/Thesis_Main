@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.10)  4 MAR 2018 12:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.10)  4 MAR 2018 12:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -379,16 +379,20 @@ Missing character: There is no √ in font ptmr7t!
 Missing character: There is no º in font ptmr7t!
 [2
 
-] [3] [4]
+] [3]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.28> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 87.
+ [4]
 Chapter 2.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 93.
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 99.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 100.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 102.
+
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 99.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 102.
  [5
 
 ]
@@ -399,42 +403,45 @@ Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ù in font ptmr7t!
  [6] [7]
-<neuron.jpg, id=36, 653.44125pt x 332.24126pt>
-File: neuron.jpg Graphic file (type jpg)
- <use neuron.jpg>
-Package pdftex.def Info: neuron.jpg used on input line 185.
+<image/neuron.jpg, id=36, 653.44125pt x 332.24126pt>
+File: image/neuron.jpg Graphic file (type jpg)
+ <use image/neuron.jpg>
+Package pdftex.def Info: image/neuron.jpg used on input line 188.
 (pdftex.def)             Requested size: 326.71982pt x 166.12021pt.
- [8 <./neuron.jpg>] <Trace_Back_Prop.jpg, id=40, 555.07375pt x 252.945pt>
-File: Trace_Back_Prop.jpg Graphic file (type jpg)
 
-<use Trace_Back_Prop.jpg>
-Package pdftex.def Info: Trace_Back_Prop.jpg used on input line 206.
+[8 <./image/neuron.jpg>]
+<image/Trace_Back_Prop.jpg, id=40, 555.07375pt x 252.945pt>
+File: image/Trace_Back_Prop.jpg Graphic file (type jpg)
+
+<use image/Trace_Back_Prop.jpg>
+Package pdftex.def Info: image/Trace_Back_Prop.jpg used on input line 209.
 (pdftex.def)             Requested size: 244.23318pt x 111.29614pt.
- [9 <./Trace_Back_Prop.jpg>] [10]
-<train_samples.png, id=48, 426.8748pt x 254.8722pt>
-File: train_samples.png Graphic file (type png)
- <use train_samples.png>
-Package pdftex.def Info: train_samples.png used on input line 272.
+ [9 <./image/Trace_Back_Prop.jpg>] [10]
+<image/train_samples.png, id=48, 426.8748pt x 254.8722pt>
+File: image/train_samples.png Graphic file (type png)
+
+<use image/train_samples.png>
+Package pdftex.def Info: image/train_samples.png used on input line 275.
 (pdftex.def)             Requested size: 298.81032pt x 178.40932pt.
-
-[11 <./train_samples.png>] <cbows.png, id=53, 669.50125pt x 280.04625pt>
-File: cbows.png Graphic file (type png)
-
-<use cbows.png>
-Package pdftex.def Info: cbows.png used on input line 294.
+ [11 <./image/train_samples.png>]
+<image/cbows.png, id=53, 669.50125pt x 280.04625pt>
+File: image/cbows.png Graphic file (type png)
+ <use image/cbows.png>
+Package pdftex.def Info: image/cbows.png used on input line 297.
 (pdftex.def)             Requested size: 334.7498pt x 140.02277pt.
- [12 <./cbows.png>]
-<skip-gram.png, id=61, 674.52pt x 327.2225pt>
-File: skip-gram.png Graphic file (type png)
- <use skip-gram.png>
-Package pdftex.def Info: skip-gram.png used on input line 310.
+
+[12 <./image/cbows.png>] <image/skip-gram.png, id=61, 674.52pt x 327.2225pt>
+File: image/skip-gram.png Graphic file (type png)
+
+<use image/skip-gram.png>
+Package pdftex.def Info: image/skip-gram.png used on input line 313.
 (pdftex.def)             Requested size: 337.25917pt x 163.61084pt.
- [13 <./skip-gram.png>] [14] [15]
+ [13 <./image/skip-gram.png>] [14] [15]
 Chapter 3.
 [16
 
 ] [17]
-Overfull \hbox (15.12422pt too wide) in paragraph at lines 351--354
+Overfull \hbox (15.12422pt too wide) in paragraph at lines 354--357
 \OT1/ptm/m/n/12 from Mikolov et al. (2013). For any three con-sec-u-tive sen-te
 nces in the doc-u-ment $\OML/cmm/m/it/12 S[]; S[]; S[]$\OT1/ptm/m/n/12 ,
  []
@@ -446,33 +453,32 @@ Chapter 4.
 ] [21]
 Chapter 5.
 
-Overfull \hbox (0.34146pt too wide) in paragraph at lines 397--398
+Overfull \hbox (0.34146pt too wide) in paragraph at lines 400--401
 []\OT1/ptm/m/n/12 Although com-plex mod-els give bet-ter ac-cu-racy, they take 
 a long time to train. Analysing
  []
 
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 406.
 [22
 
-] [23] <CNN_sentModel.png, id=98, 1349.04pt x 827.09pt>
-File: CNN_sentModel.png Graphic file (type png)
+] [23] <image/CNN_sentModel.png, id=98, 1349.04pt x 827.09pt>
+File: image/CNN_sentModel.png Graphic file (type png)
 
-<use CNN_sentModel.png>
-Package pdftex.def Info: CNN_sentModel.png used on input line 426.
+<use image/CNN_sentModel.png>
+Package pdftex.def Info: image/CNN_sentModel.png used on input line 429.
 (pdftex.def)             Requested size: 269.80322pt x 165.41505pt.
 
-Overfull \hbox (83.34981pt too wide) in paragraph at lines 426--427
+Overfull \hbox (83.34981pt too wide) in paragraph at lines 429--430
  [][] 
  []
 
-<hyperparameters.png, id=99, 469.755pt x 562.1pt>
-File: hyperparameters.png Graphic file (type png)
- <use hyperparameters.png>
-Package pdftex.def Info: hyperparameters.png used on input line 435.
+<image/hyperparameters.png, id=99, 469.755pt x 562.1pt>
+File: image/hyperparameters.png Graphic file (type png)
+
+<use image/hyperparameters.png>
+Package pdftex.def Info: image/hyperparameters.png used on input line 438.
 (pdftex.def)             Requested size: 164.41672pt x 196.73795pt.
 
-Overfull \hbox (34.32939pt too wide) in paragraph at lines 435--436
+Overfull \hbox (34.32939pt too wide) in paragraph at lines 438--439
  [][] 
  []
 
@@ -480,8 +486,8 @@ Overfull \hbox (34.32939pt too wide) in paragraph at lines 435--436
 Missing character: There is no ‚ in font cmr12!
 Missing character: There is no à in font cmr12!
 Missing character: There is no í in font cmr12!
- (./main.bbl [25 <./CNN_sentModel.png> <./hyperparameters.png>] [26]
-[27
+ (./main.bbl [25 <./image/CNN_sentModel.png> <./image/hyperparameters.png>] [26
+] [27
 
 ] [28] [29]
 Missing character: There is no ‚ in font ptmr7t!
@@ -489,8 +495,8 @@ Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no î in font ptmr7t!
  [30]) [31] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 4807 strings out of 494953
- 70095 string characters out of 6180976
+ 4808 strings out of 494953
+ 70269 string characters out of 6180976
  134816 words of memory out of 5000000
  7991 multiletter control sequences out of 15000+600000
  24841 words of font info for 61 fonts, out of 8000000 for 9000
@@ -507,7 +513,7 @@ ts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr
 8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (32 pages, 535884 bytes).
+Output written on main.pdf (32 pages, 536201 bytes).
 PDF statistics:
  164 PDF objects out of 1000 (max. 8388607)
  107 compressed objects within 2 object streams

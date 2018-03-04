@@ -1,0 +1,19 @@
+\contentsline {chapter}{\numberline {1}Introduction}{2}
+\contentsline {chapter}{\numberline {2}Background}{5}
+\contentsline {subsection}{\numberline {2.0.1}Semantic Textual Similarity (STS)}{5}
+\contentsline {subsection}{\numberline {2.0.2}STS Applications}{7}
+\contentsline {subsection}{\numberline {2.0.3}Word and Sentence Representions}{7}
+\contentsline {subsubsection}{Brief History}{7}
+\contentsline {subsubsection}{Neural Networks}{9}
+\contentsline {subsubsection}{Word Representation}{11}
+\contentsline {subsubsection}{Sentence Representation Model}{13}
+\contentsline {subsubsection}{STS Features and Accurracy}{14}
+\contentsline {subsubsection}{STS Dataset}{14}
+\contentsline {chapter}{\numberline {3}Related Work}{16}
+\contentsline {subsection}{\numberline {3.0.1}Traditional Machine Learning Models}{16}
+\contentsline {subsection}{\numberline {3.0.2}Neural Models}{18}
+\contentsline {chapter}{\numberline {4}Proposed Work}{20}
+\contentsline {chapter}{\numberline {5}Evaluation}{22}
+\contentsline {section}{\numberline {5.1}Implementations}{23}
+\contentsline {subsection}{\numberline {5.1.1}A Simple CNN Model For STS Task}{23}
+\contentsline {section}{\numberline {5.2}TimeLine}{25}

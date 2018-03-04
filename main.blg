@@ -1,0 +1,60 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+The style file: plainnat.bst
+Database file #1: sample.bib
+Repeated entry---line 126 of file sample.bib
+ : @inproceedings{marelli2014semeval
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 179 of file sample.bib
+ : @inproceedings{pennington2014glove
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 213 of file sample.bib
+ : @inproceedings{pennington2014glove
+ :                                   ,
+I'm skipping whatever remains of this entry
+Warning--empty journal in salton1971smart
+You've used 27 entries,
+            2773 wiz_defined-function locations,
+            745 strings with 11906 characters,
+and the built_in function-call counts, 17422 in all, are:
+= -- 1565
+> -- 1107
+< -- 30
++ -- 372
+- -- 345
+* -- 1372
+:= -- 2494
+add.period$ -- 88
+call.type$ -- 27
+change.case$ -- 194
+chr.to.int$ -- 27
+cite$ -- 55
+duplicate$ -- 797
+empty$ -- 1326
+format.name$ -- 378
+if$ -- 3810
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 27
+newline$ -- 143
+num.names$ -- 108
+pop$ -- 456
+preamble$ -- 1
+purify$ -- 168
+quote$ -- 0
+skip$ -- 699
+stack$ -- 0
+substring$ -- 775
+swap$ -- 233
+text.length$ -- 23
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 292
+warning$ -- 1
+while$ -- 145
+width$ -- 0
+write$ -- 362
+(There were 3 error messages)

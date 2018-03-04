@@ -1,0 +1,57 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main_v2.aux
+The style file: plainnat.bst
+Database file #1: sample.bib
+Repeated entry---line 117 of file sample.bib
+ : @inproceedings{marelli2014semeval
+ :                                  ,
+I'm skipping whatever remains of this entry
+"}" immediately follows an entry type---line 120 of file sample.bib
+ :  booktitle={SemEval@ COLING
+ :                            },
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "sem-eval2105"
+Warning--I didn't find a database entry for "glove"
+You've used 18 entries,
+            2773 wiz_defined-function locations,
+            684 strings with 9008 characters,
+and the built_in function-call counts, 10971 in all, are:
+= -- 953
+> -- 771
+< -- 13
++ -- 258
+- -- 240
+* -- 889
+:= -- 1628
+add.period$ -- 56
+call.type$ -- 18
+change.case$ -- 133
+chr.to.int$ -- 18
+cite$ -- 36
+duplicate$ -- 488
+empty$ -- 798
+format.name$ -- 262
+if$ -- 2347
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 18
+newline$ -- 98
+num.names$ -- 72
+pop$ -- 295
+preamble$ -- 1
+purify$ -- 115
+quote$ -- 0
+skip$ -- 427
+stack$ -- 0
+substring$ -- 387
+swap$ -- 118
+text.length$ -- 10
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 198
+warning$ -- 0
+while$ -- 86
+width$ -- 0
+write$ -- 236
+(There were 2 error messages)

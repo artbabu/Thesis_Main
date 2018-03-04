@@ -1,0 +1,218 @@
+\begin{thebibliography}{27}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Agirre et~al.(2012)Agirre, Diab, Cer, and
+  Gonzalez-Agirre]{agirre2012semeval}
+Eneko Agirre, Mona Diab, Daniel Cer, and Aitor Gonzalez-Agirre.
+\newblock Semeval-2012 task 6: A pilot on semantic textual similarity.
+\newblock In \emph{Proceedings of the First Joint Conference on Lexical and
+  Computational Semantics-Volume 1: Proceedings of the main conference and the
+  shared task, and Volume 2: Proceedings of the Sixth International Workshop on
+  Semantic Evaluation}, pages 385--393. Association for Computational
+  Linguistics, 2012.
+
+\bibitem[Agirre et~al.(2015)Agirre, Banea, Cardie, Cer, Diab, Gonzalez-Agirre,
+  Guo, Lopez-Gazpio, Maritxalar, Mihalcea, et~al.]{agirre2015semeval}
+Eneko Agirre, Carmen Banea, Claire Cardie, Daniel Cer, Mona Diab, Aitor
+  Gonzalez-Agirre, Weiwei Guo, Inigo Lopez-Gazpio, Montse Maritxalar, Rada
+  Mihalcea, et~al.
+\newblock Semeval-2015 task 2: Semantic textual similarity, english, spanish
+  and pilot on interpretability.
+\newblock In \emph{Proceedings of the 9th international workshop on semantic
+  evaluation (SemEval 2015)}, pages 252--263, 2015.
+
+\bibitem[Agirre et~al.(2016)Agirre, Banea, Cer, Diab, Gonzalez-Agirre,
+  Mihalcea, Rigau, and Wiebe]{agirre2016semeval}
+Eneko Agirre, Carmen Banea, Daniel~M Cer, Mona~T Diab, Aitor Gonzalez-Agirre,
+  Rada Mihalcea, German Rigau, and Janyce Wiebe.
+\newblock Semeval-2016 task 1: Semantic textual similarity, monolingual and
+  cross-lingual evaluation.
+\newblock In \emph{SemEval@ NAACL-HLT}, pages 497--511, 2016.
+
+\bibitem[Bengio et~al.(2003)Bengio, Ducharme, Vincent, and
+  Jauvin]{bengio2003neural}
+Yoshua Bengio, R{\'e}jean Ducharme, Pascal Vincent, and Christian Jauvin.
+\newblock A neural probabilistic language model.
+\newblock \emph{Journal of machine learning research}, 3\penalty0
+  (Feb):\penalty0 1137--1155, 2003.
+
+\bibitem[Bowman et~al.(2015)Bowman, Angeli, Potts, and
+  Manning]{bowman2015large}
+Samuel~R Bowman, Gabor Angeli, Christopher Potts, and Christopher~D Manning.
+\newblock A large annotated corpus for learning natural language inference.
+\newblock In \emph{Proceedings of the 2015 Conference on Empirical Methods in
+  Natural Language Processing}, pages 632--642, 2015.
+
+\bibitem[Cer et~al.(2017)Cer, Diab, Agirre, Lopez-Gazpio, and
+  Specia]{cer2017semeval}
+Daniel Cer, Mona Diab, Eneko Agirre, Inigo Lopez-Gazpio, and Lucia Specia.
+\newblock Semeval-2017 task 1: Semantic textual similarity multilingual and
+  crosslingual focused evaluation.
+\newblock In \emph{Proceedings of the 11th International Workshop on Semantic
+  Evaluation (SemEval-2017)}, pages 1--14, 2017.
+
+\bibitem[Cho et~al.(2014)Cho, van Merrienboer, Gulcehre, Bahdanau, Bougares,
+  Schwenk, and Bengio]{cho2014learning}
+Kyunghyun Cho, Bart van Merrienboer, Caglar Gulcehre, Dzmitry Bahdanau, Fethi
+  Bougares, Holger Schwenk, and Yoshua Bengio.
+\newblock Learning phrase representations using rnn encoder--decoder for
+  statistical machine translation.
+\newblock In \emph{Proceedings of the 2014 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}, pages 1724--1734, 2014.
+
+\bibitem[Collobert and Weston(2008)]{collobert2008unified}
+Ronan Collobert and Jason Weston.
+\newblock A unified architecture for natural language processing: Deep neural
+  networks with multitask learning.
+\newblock In \emph{Proceedings of the 25th international conference on Machine
+  learning}, pages 160--167. ACM, 2008.
+
+\bibitem[Collobert et~al.(2011)Collobert, Weston, Bottou, Karlen, Kavukcuoglu,
+  and Kuksa]{collobert2011natural}
+Ronan Collobert, Jason Weston, L{\'e}on Bottou, Michael Karlen, Koray
+  Kavukcuoglu, and Pavel Kuksa.
+\newblock Natural language processing (almost) from scratch.
+\newblock \emph{Journal of Machine Learning Research}, 12\penalty0
+  (Aug):\penalty0 2493--2537, 2011.
+
+\bibitem[Conneau et~al.(2017)Conneau, Kiela, Schwenk, Barrault, and
+  Bordes]{conneau2017supervised}
+Alexis Conneau, Douwe Kiela, Holger Schwenk, Lo{\"\i}c Barrault, and Antoine
+  Bordes.
+\newblock Supervised learning of universal sentence representations from
+  natural language inference data.
+\newblock In \emph{Proceedings of the 2017 Conference on Empirical Methods in
+  Natural Language Processing}, pages 670--680, 2017.
+
+\bibitem[Deerwester et~al.(1989)Deerwester, Dumais, Furnas, Harshman, Landauer,
+  Lochbaum, and Streeter]{deerwester1989computer}
+Scott~C Deerwester, Susan~T Dumais, George~W Furnas, Richard~A Harshman,
+  Thomas~K Landauer, Karen~E Lochbaum, and Lynn~A Streeter.
+\newblock Computer information retrieval using latent semantic structure,
+  June~13 1989.
+\newblock US Patent 4,839,853.
+
+\bibitem[Firth(1957)]{firth1957synopsis}
+John~R Firth.
+\newblock A synopsis of linguistic theory, 1930-1955.
+\newblock \emph{Studies in linguistic analysis}, 1957.
+
+\bibitem[Han et~al.(2013)Han, Kashyap, Finin, Mayfield, and
+  Weese]{han2013umbc_ebiquity}
+Lushan Han, Abhay~L Kashyap, Tim Finin, James Mayfield, and Jonathan Weese.
+\newblock Umbc\_ebiquity-core: semantic textual similarity systems.
+\newblock In \emph{Second Joint Conference on Lexical and Computational
+  Semantics (* SEM), Volume 1: Proceedings of the Main Conference and the
+  Shared Task: Semantic Textual Similarity}, volume~1, pages 44--52, 2013.
+
+\bibitem[Harris(1954)]{harris1970distributional}
+Zellig~S Harris.
+\newblock Distributional structure.
+\newblock In \emph{Papers in structural and transformational linguistics},
+  pages 775--794. Springer, 1954.
+
+\bibitem[Hill et~al.(2016)Hill, Cho, and Korhonen]{hill2016learning}
+Felix Hill, Kyunghyun Cho, and Anna Korhonen.
+\newblock Learning distributed representations of sentences from unlabelled
+  data.
+\newblock In \emph{Proceedings of the 2016 Conference of the North American
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies}, pages 1367--1377, 2016.
+
+\bibitem[Jurafsky and Martin(2014)]{jurafsky2014speech}
+Dan Jurafsky and James~H Martin.
+\newblock \emph{Speech and language processing}, volume~3.
+\newblock Pearson London, 2014.
+
+\bibitem[Kiros et~al.(2015)Kiros, Zhu, Salakhutdinov, Zemel, Torralba, Urtasun,
+  and Fidler]{kiros2015skip}
+Ryan Kiros, Yukun Zhu, Ruslan Salakhutdinov, Richard~S Zemel, Antonio Torralba,
+  Raquel Urtasun, and Sanja Fidler.
+\newblock Skip-thought vectors.
+\newblock In \emph{Proceedings of the 28th International Conference on Neural
+  Information Processing Systems-Volume 2}, pages 3294--3302. MIT Press, 2015.
+
+\bibitem[Marelli et~al.(2014)Marelli, Bentivogli, Baroni, Bernardi, Menini, and
+  Zamparelli]{marelli2014semeval}
+Marco Marelli, Luisa Bentivogli, Marco Baroni, Raffaella Bernardi, Stefano
+  Menini, and Roberto Zamparelli.
+\newblock Semeval-2014 task 1: Evaluation of compositional distributional
+  semantic models on full sentences through semantic relatedness and textual
+  entailment.
+\newblock In \emph{Proceedings of the 8th international workshop on semantic
+  evaluation (SemEval 2014)}, pages 1--8, 2014.
+
+\bibitem[Mikolov et~al.(2011)Mikolov, Kombrink, Burget, {\v{C}}ernock{\`y}, and
+  Khudanpur]{mikolov2011extensions}
+Tom{\'a}{\v{s}} Mikolov, Stefan Kombrink, Luk{\'a}{\v{s}} Burget, Jan
+  {\v{C}}ernock{\`y}, and Sanjeev Khudanpur.
+\newblock Extensions of recurrent neural network language model.
+\newblock In \emph{Acoustics, Speech and Signal Processing (ICASSP), 2011 IEEE
+  International Conference on}, pages 5528--5531. IEEE, 2011.
+
+\bibitem[Mikolov et~al.(2013)Mikolov, Sutskever, Chen, Corrado, and
+  Dean]{mikolov2014word2vec}
+Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado, and Jeffrey Dean.
+\newblock Distributed representations of words and phrases and their
+  compositionality.
+\newblock In \emph{Proceedings of the 26th International Conference on Neural
+  Information Processing Systems-Volume 2}, pages 3111--3119. Curran Associates
+  Inc., 2013.
+
+\bibitem[Pagliardini et~al.(2017)Pagliardini, Gupta, and
+  Jaggi]{pagliardini2017unsupervised}
+Matteo Pagliardini, Prakhar Gupta, and Martin Jaggi.
+\newblock Unsupervised learning of sentence embeddings using compositional
+  n-gram features.
+\newblock \emph{arXiv preprint arXiv:1703.02507}, 2017.
+
+\bibitem[Pennington et~al.(2014)Pennington, Socher, and
+  Manning]{pennington2014glove}
+Jeffrey Pennington, Richard Socher, and Christopher Manning.
+\newblock Glove: Global vectors for word representation.
+\newblock In \emph{Proceedings of the 2014 conference on empirical methods in
+  natural language processing (EMNLP)}, pages 1532--1543, 2014.
+
+\bibitem[Salton(1971)]{salton1971smart}
+Gerard Salton.
+\newblock The smart retrieval system—experiments in automatic document
+  processing.
+\newblock 1971.
+
+\bibitem[Severyn and Moschitti(2015)]{severyn2015learning}
+Aliaksei Severyn and Alessandro Moschitti.
+\newblock Learning to rank short text pairs with convolutional deep neural
+  networks.
+\newblock In \emph{Proceedings of the 38th International ACM SIGIR Conference
+  on Research and Development in Information Retrieval}, pages 373--382. ACM,
+  2015.
+
+\bibitem[Shao(2017)]{shao2017hcti}
+Yang Shao.
+\newblock Hcti at semeval-2017 task 1: Use convolutional neural network to
+  evaluate semantic textual similarity.
+\newblock In \emph{Proceedings of the 11th International Workshop on Semantic
+  Evaluation (SemEval-2017)}, pages 130--133, 2017.
+
+\bibitem[Tai et~al.(2015)Tai, Socher, and Manning]{tai2015improved}
+Kai~Sheng Tai, Richard Socher, and Christopher~D Manning.
+\newblock Improved semantic representations from tree-structured long
+  short-term memory networks.
+\newblock In \emph{Proceedings of the 53rd Annual Meeting of the Association
+  for Computational Linguistics and the 7th International Joint Conference on
+  Natural Language Processing (Volume 1: Long Papers)}, volume~1, pages
+  1556--1566, 2015.
+
+\bibitem[Tian et~al.(2017)Tian, Zhou, Lan, and Wu]{tian2017ecnu}
+Junfeng Tian, Zhiheng Zhou, Man Lan, and Yuanbin Wu.
+\newblock Ecnu at semeval-2017 task 1: Leverage kernel-based traditional nlp
+  features and neural networks to build a universal model for multilingual and
+  cross-lingual semantic textual similarity.
+\newblock In \emph{Proceedings of the 11th International Workshop on Semantic
+  Evaluation (SemEval-2017)}, pages 191--197, 2017.
+
+\end{thebibliography}

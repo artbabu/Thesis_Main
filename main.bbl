@@ -1,4 +1,4 @@
-\begin{thebibliography}{27}
+\begin{thebibliography}{34}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -40,12 +40,23 @@ Yoshua Bengio, R{\'e}jean Ducharme, Pascal Vincent, and Christian Jauvin.
 \newblock \emph{Journal of machine learning research}, 3\penalty0
   (Feb):\penalty0 1137--1155, 2003.
 
+\bibitem[Blei et~al.(2003)Blei, Ng, and Jordan]{blei2003latent}
+David~M Blei, Andrew~Y Ng, and Michael~I Jordan.
+\newblock Latent dirichlet allocation.
+\newblock \emph{Journal of machine Learning research}, 3\penalty0
+  (Jan):\penalty0 993--1022, 2003.
+
 \bibitem[Bowman et~al.(2015)Bowman, Angeli, Potts, and
   Manning]{bowman2015large}
 Samuel~R Bowman, Gabor Angeli, Christopher Potts, and Christopher~D Manning.
 \newblock A large annotated corpus for learning natural language inference.
 \newblock In \emph{Proceedings of the 2015 Conference on Empirical Methods in
   Natural Language Processing}, pages 632--642, 2015.
+
+\bibitem[Brown and Huntley(1992)]{brown1992practical}
+Donald~E Brown and Christopher~L Huntley.
+\newblock A practical application of simulated annealing to clustering.
+\newblock \emph{Pattern recognition}, 25\penalty0 (4):\penalty0 401--412, 1992.
 
 \bibitem[Cer et~al.(2017)Cer, Diab, Agirre, Lopez-Gazpio, and
   Specia]{cer2017semeval}
@@ -136,6 +147,12 @@ Ryan Kiros, Yukun Zhu, Ruslan Salakhutdinov, Richard~S Zemel, Antonio Torralba,
 \newblock In \emph{Proceedings of the 28th International Conference on Neural
   Information Processing Systems-Volume 2}, pages 3294--3302. MIT Press, 2015.
 
+\bibitem[Luong et~al.(2015)Luong, Pham, and Manning]{luong2015effective}
+Thang Luong, Hieu Pham, and Christopher~D Manning.
+\newblock Effective approaches to attention-based neural machine translation.
+\newblock In \emph{Proceedings of the 2015 Conference on Empirical Methods in
+  Natural Language Processing}, pages 1412--1421, 2015.
+
 \bibitem[Marelli et~al.(2014)Marelli, Bentivogli, Baroni, Bernardi, Menini, and
   Zamparelli]{marelli2014semeval}
 Marco Marelli, Luisa Bentivogli, Marco Baroni, Raffaella Bernardi, Stefano
@@ -163,12 +180,26 @@ Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado, and Jeffrey Dean.
   Information Processing Systems-Volume 2}, pages 3111--3119. Curran Associates
   Inc., 2013.
 
+\bibitem[Ng(2018)]{SeqMod2018Andrew}
+Andrew Ng.
+\newblock Sequence models course, deeplearning.ai.
+\newblock 2018.
+\newblock URL
+  \url{https://www.coursera.org/learn/nlp-sequence-models/home/welcome}.
+
 \bibitem[Pagliardini et~al.(2017)Pagliardini, Gupta, and
   Jaggi]{pagliardini2017unsupervised}
 Matteo Pagliardini, Prakhar Gupta, and Martin Jaggi.
 \newblock Unsupervised learning of sentence embeddings using compositional
   n-gram features.
 \newblock \emph{arXiv preprint arXiv:1703.02507}, 2017.
+
+\bibitem[Pedersen et~al.(2004)Pedersen, Patwardhan, and
+  Michelizzi]{pedersen2004wordnet}
+Ted Pedersen, Siddharth Patwardhan, and Jason Michelizzi.
+\newblock Wordnet:: Similarity: measuring the relatedness of concepts.
+\newblock In \emph{Demonstration papers at HLT-NAACL 2004}, pages 38--41.
+  Association for Computational Linguistics, 2004.
 
 \bibitem[Pennington et~al.(2014)Pennington, Socher, and
   Manning]{pennington2014glove}
@@ -198,6 +229,16 @@ Yang Shao.
 \newblock In \emph{Proceedings of the 11th International Workshop on Semantic
   Evaluation (SemEval-2017)}, pages 130--133, 2017.
 
+\bibitem[Socher et~al.(2011)Socher, Pennington, Huang, Ng, and
+  Manning]{socher2011semi}
+Richard Socher, Jeffrey Pennington, Eric~H Huang, Andrew~Y Ng, and
+  Christopher~D Manning.
+\newblock Semi-supervised recursive autoencoders for predicting sentiment
+  distributions.
+\newblock In \emph{Proceedings of the conference on empirical methods in
+  natural language processing}, pages 151--161. Association for Computational
+  Linguistics, 2011.
+
 \bibitem[Tai et~al.(2015)Tai, Socher, and Manning]{tai2015improved}
 Kai~Sheng Tai, Richard Socher, and Christopher~D Manning.
 \newblock Improved semantic representations from tree-structured long
@@ -214,5 +255,14 @@ Junfeng Tian, Zhiheng Zhou, Man Lan, and Yuanbin Wu.
   cross-lingual semantic textual similarity.
 \newblock In \emph{Proceedings of the 11th International Workshop on Semantic
   Evaluation (SemEval-2017)}, pages 191--197, 2017.
+
+\bibitem[Wen et~al.(2015)Wen, Gasic, Mrk{\v{s}}i{\'c}, Su, Vandyke, and
+  Young]{wen2015semantically}
+Tsung-Hsien Wen, Milica Gasic, Nikola Mrk{\v{s}}i{\'c}, Pei-Hao Su, David
+  Vandyke, and Steve Young.
+\newblock Semantically conditioned lstm-based natural language generation for
+  spoken dialogue systems.
+\newblock In \emph{Proceedings of the 2015 Conference on Empirical Methods in
+  Natural Language Processing}, pages 1711--1721, 2015.
 
 \end{thebibliography}

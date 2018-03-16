@@ -1,22 +1,42 @@
-\contentsline {chapter}{\numberline {1}Introduction}{2}
-\contentsline {section}{\numberline {1.1}Sentence Meaning as Representations}{4}
-\contentsline {section}{\numberline {1.2}Computational Semantic Representations}{4}
-\contentsline {section}{\numberline {1.3}Project Overview}{4}
-\contentsline {chapter}{\numberline {2}Background}{5}
-\contentsline {section}{\numberline {2.1}Semantic Textual Similarity (STS)}{5}
-\contentsline {subsection}{\numberline {2.1.1}STS Applications}{7}
-\contentsline {subsection}{\numberline {2.1.2}Word and Sentence Representions}{7}
-\contentsline {subsubsection}{Brief History}{7}
-\contentsline {subsubsection}{Neural Networks}{9}
-\contentsline {subsubsection}{Word Representation}{11}
-\contentsline {subsubsection}{Sentence Representation Model}{13}
-\contentsline {subsubsection}{STS Features and Accurracy}{14}
-\contentsline {subsubsection}{STS Dataset}{14}
-\contentsline {chapter}{\numberline {3}Related Work}{16}
-\contentsline {subsection}{\numberline {3.0.1}Traditional Machine Learning Models}{16}
-\contentsline {subsection}{\numberline {3.0.2}Neural Models}{18}
-\contentsline {chapter}{\numberline {4}Proposed Work}{20}
-\contentsline {chapter}{\numberline {5}Evaluation}{22}
-\contentsline {section}{\numberline {5.1}Implementations}{23}
-\contentsline {subsection}{\numberline {5.1.1}A Simple CNN Model For STS Task}{23}
-\contentsline {section}{\numberline {5.2}TimeLine}{25}
+\contentsline {chapter}{\numberline {1}Introduction}{3}
+\contentsline {section}{\numberline {1.1}Natural Language Semantics}{3}
+\contentsline {section}{\numberline {1.2}Computational Semantics}{5}
+\contentsline {section}{\numberline {1.3}Project Overview}{6}
+\contentsline {chapter}{\numberline {2}Background}{7}
+\contentsline {section}{\numberline {2.1}Semantic Textual Similarity (STS)}{7}
+\contentsline {subsection}{\numberline {2.1.1}STS Applications}{8}
+\contentsline {subsection}{\numberline {2.1.2}Data for STS}{9}
+\contentsline {section}{\numberline {2.2}Brief History of Meaning Reprsentations}{10}
+\contentsline {section}{\numberline {2.3}Machine Learning models}{12}
+\contentsline {subsection}{\numberline {2.3.1}Traditional ML models}{12}
+\contentsline {subsection}{\numberline {2.3.2}Neural Networks}{15}
+\contentsline {section}{\numberline {2.4}Word Vector Representaions}{17}
+\contentsline {section}{\numberline {2.5}Sentence Representation Model}{20}
+\contentsline {chapter}{\numberline {3}Related Work}{22}
+\contentsline {section}{\numberline {3.1}Traditional Machine Learning Models}{22}
+\contentsline {section}{\numberline {3.2}Neural Models}{24}
+\contentsline {chapter}{\numberline {4}Modeling Sentence Encoders}{27}
+\contentsline {section}{\numberline {4.1}Ensemble Model}{29}
+\contentsline {subsection}{\numberline {4.1.1}Features}{30}
+\contentsline {subsection}{\numberline {4.1.2}Learning Models}{31}
+\contentsline {section}{\numberline {4.2}Convoutional Neural Network}{32}
+\contentsline {subsection}{\numberline {4.2.1}Sentence Model using CNN}{33}
+\contentsline {subsection}{\numberline {4.2.2}Similarity Measure using FCNN}{34}
+\contentsline {section}{\numberline {4.3}Recurrent Neural Network}{35}
+\contentsline {subsection}{\numberline {4.3.1}Bi-LSTM with max pooling}{35}
+\contentsline {subsubsection}{Semantic Difference Matrix}{36}
+\contentsline {subsubsection}{Textual Entailment Classifier}{38}
+\contentsline {section}{\numberline {4.4}Summary}{38}
+\contentsline {chapter}{\numberline {5}Experiments}{39}
+\contentsline {section}{\numberline {5.1}Encoder Architectures - Performance}{40}
+\contentsline {subsection}{\numberline {5.1.1}Experiment Setup}{41}
+\contentsline {subsubsection}{Ensemble Model}{41}
+\contentsline {subsubsection}{CNN Model}{41}
+\contentsline {subsubsection}{Bi-LSTM Model}{41}
+\contentsline {subsection}{\numberline {5.1.2}Experiment}{41}
+\contentsline {subsection}{\numberline {5.1.3}Analysis}{41}
+\contentsline {subsection}{\numberline {5.1.4}Ensemble Model}{41}
+\contentsline {section}{\numberline {5.2}Encoder Architectures - Hyperparameter Tuning}{41}
+\contentsline {section}{\numberline {5.3}Features Impact}{41}
+\contentsline {section}{\numberline {5.4}Representation Dimension Size}{41}
+\contentsline {section}{\numberline {5.5}Transfer Learning}{41}

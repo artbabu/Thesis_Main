@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.10)  15 MAR 2018 20:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.10)  16 MAR 2018 19:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -232,7 +232,17 @@ Package: epigraph 2009/09/02 v1.5c typesetting epigraphs
 \afterepigraphskip=\skip54
 \epigraphwidth=\skip55
 \epigraphrule=\skip56
-) (./main.aux)
+) (./main.aux
+
+LaTeX Warning: Label `my-label' multiply defined.
+
+
+LaTeX Warning: Label `my-label' multiply defined.
+
+
+LaTeX Warning: Label `my-label' multiply defined.
+
+)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
@@ -248,8 +258,7 @@ LaTeX Font Info:    ... okay on input line 40.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
 LaTeX Font Info:    ... okay on input line 40.
 LaTeX Font Info:    Try loading font information for OT1+ptm on input line 40.
-
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 Package caption Info: Begin \AtBeginDocument code.
@@ -384,63 +393,60 @@ Missing character: There is no √ in font ptmri7t!
 Missing character: There is no º in font ptmri7t!
  [4] [5] [6]
 Chapter 2.
-[7
-
-]
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ú in font ptmr7t!
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ù in font ptmr7t!
+[7
+
+]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 204.
- [8] [9] [10] <image/doc-word.png, id=41, 595.22375pt x 177.66376pt>
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 206.
+ [8] [9]
+Overfull \hbox (2.3576pt too wide) in paragraph at lines 222--223
+[]\OT1/ptm/m/n/12 Forum dis-cus-sions about be-liefs from the DEFT Com-mit-ted 
+Be-lief An-no-ta-tion dataset 
+ []
+
+[10] <image/doc-word.png, id=41, 595.22375pt x 177.66376pt>
 File: image/doc-word.png Graphic file (type png)
 
 <use image/doc-word.png>
-Package pdftex.def Info: image/doc-word.png used on input line 235.
+Package pdftex.def Info: image/doc-word.png used on input line 237.
 (pdftex.def)             Requested size: 178.5685pt x 53.29953pt.
-
-Overfull \hbox (5.12315pt too wide) in paragraph at lines 235--236
- [][] 
- []
-
-<image/word-word.png, id=43, 642.4pt x 178.6675pt>
+ <image/word-word.png, id=43, 642.4pt x 178.6675pt>
 File: image/word-word.png Graphic file (type png)
- <use image/word-word.png>
-Package pdftex.def Info: image/word-word.png used on input line 241.
+
+<use image/word-word.png>
+Package pdftex.def Info: image/word-word.png used on input line 243.
 (pdftex.def)             Requested size: 192.72148pt x 53.60065pt.
-
-Overfull \hbox (19.27614pt too wide) in paragraph at lines 241--242
- [][] 
- []
-
-[11 <./image/doc-word.png> <./image/word-word.png>]
+ [11 <./image/doc-word.png> <./image/word-word.png>]
 <image/tree.png, id=50, 361.35pt x 341.275pt>
 File: image/tree.png Graphic file (type png)
  <use image/tree.png>
-Package pdftex.def Info: image/tree.png used on input line 259.
+Package pdftex.def Info: image/tree.png used on input line 261.
 (pdftex.def)             Requested size: 180.67456pt x 170.63707pt.
  [12 <./image/tree.png (PNG copy)>] <image/rf.jpg, id=58, 853.1875pt x 428.6012
 6pt>
 File: image/rf.jpg Graphic file (type jpg)
 
 <use image/rf.jpg>
-Package pdftex.def Info: image/rf.jpg used on input line 269.
+Package pdftex.def Info: image/rf.jpg used on input line 271.
 (pdftex.def)             Requested size: 341.26895pt x 171.43745pt.
  [13 <./image/rf.jpg>] [14]
 <image/neuron.jpg, id=66, 653.44125pt x 332.24126pt>
 File: image/neuron.jpg Graphic file (type jpg)
  <use image/neuron.jpg>
-Package pdftex.def Info: image/neuron.jpg used on input line 297.
+Package pdftex.def Info: image/neuron.jpg used on input line 299.
 (pdftex.def)             Requested size: 326.71982pt x 166.12021pt.
 
 <image/Trace_Back_Prop.jpg, id=67, 555.07375pt x 252.945pt>
 File: image/Trace_Back_Prop.jpg Graphic file (type jpg)
 
 <use image/Trace_Back_Prop.jpg>
-Package pdftex.def Info: image/Trace_Back_Prop.jpg used on input line 314.
+Package pdftex.def Info: image/Trace_Back_Prop.jpg used on input line 316.
 (pdftex.def)             Requested size: 244.23318pt x 111.29614pt.
 
 
@@ -451,125 +457,142 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: image/train_samples.png Graphic file (type png)
 
 <use image/train_samples.png>
-Package pdftex.def Info: image/train_samples.png used on input line 378.
+Package pdftex.def Info: image/train_samples.png used on input line 380.
 (pdftex.def)             Requested size: 298.81032pt x 178.40932pt.
- [18 <./image/train_samples.png>]
-<image/cbows.png, id=83, 669.50125pt x 280.04625pt>
+
+<image/cbows.png, id=78, 669.50125pt x 280.04625pt>
 File: image/cbows.png Graphic file (type png)
  <use image/cbows.png>
-Package pdftex.def Info: image/cbows.png used on input line 400.
+Package pdftex.def Info: image/cbows.png used on input line 389.
 (pdftex.def)             Requested size: 334.7498pt x 140.02277pt.
 
-<image/skip-gram.png, id=84, 674.52pt x 327.2225pt>
+[18 <./image/train_samples.png> <./image/cbows.png>]
+<image/skip-gram.png, id=85, 674.52pt x 327.2225pt>
 File: image/skip-gram.png Graphic file (type png)
  <use image/skip-gram.png>
-Package pdftex.def Info: image/skip-gram.png used on input line 415.
+Package pdftex.def Info: image/skip-gram.png used on input line 417.
 (pdftex.def)             Requested size: 337.25917pt x 163.61084pt.
 
-[19 <./image/cbows.png>] [20 <./image/skip-gram.png>] [21]
+[19] [20 <./image/skip-gram.png>]
 Chapter 3.
-[22
+[21
 
-] [23]
-Overfull \hbox (15.12422pt too wide) in paragraph at lines 453--456
+] [22]
+Overfull \hbox (15.12422pt too wide) in paragraph at lines 458--461
 \OT1/ptm/m/n/12 from Mikolov et al. (2013). For any three con-sec-u-tive sen-te
 nces in the doc-u-ment $\OML/cmm/m/it/12 S[]; S[]; S[]$\OT1/ptm/m/n/12 ,
  []
 
-[24] [25] [26]
+[23] [24] [25]
 Chapter 4.
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 480.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 485.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 480.
- [27
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 485.
+ [26
 
-] [28]
-<image/Ensemble.png, id=119, 630.355pt x 595.22375pt>
+] [27]
+<image/Ensemble.png, id=116, 630.355pt x 595.22375pt>
 File: image/Ensemble.png Graphic file (type png)
  <use image/Ensemble.png>
-Package pdftex.def Info: image/Ensemble.png used on input line 509.
+Package pdftex.def Info: image/Ensemble.png used on input line 516.
 (pdftex.def)             Requested size: 252.13753pt x 238.08528pt.
 
-[29] [30 <./image/Ensemble.png>] [31]
+[28] [29 <./image/Ensemble.png>] [30]
 LaTeX Font Info:    Font shape `OMS/ptm/m/it' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 545.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 552.
 
-Overfull \hbox (3.37442pt too wide) in paragraph at lines 545--546
-[]\OT1/ptm/m/n/12 The RTE task is a clas-si-fi-ca-tion prob-lem that con-sist t
-hree tar-get clasess  \OT1/ptm/m/it/12 C =\OMS/cmsy/m/n/12 f\OT1/ptm/m/it/12 en
-tailment,
+Overfull \hbox (20.31828pt too wide) in paragraph at lines 552--553
+[]\OT1/ptm/m/n/12 The RTE task is a clas-si-fi-ca-tion prob-lem that con-sists 
+of three tar-get clasess  \OT1/ptm/m/it/12 C =\OMS/cmsy/m/n/12 f\OT1/ptm/m/it/1
+2 entailment,
  []
 
-[32] [33] <image/CNN_sentModel.png, id=138, 1349.04pt x 827.09pt>
+
+Package caption Warning: \label without proper reference on input line 572.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `CNN_1' on page 31 undefined on input line 562.
+
+[31] <image/CNN_sentModel.png, id=131, 1349.04pt x 827.09pt>
 File: image/CNN_sentModel.png Graphic file (type png)
 
 <use image/CNN_sentModel.png>
-Package pdftex.def Info: image/CNN_sentModel.png used on input line 566.
+Package pdftex.def Info: image/CNN_sentModel.png used on input line 574.
 (pdftex.def)             Requested size: 269.80322pt x 165.41505pt.
 
-Overfull \hbox (83.34981pt too wide) in paragraph at lines 566--567
+Overfull \hbox (83.34981pt too wide) in paragraph at lines 574--575
  [][] 
  []
 
-<image/hyperparameters.png, id=139, 469.755pt x 562.1pt>
+<image/hyperparameters.png, id=132, 469.755pt x 562.1pt>
 File: image/hyperparameters.png Graphic file (type png)
 
 <use image/hyperparameters.png>
-Package pdftex.def Info: image/hyperparameters.png used on input line 575.
+Package pdftex.def Info: image/hyperparameters.png used on input line 582.
 (pdftex.def)             Requested size: 164.41672pt x 196.73795pt.
 
-Overfull \hbox (34.32939pt too wide) in paragraph at lines 575--576
+Overfull \hbox (34.32939pt too wide) in paragraph at lines 582--583
  [][] 
  []
 
-[34 <./image/CNN_sentModel.png> <./image/hyperparameters.png>]
-<image/LSTM.png, id=143, 756.8275pt x 601.24625pt>
+[32] [33 <./image/CNN_sentModel.png> <./image/hyperparameters.png>]
+<image/LSTM.png, id=140, 756.8275pt x 601.24625pt>
 File: image/LSTM.png Graphic file (type png)
  <use image/LSTM.png>
-Package pdftex.def Info: image/LSTM.png used on input line 603.
+Package pdftex.def Info: image/LSTM.png used on input line 610.
 (pdftex.def)             Requested size: 302.72563pt x 240.49423pt.
 
-[35] <image/Bi-LSTM.png, id=147, 629.35126pt x 600.2425pt>
+[34] <image/Bi-LSTM.png, id=144, 629.35126pt x 600.2425pt>
 File: image/Bi-LSTM.png Graphic file (type png)
 
 <use image/Bi-LSTM.png>
-Package pdftex.def Info: image/Bi-LSTM.png used on input line 612.
+Package pdftex.def Info: image/Bi-LSTM.png used on input line 619.
 (pdftex.def)             Requested size: 314.67485pt x 300.12051pt.
- [36 <./image/LSTM.png>] [37 <./image/Bi-LSTM.png>]
-[38]
+ [35 <./image/LSTM.png>] [36 <./image/Bi-LSTM.png>]
+[37]
 Chapter 5.
 
-Overfull \hbox (0.34146pt too wide) in paragraph at lines 643--644
+Overfull \hbox (0.34146pt too wide) in paragraph at lines 650--651
 []\OT1/ptm/m/n/12 Although com-plex mod-els give bet-ter ac-cu-racy, they take 
 a long time to train. Analysing
  []
 
-[39
+[38
 
 ]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 673.
+               Default added (so using `tbp') on input line 678.
+
+[39]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 698.
 
 
-Overfull \hbox (36.8598pt too wide) in paragraph at lines 677--689
- [][] 
- []
-
-[40] (./main.bbl
-Overfull \vbox (32.95105pt too high) has occurred while \output is active []
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 724.
 
 
-[41] [42
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 742.
+
+(./main.bbl
+Overfull \vbox (31.75107pt too high) has occurred while \output is active []
+
+
+[40] [41] [42
 
 ] [43] [44]
 LaTeX Font Info:    Try loading font information for OT1+pcr on input line 188.
 
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 Underfull \hbox (badness 10000) in paragraph at lines 184--189
@@ -586,28 +609,35 @@ Overfull \hbox (34.72968pt too wide) in paragraph at lines 184--189
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no î in font ptmr7t!
-[45]) [46] (./main.aux) ) 
+[45]) [46] (./main.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 4909 strings out of 494953
- 72030 string characters out of 6180976
- 135297 words of memory out of 5000000
- 8080 multiletter control sequences out of 15000+600000
+ 4911 strings out of 494953
+ 72040 string characters out of 6180976
+ 137360 words of memory out of 5000000
+ 8082 multiletter control sequences out of 15000+600000
  25356 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 42i,14n,42p,1613b,380s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r
-.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utm
-b8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (47 pages, 889555 bytes).
+ 42i,14n,42p,1621b,372s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbol
+s/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (47 pages, 894978 bytes).
 PDF statistics:
  229 PDF objects out of 1000 (max. 8388607)
  144 compressed objects within 2 object streams

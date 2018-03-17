@@ -24,12 +24,12 @@
 \@writefile{toc}{\contentsline {section}{\numberline {1.3}Project Overview}{6}}
 \citation{agirre2012semeval}
 \citation{agirre2012semeval}
+\citation{agirre2016semeval}
+\citation{agirre2016semeval}
 \@writefile{toc}{\contentsline {chapter}{\numberline {2}Background}{7}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {2.1}Semantic Textual Similarity (STS)}{7}}
-\citation{agirre2016semeval}
-\citation{agirre2016semeval}
 \citation{jurafsky2014speech}
 \citation{jurafsky2014speech}
 \citation{agirre2016semeval}
@@ -48,11 +48,12 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Data for STS}{9}}
 \citation{bowman2015large}
 \citation{salton1971smart}
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}Brief History of Meaning Reprsentations}{10}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Brief History of Meaning Representation}{10}}
+\citation{jurafsky2014speech}
 \citation{jurafsky2014speech}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces  Term-Document Matrix\relax }}{11}}
 \newlabel{doc-word}{{2.1}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Term-Term Matrix\relax }}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Term-Context Matrix\relax }}{11}}
 \newlabel{word-word}{{2.2}{11}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces A simple Decision Tree\relax }}{12}}
 \newlabel{tree}{{2.3}{12}}
@@ -63,36 +64,37 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces A simple neuron\relax }}{15}}
 \newlabel{neuron}{{2.5}{15}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Neural Networks}{15}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Netural Network\relax }}{16}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Neural Network\relax }}{16}}
 \newlabel{net}{{2.6}{16}}
-\citation{firth1957synopsis}
 \citation{brown1992practical}
 \citation{blei2003latent}
 \citation{bengio2003neural}
 \citation{collobert2008unified}
 \citation{mikolov2014word2vec}
 \citation{kiros2015skip}
-\@writefile{toc}{\contentsline {section}{\numberline {2.4}Word Vector Representaions}{17}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}Word Vector Representation}{17}}
+\citation{jurafsky2014speech}
+\citation{jurafsky2014speech}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Training samples for skip-gram - Words pairs from raw corpus\relax }}{18}}
 \newlabel{train_sam}{{2.7}{18}}
-\citation{jurafsky2014speech}
-\citation{jurafsky2014speech}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Context and Word matrices \citep  {jurafsky2014speech}\relax }}{18}}
+\newlabel{C_W_matrics}{{2.8}{18}}
 \citation{mikolov2014word2vec}
 \citation{jurafsky2014speech}
 \citation{jurafsky2014speech}
 \citation{conneau2017supervised}
 \citation{kiros2015skip}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Context and Word matrices \citep  {jurafsky2014speech}\relax }}{19}}
-\newlabel{C_W_matrics}{{2.8}{19}}
+\newlabel{eq1}{{2.10}{19}}
+\newlabel{eq2}{{2.11}{19}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.5}Sentence Representation Model}{19}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.9}{\ignorespaces Skip-gram Model \citep  {jurafsky2014speech}\relax }}{20}}
 \newlabel{skipgram}{{2.9}{20}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.5}Sentence Representation Model}{20}}
 \citation{conneau2017supervised}
 \citation{conneau2017supervised}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Related Work}{22}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Related Work}{21}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Traditional Machine Learning Models}{22}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Traditional Machine Learning Models}{21}}
 \citation{han2013umbc_ebiquity}
 \citation{han2013umbc_ebiquity}
 \citation{agirre2015semeval}
@@ -103,7 +105,7 @@
 \citation{cho2014learning}
 \citation{marelli2014semeval}
 \citation{tai2015improved}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Neural Models}{24}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Neural Models}{23}}
 \citation{shao2017hcti}
 \citation{pennington2014glove}
 \citation{pagliardini2017unsupervised}
@@ -112,7 +114,7 @@
 \citation{kiros2015skip}
 \citation{hill2016learning}
 \citation{conneau2017supervised}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Modeling Sentence Encoders}{27}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Modeling Sentence Encoders}{26}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \citation{shao2017hcti}
@@ -124,59 +126,65 @@
 \citation{tian2017ecnu}
 \citation{tian2017ecnu}
 \citation{tian2017ecnu}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Ensemble Model}{29}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Ensemble Model \citep  {tian2017ecnu}\relax }}{30}}
-\newlabel{ensemble}{{4.1}{30}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Features}{30}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Learning Models}{31}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Convoutional Neural Network}{32}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Ensemble Model}{28}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Features}{28}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Ensemble Model \citep  {tian2017ecnu}\relax }}{29}}
+\newlabel{ensemble}{{4.1}{29}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Learning Models}{30}}
 \citation{shao2017hcti}
 \citation{pennington2014glove}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Sentence Model using CNN}{33}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Convoutional Neural Network}{31}}
 \citation{severyn2015learning}
 \citation{severyn2015learning}
 \citation{shao2017hcti}
 \citation{shao2017hcti}
-\newlabel{CNN_1}{{\caption@xref {CNN_1}{ on input line 565}}{34}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces CNN Sentence Model \cite  {severyn2015learning}\relax }}{34}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Hyperparameters for FCNN \cite  {shao2017hcti}\relax }}{34}}
-\newlabel{params}{{4.3}{34}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Similarity Measure using FCNN}{34}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Sentence Model using CNN}{32}}
+\newlabel{CNN_1}{{\caption@xref {CNN_1}{ on input line 572}}{33}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces CNN Sentence Model \cite  {severyn2015learning}\relax }}{33}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Hyperparameters for FCNN \cite  {shao2017hcti}\relax }}{33}}
+\newlabel{params}{{4.3}{33}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Similarity Measure using FCNN}{33}}
 \citation{conneau2017supervised}
 \citation{SeqMod2018Andrew}
 \citation{SeqMod2018Andrew}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}Recurrent Neural Network}{35}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Bi-LSTM with max pooling}{35}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Recurrent Neural Network}{34}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Bi-LSTM with max pooling}{34}}
 \citation{conneau2017supervised}
 \citation{conneau2017supervised}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces A Single LSTM cell \citep  {SeqMod2018Andrew}\relax }}{36}}
-\newlabel{lstm}{{4.4}{36}}
-\@writefile{toc}{\contentsline {subsubsection}{Semantic Difference Matrix}{36}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces A Bi-LSTM Network \citep  {conneau2017supervised}\relax }}{37}}
-\newlabel{bilstm}{{4.5}{37}}
-\@writefile{toc}{\contentsline {subsubsection}{Textual Entailment Classifier}{38}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}Summary}{38}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Experiments}{39}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces A Single LSTM cell \citep  {SeqMod2018Andrew}\relax }}{35}}
+\newlabel{lstm}{{4.4}{35}}
+\@writefile{toc}{\contentsline {subsubsection}{Semantic Difference Matrix}{35}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces A Bi-LSTM Network \citep  {conneau2017supervised}\relax }}{36}}
+\newlabel{bilstm}{{4.5}{36}}
+\@writefile{toc}{\contentsline {subsubsection}{Textual Entailment Classifier}{37}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Summary}{37}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Experiments}{38}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \citation{cer2017semeval}
 \citation{bowman2015large}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Encoder Architectures - Performance}{40}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Encoder Architectures - Performance}{39}}
 \bibstyle{plainnat}
 \bibdata{sample}
-\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces My caption\relax }}{41}}
-\newlabel{my-label}{{5.1}{41}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Experiment Setup}{41}}
-\@writefile{toc}{\contentsline {subsubsection}{Ensemble Model}{41}}
-\@writefile{toc}{\contentsline {subsubsection}{CNN Model}{41}}
-\@writefile{toc}{\contentsline {subsubsection}{Bi-LSTM Model}{41}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Experiment}{41}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Analysis}{41}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.4}Ensemble Model}{41}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Encoder Architectures - Hyperparameter Tuning}{41}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Features Impact}{41}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.4}Representation Dimension Size}{41}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.5}Transfer Learning}{41}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces  Peformance in Recognizing Textual Entailment\relax }}{40}}
+\newlabel{my-label}{{5.1}{40}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Experiment Setup}{40}}
+\@writefile{toc}{\contentsline {subsubsection}{Ensemble Model}{40}}
+\@writefile{toc}{\contentsline {subsubsection}{CNN Model}{40}}
+\@writefile{toc}{\contentsline {subsubsection}{Bi-LSTM Model}{40}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Experiment}{40}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Analysis}{40}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.4}Ensemble Model}{40}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Encoder Architectures - Hyperparameter Tuning}{40}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Features Impact}{40}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}Representation Dimension Size}{40}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.5}Transfer Learning}{40}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces Performance in Sentence Relatedness\relax }}{41}}
+\newlabel{my-label}{{5.2}{41}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.3}{\ignorespaces Sentence Representation Dimension\relax }}{41}}
+\newlabel{my-label}{{5.3}{41}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.4}{\ignorespaces Transfer Learning\relax }}{41}}
+\newlabel{my-label}{{5.4}{41}}
 \bibcite{agirre2012semeval}{{1}{2012}{{Agirre et~al.}}{{Agirre, Diab, Cer, and Gonzalez-Agirre}}}
 \bibcite{agirre2015semeval}{{2}{2015}{{Agirre et~al.}}{{Agirre, Banea, Cardie, Cer, Diab, Gonzalez-Agirre, Guo, Lopez-Gazpio, Maritxalar, Mihalcea, et~al.}}}
 \bibcite{agirre2016semeval}{{3}{2016}{{Agirre et~al.}}{{Agirre, Banea, Cer, Diab, Gonzalez-Agirre, Mihalcea, Rigau, and Wiebe}}}

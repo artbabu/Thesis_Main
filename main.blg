@@ -21,45 +21,45 @@ Repeated entry---line 274 of file sample.bib
 I'm skipping whatever remains of this entry
 Warning--empty booktitle in SeqMod2018Andrew
 Warning--empty journal in salton1971smart
-You've used 34 entries,
+You've used 36 entries,
             2773 wiz_defined-function locations,
-            784 strings with 13206 characters,
-and the built_in function-call counts, 21531 in all, are:
-= -- 1946
-> -- 1333
-< -- 36
-+ -- 448
-- -- 414
-* -- 1693
-:= -- 3077
-add.period$ -- 112
-call.type$ -- 34
-change.case$ -- 238
-chr.to.int$ -- 34
-cite$ -- 70
-duplicate$ -- 994
-empty$ -- 1665
-format.name$ -- 456
-if$ -- 4713
+            794 strings with 13661 characters,
+and the built_in function-call counts, 22732 in all, are:
+= -- 2052
+> -- 1411
+< -- 39
++ -- 474
+- -- 438
+* -- 1783
+:= -- 3250
+add.period$ -- 119
+call.type$ -- 36
+change.case$ -- 252
+chr.to.int$ -- 36
+cite$ -- 74
+duplicate$ -- 1053
+empty$ -- 1759
+format.name$ -- 484
+if$ -- 4980
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 34
-newline$ -- 179
-num.names$ -- 136
-pop$ -- 557
+missing$ -- 36
+newline$ -- 189
+num.names$ -- 144
+pop$ -- 592
 preamble$ -- 1
-purify$ -- 205
+purify$ -- 217
 quote$ -- 0
-skip$ -- 859
+skip$ -- 907
 stack$ -- 0
-substring$ -- 978
-swap$ -- 282
-text.length$ -- 27
+substring$ -- 1010
+swap$ -- 298
+text.length$ -- 29
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 369
+type$ -- 391
 warning$ -- 2
-while$ -- 182
+while$ -- 192
 width$ -- 0
-write$ -- 455
+write$ -- 482
 (There were 4 error messages)

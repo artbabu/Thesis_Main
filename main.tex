@@ -7,7 +7,7 @@
 % \usepackage[margin=1in]{geometry}
 
 
-\linespread{1.5}
+\linespread{2}
 \usepackage{multirow}
 \usepackage{amsmath,amsthm,amssymb}
 \usepackage{subcaption,graphicx}
@@ -20,6 +20,14 @@
 \usepackage[margin=1.25in]{geometry}
 \usepackage{epigraph}
 % 2.09
+
+\usepackage{afterpage}
+
+\newcommand\blankpage{%
+	\null
+	\thispagestyle{empty}%
+	\addtocounter{page}{-1}%
+	\newpage}
 
 \title{Sentence Encoders for Semantic Textual Similarity - A Survey}
 \author{Aarthi Babu}
@@ -41,26 +49,27 @@
 
 
 \maketitle
+\cleardoublepage
 \tableofcontents
-\newpage
+\listoffigures
+\listoftables
+\afterpage{\blankpage}
 
-%\begin{abstract}
-%	Finding if two sentences are similar in meaning, is a basic language understanding problem that is applicable in many natural language processing(NLP) applications. Sentence representations are the basic components that greatly impact the performance of Semantic Textual Similarity(STS) models. Despite the existence of well established models for generating word representation and the consensus about its usefulness, there is a lack of profound research on learning the sentence representations. In this project, I propose to systematically compare models that achieved state of art performance in Sem-Eval STS shared task \citep{cer2017semeval} proposed for learning STS and sentence representation. In addition to the comparative study, I will analyse the internal component of the architecture of each model and its impact on STS task performance and learning of sentence representations.
-%\end{abstract}
+%%%%\begin{abstract}
+%%%%	Finding if two sentences are similar in meaning, is a basic language understanding problem that is applicable in many natural language processing(NLP) applications. Sentence representations are the basic components that greatly impact the performance of Semantic Textual Similarity(STS) models. Despite the existence of well established models for generating word representation and the consensus about its usefulness, there is a lack of profound research on learning the sentence representations. In this project, I propose to systematically compare models that achieved state of art performance in Sem-Eval STS shared task \citep{cer2017semeval} proposed for learning STS and sentence representation. In addition to the comparative study, I will analyse the internal component of the architecture of each model and its impact on STS task performance and learning of sentence representations.
+%%%%\end{abstract}
 
 %\epigraph{You shall know a word by the company it keeps!}{\textit{J. R. Firth (1957)}}
 
 \chapter{Introduction}
 
-
-	This project studies and evaluates the ability of different encoders in sentence understanding problems in Natural Language Processing (NLP). Semantic Textual Similarity task is used to evaluate the sentence semantics extracted using these encoder algorithms. This study helps in advancing our understanding of existing models.
+	Natural Language Processing (NLP) is a field at the intersection of Linguistics and Artificial Intelligence (AI) \citep{jurafsky2014speech}. The major goal of this field is to make computers process and understand human languages. Language processing helps to perform many useful tasks for humans such as language translation, information extraction, intelligent search engines, and question answering systems etc. \citep{jurafsky2014speech}. These tasks involve processing text and understanding the meaning of words and phrases in it. 
 	
-	NLP is a field at the intersection of Linguistics and Artificial Intelligence (AI) \citep{jurafsky2014speech}. The major goal of this field is to make computers process and understand human languages. Language Processing helps to perform many useful tasks for humans such as language translation, information extraction, intelligent search engines, and question answering systems etc. \citep{jurafsky2014speech}. These tasks involve processing text and understanding the meaning of words and phrases in it. 
+	This project studies and evaluates the ability of different machine learning algorithms proposed for sentence understanding problems in NLP. The text meaning extracted using these algorithms, are estimated using Semantic Textual Similarity task. This study helps in advancing our understanding of existing models. In specific, we study how machine learning algorithm is used to represent the meaning of the given text. Therefore, it is essential to understand what constitutes a meaning. Section 1.1 and 1.2 briefly introduces how semantics are interpreted in the field of linguistics and computer science.
 	
-	\section{Natural Language Semantics}
-	In this project, we study how machine learning algorithm is used to represent meaning of the given text. Therefore, it is essential to understand what constitutes a meaning. This section briefly introduces how semantics is interpreted in field of linguistics and computer science. 
+	\section{Natural Language Semantics} 
 	
-	In the field of Linguistics, Semantics studies the meaning or sense of words and their relationship with other words. Contextual information is always to used express the sense of the word. Meaning can be classified as Lexical and Grammatical. Lexical meaning denotes the meaning of the words based on its parts of speech tags such as noun, verbs, adverbs, adjectives etc. The latter signifies the meaning of the words that are related to the function of the sentence such as articles, determiners, pronouns or prepositions.
+	In the field of Linguistics, Semantics studies the meaning or sense of words and their relationship with other words. Contextual information is always used to express the sense of the word. Meaning can be classified as Lexical and Grammatical. Lexical meaning denotes the meaning of the words based on its parts of speech tags such as noun, verbs, adverbs, adjectives etc. The latter signifies the meaning of the words that are related to the function of the sentence such as articles, determiners, pronouns or prepositions.
 	
 	
 	Many properties of human languages make this a very complex task for computers. For words, a single word can have various different meanings also known as sense. For example, a word bank can mean a river bank or financial institution. But when humans read a sentence consisting of bank and wood, they understand the meaning through context with their knowledge of the world. In some cases, the meaning of a word is part of another word such as animal and cat. Therefore, we can deduce that the words have a similar meaning when they share context.
@@ -506,6 +515,7 @@ Knowledge (SICK) corpus \citep{marelli2014semeval}, for semantic relatedness and
 This section describes the architecture of a various learning methods that are investigated for its ability in extracting sentence representation. 
 
 \section{Ensemble Model}
+\label{ensemble}
 
 	This section discusses about the architecture details of an ensemble model proposed by \cite{tian2017ecnu}. This model adapts a combination method to intergrate the prediction of traditional ML algorithms such as support vector machine (SVM), Random Forest (RF), Gradiant Boosting (GB) and a neural network algorithm such as deep averaging network. This project explores the combined performance of SVM , RF and GB as mentioned in \citep{tian2017ecnu}. Given \textit{n} training data with input and output $ \{(x_i,y_i)\}^{n}_{i=1} $, these models focus on estimating a function (hypothesis) \textit{h(x)=y} that maps input to output. In STS task, with sentence pair as the input, a standard approach is to represent the sentence pair in the form of similarity features. Therefore,  effective feature representations that capture semantic and synactic matching degree are hand engineered. 
 	
@@ -555,15 +565,15 @@ This section describes the architecture of a various learning methods that are i
 	
 	
 \section{Convoutional Neural Network}
-	This section explains the convolution neural networks(CNN) based learning model used for semantic sentence similarity. The two main components of this model are (CNN) based sentence representation model, and fully connected neural networks (FCNN) used as for STS task. The CNN architecture consists of two convolution networks that work parallel to mapping the two sentences to a vector space. The vectors of the sentence pairs are used by FCNN to classify their sentence similarity score. In the following, we first describe our sentence model for mapping sentence pairs to their intermediate representations and then explain how these representations are used to classify the relatedness score.
+	This section explains the convolution neural networks (CNN) based learning model used for semantic sentence similarity. The two main components of this model are (CNN) based sentence representation model, and fully connected neural networks (FCNN) used for STS task. The CNN architecture consists of two convolution networks that work parallel to mapping the two sentences to a vector space. The vectors of the sentence pairs are used by FCNN to classify their sentence similarity score. In the following, we first describe our sentence model for mapping sentence pairs to their intermediate representations and then explain how these representations are used to classify the relatedness score.
 	
 	\subsection{Sentence Model using CNN}
-	CNN architecture for mapping sentences to feature
-	vectors inspired from \cite{shao2017hcti} is shown in Figure \ref{CNN_1}. This architecture consists of two 1-dimensional convolution layers and a max pooling layer. The objective of this network is to convert the raw sentence into vector representations from \cite{pennington2014glove}, using pre-trained 300 dimension word embeddings of all the words \{$w_{1}, w_{2},...,w_{|s|}$\} present in the sentence.
+	CNN architecture for mapping sentences to
+	vector representations inspired from \cite{shao2017hcti} is shown in Figure 4.2. This architecture consists of two 1-dimensional convolution layers and a max pooling layer. The objective of this network is to convert the raw sentence into vector representations from \cite{pennington2014glove}, using pre-trained 300 dimension word embeddings of all the words \{$w_{1}, w_{2},...,w_{|s|}$\} present in the sentence.
 	
-	The input sentence to the convolution layers is treated as a sequence of a real valued number where the real valued integers are retrieved from the integer-word mapping present in the vocabulary V. The vector representaion of all the words $ w \in \mathbb{R}^{d}  $ are drawn from embedding matrix  $ W \in \mathbb{R}^{d \times |V|} $ in the embedding layer. To enhance the word representation with respect to this task, a true flag for word overlap is added as an additional dimension into the word vector representation for each word in the sentence. Then the CNN network applies the convolution and max pooling operation to find the optimal feature vectors for the sentence that capture its semantics. 
+	The input sentence to the convolution layers is treated as a sequence of a real valued number where the real valued integers are retrieved from the integer-word mapping present in the vocabulary V. The vector representation of all the words $ w \in \mathbb{R}^{d}  $ are drawn from embedding matrix  $ W \in \mathbb{R}^{d \times |V|} $ in the embedding layer. To enhance the word representation with respect to this task, a true flag for word overlap is added as an additional dimension into the word vector representation for each word in the sentence. Then the CNN network applies the convolution and max pooling operation to find the optimal feature vectors for the sentence that capture its semantics. 
 	
-	The idea behind the convolution layer is to learn the features which identified the relationship between n-gram of the sentence using weight vectors \textit{m} $\in \mathbb{R}^{|m|}$ . The $1 \times 1$ weight vector \textit{m} also known as filters of the convolution is used. This convolution operation is followed by applying the Relu activation function to learn non-linear decision boundaries. This filters out the insignificant features learned in previous operation. The output from the convolution layer is passed to the max pooling layer with pool size (1, $|S|$) where the semantic information learned is aggregated, and reduces representation dimension from $1 \times |S| \times 300$ (word vec dimension) to $1 \times 300$ (word vec dimension).The convolution layers along with RELU activation function and max pooling acts as a non linear  feature detector for the given sentence. The output sentence representation from CNN is used to find the Semantic Difference Matrix by performing a series of operations on the two sentence vector. 
+	The idea behind the convolution layer is to learn the features which identified the relationship between n-gram of the sentence using weight vectors \textit{m} $\in \mathbb{R}^{|m|}$ . The $1 \times 1$ weight vector \textit{m} also known as filters of the convolution is used. This convolution operation is followed by applying the Relu activation function to learn non-linear decision boundaries. This filters out the insignificant features learned in previous operation. The output from the convolution layer is passed to the max pooling layer with pool size (1, $|S|$) where the semantic information learned is aggregated, and reduces representation dimension from $1 \times |S| \times 300$ (word vec dimension) to $1 \times 300$ (word vec dimension). The convolution layers along with RELU activation function and max pooling acts as a non linear  feature detector for the given sentence. The output sentence representation from CNN is used to find the Semantic Difference Matrix by performing a series of operations on the two sentence vector. 
 	
 	\begin{figure}[!tbp]
 		\centering
@@ -574,12 +584,11 @@ This section describes the architecture of a various learning methods that are i
 		\includegraphics[scale=0.20]{image/CNN_sentModel.png}
 		\end{minipage}
 		\hfill
-		\begin{minipage}[b]{0.3\textwidth}
+		\begin{minipage}[b]{0.40\textwidth}
 		\centering
 		\caption{Hyperparameters for FCNN \cite{shao2017hcti}}
 		\label{params}
-		
-		\includegraphics[scale=0.35]{image/hyperparameters.png}
+		\includegraphics[scale=0.30]{image/hyperparameters.png}
 		
 		\end{minipage}
 	\end{figure}
@@ -598,10 +607,10 @@ This section describes the architecture of a various learning methods that are i
 	 The maximal point is calculated from the probability distribution over six score labels. Finally, the model is trained and optimised using the root mean squared loss of target and predicted continous value. 
 	 
 	 \section{Recurrent Neural Network}
-	 This section desecribes the architecture of InferSent, a variant of recurrent neural network (RNN) proposed for RTE task \citep{conneau2017supervised}.This model outperformed all the existing state-of-the-art models such as SkipThought, FastSent etc, in extracting accurate sentence embedding. InferSent consists of a bi-directional Long-Short Time Memory (LSTM) based RNN sentence encoder and a fully connected neural network based decoder as shown in Figure \ref{bilstm}. The architecture of encoder is discussed in the following section. 
+	 This section desecribes the architecture of InferSent, a variant of recurrent neural network (RNN) proposed for RTE task \citep{conneau2017supervised}. This model outperformed all the existing state-of-the-art models such as SkipThought, FastSent etc, in extracting accurate sentence embedding. InferSent consists of a bi-directional Long-Short Time Memory (LSTM) based RNN sentence encoder and a fully connected neural network based decoder as shown in Figure \ref{bilstm}. The architecture of encoder is discussed in the following section. 
 	 
 	\subsection{Bi-LSTM with max pooling}
-	Generally, RNN has the ability to accept input of arbitary length and return a fixed dimensional vector. They are capable of propogating the previously processed input's information while processing a word in the given sequence at timestep \textit{t}.
+	Generally, RNN has the ability to accept input of arbitary length and return a fixed dimensional vector. Also, it is capable of propogating the previously processed input's information while processing a word in the given sequence at timestep \textit{t}.
 	This encoder architecture consists of bi-directional RNN which reads the sentence in two opposite directions. It is capable of remembering the past and future context information of a sequence at any time step. The objective of this network is to extract generic sentence representation for a given word representations of the words present in the sentence.  
 	
 	
@@ -616,7 +625,7 @@ This section describes the architecture of a various learning methods that are i
 	
 	\begin{figure}[!tbp]
 		\centering
-		\includegraphics[scale=0.50]{image/Bi-LSTM.png}
+		\includegraphics[scale=0.40]{image/Bi-LSTM.png}
 		\caption{A Bi-LSTM Network \citep{conneau2017supervised}}
 		\label{bilstm}
 	\end{figure}
@@ -636,23 +645,29 @@ This section describes the architecture of a various learning methods that are i
 	The whole encoder decoder architecture is trained  and optimised using the categorical cross-entropy as its loss function. With the probabilties from the decoder's softmax layer, one hot vector is calculated by assigning 1 to the class with maximum probability and 0 to others. It is compared to the target one hot vector as its a multi-class classification while calculating loss.
 	
 	\section{Summary}
-	In this chapter, the motivation and objective of the comparison study was discussed. Also, this chapter presented the architectural details of the models involved in the comparison study. Following Chapter lays out the experiments and evaluations of these models.
+	In this chapter, the motivation and objective of the comparison study was discussed. Also, this chapter presented the architectural details of the models involved in the comparison study. Chapter 5 outlays the experiments and evaluations of these models.
 	
 	  
 	 
 \chapter{Experiments}
 
- This chapter lays out the comparison study on the ability of traditional machine learning and neural models in extracting the meaning representation of sentence. In this project, the models are trained on Sentence Relatedness and Recognizing Textual Entailment (RTE) task. While training, the encoder model learns sentence representations that allows a decoder to judge how much two sentences are semantically similar or whether two sentences have meaning overlap. To perform better in these tasks, the encoder model should capture the compositional meaning of the given sentence. This constraint makes it the ideal tasks for evaluation. 
+ In this chapter, we discuss the results of the comparison study. The goal of our study is to compare the ability of traditional machine learning and neural models in capturing meaning representations of sentences. All the models are trained on Sentence Relatedness and Recognising Textual Entailment (RTE) task. During training, the encoder model learns sentence representations that allows a decoder to judge how much two sentences are semantically similar or whether two sentences have meaning overlap. To perform better in these tasks, the encoder model should capture the compositional meaning of the given sentence. 
  
+ In section \ref{performance}, the sentence encoders are compared and analysed for its performance in Sentence Relatedness and RTE task. In section \ref{parameter-tune}, experiments are performed to tune the parameter of encoder architecture and presents the optimal parameter under which it performs best compared to other parameter
+ settings.
  
- The performance of the models on STS task is evaluated using two metrics, 1) Accuracy of its prediction; 2) Training Time. The accuracy of the STS models is measured using Pearson correlation between machine generated semantic score and gold standards created using human judgement. It helps in capturing the linear relationship between the predicted and target semantic score. This correlation value ranges from -1 to 1 where, 1 indicates perfect positive correlation and -1,0 indicates no or negative correlation.
+ The performance of the models on STS task is evaluated using accuracy of its prediction. The accuracy of the STS models is measured using Pearson correlation between machine generated semantic score and gold standards created using humans judgement. It helps in capturing the linear relationship between the predicted and target semantic score. This correlation value ranges from -1 to 1 where, 1 indicates perfect positive correlation and -1,0 indicates no or negative correlation.
  
- Although complex models give better accuracy, they take a long time to train. Analysing the training time of the encoder models help in finding a tradeoff between the training time and the model performance. The neural models implemented in this project, are trained using a machine with 4 $\times$ CPUs, 16GB RAM and 1 $\times$ NVIDIA Tesla K80 GPU to perform the comparison study.
+ Although complex models give better accuracy, they take a long time to train. The major aim of any machine learning algorithm is to minimise the loss in the predicted value when compared to target value. The model is trained until the loss converges to its global minima. Various hyper-paramter impact the time taken by a model to converge. Sometimes, the learning algorithm consistently learns unnecessary features because the randomness in the training data points. In this case, the loss is always high and the model is said to have high bias. This model doesn't converge to the global minima resulting in underfitting. In contrast, starts to memorise the training data which is known as overfitting. At this point, the model's prediction on unseen data is comparatively very less.  Analysing the time taken by loss of the encoder models to converge to its local minima can help in finding a tradeoff between the training time and the model performance. 
  
- In addition, the sentence representations encoders are evaluated for its performance on generating a generic sentence representation that aids in transfer learning. This evaluation is carried out by using representations learned from training RTE task as input in sentence relatedness task and vice versa. Generic representations are expected to perform well in both tasks in terms of accuracy.  
+ In addition, the sentence representations encoders are evaluated for its performance on generating a generic sentence representation that aids in transfer learning. This evaluation is carried out by using representations learned from training RTE task as input in sentence relatedness task and vice versa. Generic representations are expected to perform well in both tasks in terms of accuracy. This helps in training a task that do not have sufficient resource.  
  
  In this chapter, we evaluate a variety of sentence encoding models,
- including a Ensemble model (based on combination of SVM, RF, GB), a simple Convolutional Neural Network model , and a Bi-Directional LSTM based Recurrent Neural Network model. To make these evaluations more informative, the experimental setup of each models architecture including its hyperparamters are outlined along with their performance. We use Stanford Natural Language Inference (SNLI) corpus and Sentences Involving Compositional Knowledge (SICK) dataset for training and evaluation of the sentence encoder models. 
+ including a Ensemble model (based on combination of SVM, RF, GB), a simple Convolutional Neural Network model , and a Bi-Directional LSTM based Recurrent Neural Network model. To make these evaluations more informative, the experimental setup of each models architecture including its hyper-parameters are outlined along with their performance. We use Stanford Natural Language Inference (SNLI) corpus and Sentences Involving Compositional Knowledge (SICK) data-set for training and evaluation of the sentence encoder models. 
+ 
+  The ensemble model is implemented using SciKit-Learn library. The data pre-processing that includes stop-words removal, replacing words with its root words, extracting similarity measures mentioned \ref{ensemble} are performed utilizing NLTK-toolkit, python-based library \citep{bird2004nltk}. The features based on alignment and syntactical tree structure properties are created using Standford-coreNLP \citep{manning2014stanford}.
+  
+   The neural models are implemented using Keras \footnote{https://keras.io/} and PyTorch  \footnote{http://pytorch.org}. Keras is a python-based high-level neural networks API that on top of TensFlow as backend \footnote{https://github.com/tensorflow/tensorflow}. PyTorch is a python package that faciliates to build a dynamic neural networks architecture. They are trained using a machine with 8 $\times$ CPUs, 32GB RAM and 1 $\times$ NVIDIA Tesla P100 GPU to perform the comparison study.
  
  
  
@@ -665,20 +680,16 @@ This section describes the architecture of a various learning methods that are i
 
 
 \section{Encoder Architectures - Performance}
-In this section, the performance of the encoder models on Sentence Relatedness and RTE task are explored. The encoder is trained on Sentence Relatedness task using 20k sentence pair \cite{cer2017semeval} and RTE task using 100k sentence pair \cite{bowman2015large}. As mentioned in Chapter 2, the data-set used for this experiment is a collection of data from various domain. The trained models are tested with sentence pairs that was not encountered by them while training. For this experiment, all the models were ran with its optimal hyper-parameter to explore  its best performance in both task.
 
 \subsection{Experiment Setup}
 
-\subsubsection{Ensemble Model}
-\subsubsection{CNN Model}
-\subsubsection{Bi-LSTM Model}
-\subsection{Experiment}
-\subsection{Analysis}
+\label{performance}
+In this section, the performance of the encoder models on Sentence Relatedness and RTE task are explored. The encoder is trained on Sentence Relatedness task using 20k sentence pair \cite{cer2017semeval} and RTE task using 100k sentence pair \cite{bowman2015large}. As mentioned in Chapter 2, the data-set used for this experiment is a collection of data from various domain. The trained models are tested with sentence pairs that was not encountered by them while training. For this experiment, all the models were ran with its optimal hyper-parameter to explore  its best performance in both task. 
 
-\begin{table}[]
+\begin{table}[h]
 	\centering
 	\caption{ Peformance in Recognizing Textual Entailment}
-	\label{my-label}
+	\label{rte-perf}
 	\begin{tabular}{|l|l|l|l|}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{Algorithms}}                                     & \multicolumn{2}{c|}{\textbf{RTE}}                   \\ \hline
@@ -693,56 +704,151 @@ In this section, the performance of the encoder models on Sentence Relatedness a
 	\end{tabular}
 \end{table}
 
+
+%\subsection{Experiment Setup}
+
+The ensemble model used for this experiment consist of a Support Vector Model, Random Forest and Gradient Boosting.  
+
+
+\subsection{Analysis}
+
+Table \ref{rte-perf} and \ref{rte-perf} shows the test performance of various models trained on RTE task and Sentence Relatedness. We find that Bi-LSTM model have the best performance on both the task. The reason can be, bidirectional RNN is capable of parsing sentence in both direction and maintains the dynamic knowledge base using LSTM, which enables it to capture the compositional semantics of a sentence. For RTE task, there is no significant accuracy difference between voting based ensemble and GB. For Sentence Relatedness task, the gradient boosting does slightly better than stacking ensemble model.
+
+ Among classical machine learning algorithms, Gradient boosting performs better than random forest. This can be because, the random forest reduces the error by lowering its variance to handle over-fitting and the bias in prediction caused due to under-fitting stays fixed. In gradient boosting, weights are optimised in such a way that both bias and variance are minimised. This reduce the possibility of model to under-fit or over-fit the training data.
+
+The convolutional network did not perform well in both the tasks. It was observed that the testing accuracy of the CNN model was incomparably less than the training accuracy assuring that the model is over fitting the data.
+
+
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
 \begin{table}[]
 	\centering
 	\caption{Performance in Sentence Relatedness}
-	\label{my-label}
+	\label{sr_perf}
 	\begin{tabular}{|l|l|l|l|}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{Algorithms}}                                     & \multicolumn{2}{c|}{\textbf{Sentence Relatedness}}                       \\ \hline
 		&                              & \multicolumn{1}{c|}{\textbf{Train}} & \multicolumn{1}{c|}{\textbf{Test}} \\ \hline
 		\multirow{2}{*}{\textbf{Single ML Model}} & Support Vector Machine (SVM) &                                     & 76.2                               \\ \cline{2-4}
 		& Random Forest (RF)           &                                     & 77.5                               \\ \cline{2-4}
-		& Gradient Boosting (GB)       & 81.1                                & 77.7                               \\ \cline{2-4}
+		& Gradient Boosting (GB)       &                                 & 77.7                               \\ \cline{2-4}
 		\textbf{}                                      & XGradient Boosting (XGB)     &                                     & 77.2                               \\ \hline
 		\textbf{Ensemble}                              & SVM + RF + GB                &                                     & 75.4                               \\ \hline
 		\multirow{2}{*}{\textbf{Neural Model}}         & CNN                          & 69.6                                & 61.4                               \\ \cline{2-4} 
-		& Bi-LSTM RNN                  & 79.1 fake                           & 75.2                               \\ \hline
+		& Bi-LSTM RNN                  & 79.1                            & 78.2                               \\ \hline
 	\end{tabular}
 \end{table}
 
-\subsection{Ensemble Model}
 
 
+\section{Hyper-parameter Tuning}
+\label{parameter-tune}
 
-\section{Encoder Architectures - Hyperparameter Tuning}
-\section{Features Impact}
-\section{Representation Dimension Size}
+\subsection{Experiment Setup}
+This experiment aims to find the optimal hyper-parameters of the neural model's architecture that can contribute to better performance. The hyper-parameters are the external configuration of a model that helps in estimating the weight and bias variables of the model. For this experiment, we studied the following hyper-parameters: optimizers, dropout rates, sentence representation dimensions and Learning rates. The updates to the  weights and the biases of the networks are heavily depended on the hyper-parameters.
 
+\subsection{Analysis}
+
+Table \ref{lr-opt}, and Table \ref{sent_dim} reports the results of our experiments on optimal hyper parameters. These experiments were performed on our best performing model- BiLSTM RNN model. For this model, the network did not converge at all when Adam optimizer was used. The training was stopped in 4 epochs as the loss of the network did not decrease.  But, the same network converged to optimal solution when we used SGD as reported by \cite{conneau2017supervised}. 
+
+For SGD, the network was trained with three different learning rate \textit{[0.1,0.01,0.001]}, two dropout rate \textit{[0.2,0.5]} for 21 epochs each. When using learning rate 0.1,  the network achieved its maximum accuracy within 8 epochs. Lower learning rate took longer to converge and did not achieve global optima as shown in Figure \ref{lr-opt}. For dropouts, no difference was found in output performance under both the settings.
+
+%When lower learning rates, we achieve slightly lower performance but takes almost twice the time to train. 
+%
+%that constitute the computational units in neural networks algorithm, depth and width of the neural networks  are tuned and their impact on the model performance are explored.
+
+%\subsubsection{Optimizers and Learning Rate}
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
 \begin{table}[]
 	\centering
+	\caption{Learning rate - optimizers}
+	\label{lr-opt}
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		Optimizer            & Learning  Rate & Epochs & \multicolumn{2}{l|}{RTE Task} \\ \hline
+		&                &        & dev           & test          \\ \hline
+		Adam                 & 0.1            & 4      & 57.2          & 57.15         \\ \hline
+		\multirow{3}{*}{SGD} & 0.1            & 8     & 83.98         & \textbf{84.35}         \\ \cline{2-5} 
+		& 0.01           & 13     & 83.49         & 83.28         \\ \cline{2-5} 
+		& 0.001          & 21     & 78.17         & 77.86         \\ \hline
+	\end{tabular}
+\end{table}
+
+
+Table \ref{sent_dim} presents the effects of using different dimensions for sentence representations. For all the models in this table, SGD optimizer with 0.1 learning rate was used. We find interesting trade-offs between accuracy and training time.  When a  large dimension is used, the training time rapidly increases as the number of parameters of the network increase. Hence, the model is able to capture the linguistics features of the sentences better and produces 84.35\% accuracy on test data. As the dimension of the sentence representations decrease,  the accuracy and time taken to train the model also decreases.
+
+\begin{table}[h]
+	\centering
 	\caption{Sentence Representation Dimension}
-	\label{my-label}
+	\label{sent_dim}
 	\begin{tabular}{|l|l|l|l|l|}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{Algorithms}}                  & \multicolumn{3}{c|}{\textbf{RTE}}                                                                                                                                                                                      \\ \hline
-		& \textbf{Dimension} & \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Converge \\ Epoch\end{tabular}}} & \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Time \\ per Epoch\end{tabular}}} & \multicolumn{1}{c|}{\textbf{Test}} \\ \hline
-		\multirow{4}{*}{\textbf{Bi-LSTM RNN}} & 500                & 20                                                                                      & 20 mins                                                                                 & 83.12                              \\ \cline{2-5} 
-		& 1000               & 8                                                                                       & 45 mins                                                                                 & 83.97                              \\ \cline{2-5} 
-		& 1500               & 6                                                                                       & 60 hr                                                                                   & 84.17                              \\ \cline{2-5} 
-		& 2048               & 6                                                                                       & 90 mins                                                                                 & \textbf{84.35}                     \\ \hline
+		& \textbf{Dimension} & \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Converge \\ Epoch\end{tabular}}} & \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Total \\ training time\end{tabular}}} & \multicolumn{1}{c|}{\textbf{Test}} \\ \hline
+		\multirow{4}{*}{\textbf{Bi-LSTM RNN}} & 500                & 20                                                                                      & $\sim$ 400 mins                                                                                 & 83.12                              \\ \cline{2-5} 
+		& 1000               & 8                                                                                       & $\sim$ 360 mins                                                                                 & 83.97                              \\ \cline{2-5} 
+		& 1500               & 6                                                                                       & $\sim$ 360 mins                                                                                   & 84.17                              \\ \cline{2-5} 
+		& 2048               & 6                                                                                       & $\sim$ 540 mins                                                                                 & \textbf{84.35}                     \\ \hline
 	\end{tabular}
 \end{table}
+%\subsection{Experiment Setup}
+%
+%
+%\subsection{Analysis}
+%
+%
+%
+%\section{Features Impact}
+%\subsection{Experiment Setup}
+%
+%
+%\subsection{Experiment}
+%\subsection{Analysis}
+%
+%\section{Representation Dimension Size}
+%\subsection{Experiment Setup}
+
+\section{Input features for Traditional MLT}
+
+In this section, the experiments are performed to find the important of the handcrafted features and their impact on the performance machine learning technique.
+
+
+\begin{table}[]
+	\centering
+	\caption{My caption}
+	\label{my-label}
+	\begin{tabular}{|l|l|c|}
+		\hline
+		\textbf{Algorithms}                                                               & \textbf{Features}             & \textbf{\begin{tabular}[c]{@{}c@{}}Sentence Relatedness\\ (Test accuracy)\end{tabular}} \\ \hline
+		\multicolumn{1}{|c|}{Ensemble}                                                    & Ngram Overlap                 & 63.8                                                                                    \\ \hline
+		& Sequence Features             & 65.4                                                                                    \\ \hline
+		& Word Representation Features  & 70.6                                                                                    \\ \hline
+		& Alignment Features            & 66.7                                                                                    \\ \hline
+		& All Features                  & 76.0                                                                                    \\ \hline
+%		Hierarchical CNN                                                                  & Word Represention             & 69.1                                                                                    \\ \hline
+%		\multicolumn{1}{|c|}{\begin{tabular}[c]{@{}c@{}}Hierarchical \\ CNN\end{tabular}} & Word Represention + Alignment & 70.4                                                                                    \\ \hline
+	\end{tabular}
+\end{table}
+
+%\subsection{Experiment}
+%\subsection{Analysis}
 
 
 \section{Transfer Learning}
 
+%\subsection{Experimental setup}
+This section reports on the ability of Bi-LSTM RNN and CNN model to aid in transfer learning. \cite{conneau2017supervised} showed that models trained on SNLI dataset captures universal representations of sentences that can be transferred to other tasks. We train Hierarchical CNN model and Bi-LSTM RNN with max pooling on SNLI dataset for RTE task and evaluate the encoder performance on sentence relatedness task. We use STS benchmark dataset\cite{bibid} for testing.  This test dataset consists of 8628 sentence pairs, from different domains such as image captions, news headlines and user forums and their similarity scores.
+
+
+%\subsection{Analysis}
+As reported in Table \ref{transfer}, Bi-LSTM RNN outperforms the hierarchical CNN model by considerable margin. 
+
 \begin{table}[]
 	\centering
 	\caption{Transfer Learning}
-	\label{my-label}
+	\label{transfer}
 	\begin{tabular}{|l|l|l|l|}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{Algorithms}}            & \multicolumn{2}{c|}{\textbf{Sentence Relatedness}}               \\ \hline
@@ -751,6 +857,8 @@ In this section, the performance of the encoder models on Sentence Relatedness a
 		& Bi-LSTM RNN & 78                                  & 74                                 \\ \hline
 	\end{tabular}
 \end{table}
+
+\chapter{Conclusion}
 
 
 %Both the RNN models investigated with mean and max pooling over the hidden representations separately. 

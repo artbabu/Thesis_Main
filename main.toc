@@ -10,30 +10,33 @@
 \contentsline {section}{\numberline {2.3}Machine Learning models}{17}
 \contentsline {subsection}{\numberline {2.3.1}Traditional ML models}{18}
 \contentsline {subsection}{\numberline {2.3.2}Neural Networks}{21}
-\contentsline {section}{\numberline {2.4}Word Vector Representation}{24}
-\contentsline {section}{\numberline {2.5}Sentence Representation Model}{27}
-\contentsline {chapter}{\numberline {3}Related Work}{29}
-\contentsline {section}{\numberline {3.1}Traditional Machine Learning Models}{30}
-\contentsline {section}{\numberline {3.2}Neural Models}{31}
-\contentsline {chapter}{\numberline {4}Modeling Sentence Encoders}{35}
-\contentsline {section}{\numberline {4.1}Ensemble Model}{38}
-\contentsline {subsection}{\numberline {4.1.1}Features}{39}
-\contentsline {subsection}{\numberline {4.1.2}Learning Models}{41}
-\contentsline {section}{\numberline {4.2}Convoutional Neural Network}{42}
-\contentsline {subsection}{\numberline {4.2.1}Sentence Model using CNN}{42}
-\contentsline {subsection}{\numberline {4.2.2}Similarity Measure using FCNN}{45}
-\contentsline {section}{\numberline {4.3}Recurrent Neural Network}{45}
-\contentsline {subsection}{\numberline {4.3.1}Bi-LSTM with max pooling}{45}
-\contentsline {subsubsection}{Semantic Difference Matrix}{48}
-\contentsline {subsubsection}{Textual Entailment Classifier}{48}
-\contentsline {section}{\numberline {4.4}Summary}{48}
-\contentsline {chapter}{\numberline {5}Experiments}{50}
-\contentsline {section}{\numberline {5.1}Encoder Architectures - Performance}{53}
-\contentsline {subsection}{\numberline {5.1.1}Experiment Setup}{53}
-\contentsline {subsection}{\numberline {5.1.2}Analysis}{53}
-\contentsline {section}{\numberline {5.2}Hyper-parameter Tuning}{55}
-\contentsline {subsection}{\numberline {5.2.1}Experiment Setup}{55}
-\contentsline {subsection}{\numberline {5.2.2}Analysis}{56}
-\contentsline {section}{\numberline {5.3}Input features for Traditional MLT}{57}
-\contentsline {section}{\numberline {5.4}Transfer Learning}{58}
-\contentsline {chapter}{\numberline {6}Conclusion}{60}
+\contentsline {section}{\numberline {2.4}Word Vector Representation}{25}
+\contentsline {section}{\numberline {2.5}Sentence Representation Model}{28}
+\contentsline {section}{\numberline {2.6}Summary}{29}
+\contentsline {chapter}{\numberline {3}Related Work}{30}
+\contentsline {section}{\numberline {3.1}Traditional Machine Learning Models}{31}
+\contentsline {section}{\numberline {3.2}Neural Models}{33}
+\contentsline {section}{\numberline {3.3}Summary}{35}
+\contentsline {chapter}{\numberline {4}Proposed Work}{37}
+\contentsline {section}{\numberline {4.1}Ensemble Model}{39}
+\contentsline {subsection}{\numberline {4.1.1}Features}{40}
+\contentsline {subsection}{\numberline {4.1.2}Objective Function}{43}
+\contentsline {section}{\numberline {4.2}Convoutional Neural Network}{44}
+\contentsline {subsection}{\numberline {4.2.1}Sentence Model using CNN}{44}
+\contentsline {subsection}{\numberline {4.2.2}Similarity Measure using FCNN}{47}
+\contentsline {section}{\numberline {4.3}Recurrent Neural Network}{47}
+\contentsline {subsection}{\numberline {4.3.1}Bi-LSTM with max pooling}{47}
+\contentsline {subsubsection}{Semantic Difference Matrix}{50}
+\contentsline {subsubsection}{Textual Entailment Classifier}{50}
+\contentsline {section}{\numberline {4.4}Summary}{50}
+\contentsline {chapter}{\numberline {5}Experiments and Results}{52}
+\contentsline {section}{\numberline {5.1}Evaluation metric}{53}
+\contentsline {section}{\numberline {5.2}Experiment Setup}{54}
+\contentsline {section}{\numberline {5.3}Encoder Architectures - Performance}{57}
+\contentsline {subsection}{\numberline {5.3.1}Analysis}{57}
+\contentsline {section}{\numberline {5.4}Hyper-parameter Tuning}{59}
+\contentsline {subsection}{\numberline {5.4.1}Analysis}{59}
+\contentsline {section}{\numberline {5.5}Input features for Traditional ML}{61}
+\contentsline {section}{\numberline {5.6}Transfer Learning}{63}
+\contentsline {section}{\numberline {5.7}Summary}{64}
+\contentsline {chapter}{\numberline {6}Conclusion}{65}

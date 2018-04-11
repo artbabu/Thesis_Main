@@ -1,7 +1,7 @@
 This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
-The style file: plainnat.bst
+The style file: apalike.bst
 Database file #1: sample.bib
 Repeated entry---line 126 of file sample.bib
  : @inproceedings{marelli2014semeval
@@ -21,45 +21,45 @@ Repeated entry---line 274 of file sample.bib
 I'm skipping whatever remains of this entry
 Warning--empty booktitle in SeqMod2018Andrew
 Warning--empty journal in salton1971smart
-You've used 36 entries,
-            2773 wiz_defined-function locations,
-            794 strings with 13661 characters,
-and the built_in function-call counts, 22732 in all, are:
-= -- 2052
-> -- 1411
+You've used 37 entries,
+            1935 wiz_defined-function locations,
+            675 strings with 12602 characters,
+and the built_in function-call counts, 19692 in all, are:
+= -- 1977
+> -- 851
 < -- 39
-+ -- 474
-- -- 438
-* -- 1783
-:= -- 3250
++ -- 312
+- -- 298
+* -- 1530
+:= -- 3103
 add.period$ -- 119
-call.type$ -- 36
-change.case$ -- 252
-chr.to.int$ -- 36
-cite$ -- 74
-duplicate$ -- 1053
-empty$ -- 1759
-format.name$ -- 484
-if$ -- 4980
+call.type$ -- 37
+change.case$ -- 332
+chr.to.int$ -- 37
+cite$ -- 39
+duplicate$ -- 856
+empty$ -- 1371
+format.name$ -- 345
+if$ -- 4131
 int.to.chr$ -- 1
-int.to.str$ -- 1
-missing$ -- 36
-newline$ -- 189
-num.names$ -- 144
-pop$ -- 592
+int.to.str$ -- 0
+missing$ -- 37
+newline$ -- 186
+num.names$ -- 111
+pop$ -- 421
 preamble$ -- 1
-purify$ -- 217
+purify$ -- 333
 quote$ -- 0
-skip$ -- 907
+skip$ -- 664
 stack$ -- 0
-substring$ -- 1010
-swap$ -- 298
+substring$ -- 1396
+swap$ -- 271
 text.length$ -- 29
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 391
+type$ -- 220
 warning$ -- 2
-while$ -- 192
+while$ -- 158
 width$ -- 0
-write$ -- 482
+write$ -- 485
 (There were 4 error messages)

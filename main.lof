@@ -4,17 +4,17 @@
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Term-Context Matrix\relax }}{16}
 \contentsline {figure}{\numberline {2.3}{\ignorespaces A simple Decision Tree\relax }}{18}
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Random Forest\relax }}{19}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces A simple neuron\relax }}{21}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Neural Network\relax }}{22}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Training samples for skip-gram - Words pairs from raw corpus\relax }}{25}
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Context and Word matrices \citep {jurafsky2014speech}\relax }}{26}
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Skip-gram Model \citep {jurafsky2014speech}\relax }}{27}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces A simple neuron\relax }}{22}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Neural Network\relax }}{23}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Training samples for skip-gram - Words pairs from raw corpus\relax }}{26}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Context and Word matrices \citep {jurafsky2014speech}\relax }}{27}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Skip-gram Model \citep {jurafsky2014speech}\relax }}{28}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Ensemble Model \citep {tian2017ecnu}\relax }}{39}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces CNN Sentence Model \cite {severyn2015learning}\relax }}{44}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Hyperparameters for FCNN \cite {shao2017hcti}\relax }}{44}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces A Single LSTM cell \citep {SeqMod2018Andrew}\relax }}{46}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces A Bi-LSTM Network \citep {conneau2017supervised}\relax }}{47}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Ensemble Model \citep {tian2017ecnu}\relax }}{41}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces CNN Sentence Model \cite {severyn2015learning}\relax }}{45}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Hyperparameters for FCNN \cite {shao2017hcti}\relax }}{46}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces A Single LSTM cell \citep {SeqMod2018Andrew}\relax }}{48}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces A Bi-LSTM Network \citep {conneau2017supervised}\relax }}{49}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

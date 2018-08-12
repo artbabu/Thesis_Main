@@ -15,51 +15,55 @@ Repeated entry---line 213 of file sample.bib
  : @inproceedings{pennington2014glove
  :                                   ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 274 of file sample.bib
+Repeated entry---line 275 of file sample.bib
+ : @inproceedings{cho2014learning
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 314 of file sample.bib
  : @inproceedings{bowman2015large
  :                               ,
 I'm skipping whatever remains of this entry
 Warning--empty booktitle in SeqMod2018Andrew
 Warning--empty journal in salton1971smart
-You've used 37 entries,
+You've used 47 entries,
             1935 wiz_defined-function locations,
-            675 strings with 12602 characters,
-and the built_in function-call counts, 19692 in all, are:
-= -- 1977
-> -- 851
-< -- 39
-+ -- 312
-- -- 298
-* -- 1530
-:= -- 3103
-add.period$ -- 119
-call.type$ -- 37
-change.case$ -- 332
-chr.to.int$ -- 37
-cite$ -- 39
-duplicate$ -- 856
-empty$ -- 1371
-format.name$ -- 345
-if$ -- 4131
+            735 strings with 14868 characters,
+and the built_in function-call counts, 24460 in all, are:
+= -- 2465
+> -- 1029
+< -- 51
++ -- 376
+- -- 358
+* -- 1908
+:= -- 3868
+add.period$ -- 151
+call.type$ -- 47
+change.case$ -- 411
+chr.to.int$ -- 47
+cite$ -- 49
+duplicate$ -- 1059
+empty$ -- 1713
+format.name$ -- 423
+if$ -- 5119
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 37
-newline$ -- 186
-num.names$ -- 111
-pop$ -- 421
+missing$ -- 46
+newline$ -- 236
+num.names$ -- 141
+pop$ -- 503
 preamble$ -- 1
-purify$ -- 333
+purify$ -- 413
 quote$ -- 0
-skip$ -- 664
+skip$ -- 825
 stack$ -- 0
-substring$ -- 1396
-swap$ -- 271
-text.length$ -- 29
+substring$ -- 1758
+swap$ -- 327
+text.length$ -- 35
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 220
+type$ -- 280
 warning$ -- 2
-while$ -- 158
+while$ -- 200
 width$ -- 0
-write$ -- 485
-(There were 4 error messages)
+write$ -- 618
+(There were 5 error messages)

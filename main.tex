@@ -5,8 +5,8 @@
 %\usepackage{hyperref}
 %\usepackage{url}
 % \usepackage[margin=1in]{geometry}
-
-
+\usepackage{tocbibind}
+\usepackage{hyperref}
 \linespread{2}
 \usepackage{multirow}
 \usepackage{amsmath,amsthm,amssymb}
@@ -19,18 +19,20 @@
 \usepackage[round]{natbib}
 \usepackage[margin=1.25in]{geometry}
 \usepackage{epigraph}
+\usepackage{textcomp,    % for \textlangle and \textrangle macros
+	xspace}
 % 2.09
 \usepackage[most]{tcolorbox}
 \usepackage{afterpage}
 
-\newcommand\blankpage{%
-	\null
-	\thispagestyle{empty}%
-	\addtocounter{page}{-1}%
-	\newpage}
+%\newcommand\blankpage{%
+%	\null
+%	\thispagestyle{empty}%
+%	\addtocounter{page}{-1}%
+%	\newpage}
 
-\title{Sentence Encoders for Semantic Textual Similarity - A Survey}
-\author{Aarthi Babu}
+%\title{Sentence Encoders for Semantic Textual Similarity - A Survey}
+%\author{Aarthi Babu}
 
 % The \author macro works with any number of authors. There are two commands
 % used to separate the names and addresses of multiple authors: \And and \AND.
@@ -43,45 +45,59 @@
 \newcommand{\fix}{\marginpar{FIX}}
 \newcommand{\new}{\marginpar{NEW}}
 
+\usepackage{pdfpages}
 %\nipsfinalcopy % Uncomment for camera-ready version
+
 
 \begin{document}
 
+\pagenumbering{roman}
+\includepdf{title.pdf}
 
-\maketitle
-\cleardoublepage
+\pagestyle{plain}
+\clearpage
+%\maketitle
+%\cleardoublepage
+\input{abstract.tex}
+
+\phantomsection\addcontentsline{toc}{chapter}{Abstract}
 \tableofcontents
-\listoffigures
 \listoftables
-\afterpage{\blankpage}
+\listoffigures
+\newpage
+\pagenumbering{arabic}
+%\afterpage{\blankpage}
 
-%%%%\begin{abstract}
-%%%%	Finding if two sentences are similar in meaning, is a basic language understanding problem that is applicable in many natural language processing(NLP) applications. Sentence representations are the basic components that greatly impact the performance of Semantic Textual Similarity(STS) models. Despite the existence of well established models for generating word representation and the consensus about its usefulness, there is a lack of profound research on learning the sentence representations. In this project, I propose to systematically compare models that achieved state of art performance in Sem-Eval STS shared task \citep{cer2017semeval} proposed for learning STS and sentence representation. In addition to the comparative study, I will analyse the internal component of the architecture of each model and its impact on STS task performance and learning of sentence representations.
-%%%%\end{abstract}
+
+
+%%%%%\begin{abstract}
+%%%%%	Finding if two sentences are similar in meaning, is a basic language understanding problem that is applicable in many natural language processing(NLP) applications. Sentence representations are the basic components that greatly impact the performance of Semantic Textual Similarity(STS) models. Despite the existence of well established models for generating word representation and the consensus about its usefulness, there is a lack of profound research on learning the sentence representations. In this project, I propose to systematically compare models that achieved state of art performance in Sem-Eval STS shared task \citep{cer2017semeval} proposed for learning STS and sentence representation. In addition to the comparative study, I will analyse the internal component of the architecture of each model and its impact on STS task performance and learning of sentence representations.
+%%%%%\end{abstract}
 
 %\epigraph{You shall know a word by the company it keeps!}{\textit{J. R. Firth (1957)}}
 
 \chapter{Introduction}
 \label{introduction}
 
-	Natural Language Processing (NLP) is a field at the intersection of Linguistics and Artificial Intelligence (AI) \citep{jurafsky2014speech}. The major goal of this field is to make computers process and understand human languages. Language processing helps to perform many useful tasks for humans such as language translation, information extraction, intelligent search engines, and question answering systems etc. \citep{jurafsky2014speech}. These tasks involve processing text and understanding the meaning of words and phrases in it. 
+	Natural Language Processing (NLP) is a field at the intersection of Linguistics and Artificial Intelligence (AI) \citep{jurafsky2014speech}. The major goal of this field is to make computers process and understand human languages. Language processing helps to perform many useful tasks for humans such as language translation, information extraction, intelligent search engines, and question answering systems and so on \citep{jurafsky2014speech}. These tasks involve processing text and understanding the meaning of words and phrases in it. 
 	
-	This project studies and evaluates the ability of different machine learning algorithms proposed for sentence understanding problems in NLP. The text meaning extracted using these algorithms, are estimated using Semantic Textual Similarity task. This study helps to advance our understanding of existing models. In specific, we study how machine learning algorithm is used to represent the meaning of the given text. Therefore, it is essential to understand what constitutes a meaning. Section \ref{nlp_sem} and \ref{com_sem} briefly introduces how semantics are interpreted in the field of linguistics and computer science.
+	This project studies various algorithms proposed for learning semantic representation of text and evaluates their ability to capture semantics. The text meaning extracted using these algorithms, are estimated using Semantic Textual Similarity task. This study helps to advance our understanding of existing models. Specifically, we study how machine learning algorithm is used to represent the meaning of the given text. Therefore, it is essential to understand what constitutes a meaning. Section \ref{nlp_sem} and \ref{com_sem} briefly introduce how semantics are interpreted in the field of linguistics and computer science.
+
 	
 	\section{Natural Language Semantics}
 	\label{nlp_sem} 
 	
-	In the field of Linguistics, Semantics studies the meaning or sense of words and their relationship with other words. Contextual information is always used to express the sense of the word. Meaning can be classified as Lexical and Grammatical. Lexical meaning denotes the meaning of the words based on its parts of speech tags such as noun, verbs, adverbs, adjectives etc. The latter signifies the meaning of the words that are related to the function of the sentence such as articles, determiners, pronouns or prepositions.
+	In the field of Linguistics, Semantics is a study of the meaning or sense of words and their relationship with other words. Contextual information is always used to express the sense of the word. Meaning can be classified as Lexical and Grammatical. Lexical meaning denotes the meaning of the words based on its parts of speech tags such as noun, verbs, adverbs, adjectives and so on. For example, lexical meaning is the meaning of word \textit{walk} in the words \textit{walks/walking/walked}. The latter signifies the meanings that are conveyed in a sentence by using its word order and other grammatical signals.
 	
 	
-	Many properties of human languages make language processing a very complex task for computers. For words, a single word can have various different meanings also known as sense. For example, a word \textit{bank} can mean a river bank or financial institution. But when humans read a sentence consisting of \textit{bank} and\textit{ wood}, they understand the meaning through context with their knowledge of the world. In some cases, the meaning of a word is part of another word such as animal and cat. Therefore, we can deduce that the words have a similar meaning when they share context.
+	Many properties of human languages make language processing a very complex task for computers. For words, a single word can have various different meanings also known as sense. For example, the word \textit{bank} can mean a river bank or financial institution. But when humans read a sentence consisting of \textit{bank} and\textit{ wood}, they understand the meaning through context with their knowledge of the world. In some cases, the meaning of a word is part of another word such as animal and cat expressing a \textit{is-a} relationship. Therefore, we can deduce that the words have a similar meaning when they share context.
 	
-	\cite{harris1970distributional} and \cite{firth1957synopsis} formulated a hypothesis that \textit{ \textquotedblleft Words which occur in similar contexts tend to have similar meanings\textquotedblright}. There have been many approaches based on this hypothesis that tried to capture and represent the meaning of a word using words that occur around it. For example, consider a text \textit{ \textquotedblleft One bottle of Tesgüino makes you drunk. We make tesgüino out of corn\textquotedblright} \citep{jurafsky2014speech}.  The word \textit{tesgüino}  appears to be an alcoholic drink based on the words such as \textit{drunk} and \textit{bottle}. The same words (drunk and bottle) often occur around the word beer, which has a similar meaning. There are a lot of techniques to find similar words, but fewer approaches to find similar sentences.
+	\cite{harris1970distributional} and \cite{firth1957synopsis} formulated a hypothesis that \textit{ \textquotedblleft Words which occur in similar contexts tend to have similar meanings\textquotedblright}. There have been many approaches based on this hypothesis that try to capture and represent the meaning of a word using words that occur around it. For example, consider a text \textit{ \textquotedblleft One bottle of Tesgüino makes you drunk. We make tesgüino out of corn\textquotedblright} \citep{jurafsky2014speech}.  The word \textit{tesgüino}  appears to be an alcoholic drink based on the words such as \textit{drunk} and \textit{bottle}. The same words (drunk and bottle) often occur around the word beer, which has a similar meaning. There are a lot of techniques to find similar words, but fewer approaches to find similar sentences.
 	
 	%    
 	%    Therefore, the meaning of a word is represented as a vector, with dimension equivalent to the number of words in the text corpus (vocabulary size). The vector values are the counts of corresponding co-occuring words.
 	
-	The compositional and ambiguous feature of the sentences makes it complex to process and understand its meaning. For example, the compositional meaning of \textit{big apple} may not mean \textit{large apple}, but maybe \textit{New York city}. An ambiguous sentence can have two different meanings. For example, \textit{\textquotedblleft We saw her duck \textquotedblright} can mean either \textit{We looked at a duck that belonged to her}, or \textit{We saw her duck under something}. Languages are also highly variable in structure as \textit{I ate pizza with friends} can also be expressed as \textit{Friends and I shared some pizza} \citep{jurafsky2014speech}. %With these challenges, the semantic behaviour of the word cannot be captured with its dictionary meaning.     
+	The compositional and ambiguous feature of the sentences makes it complex to process and understand its meaning. For example, the compositional meaning of \textit{big apple} may not mean \textit{large apple}, but maybe \textit{New York city}. An ambiguous sentence can have two different meanings. For example, \textit{\textquotedblleft We saw her duck\textquotedblright} can mean either \textit{We looked at a duck that belonged to her}, or \textit{We saw her duck under something}. Languages are also highly variable in structure as \textit{I ate pizza with friends} can also be expressed as \textit{Friends and I shared some pizza} \citep{jurafsky2014speech}. %With these challenges, the semantic behaviour of the word cannot be captured with its dictionary meaning.     
 	
 	
 	
@@ -92,13 +108,13 @@
 	\label{com_sem}
 	
 	%     the word that co-occurring with its neighbouring words.
-	In computer science, semantics are expressed as representation that can be understood by machine. Most commonly accepted methods to determine the word representations and its similarity, are knowledge-based and corpus-based methods. The knowledge-based approach uses structure resources such as WordNet \citep{pedersen2004wordnet} consisting of highly relevant information like synonyms, words relation tree etc. The corpus-based method measures word similarity using sizable raw text corpora as a source data to infer information such as co-occurrence, and the frequency of the words.
+	In computer science, semantics are expressed as representation that can be understood by machine. Most commonly accepted methods to determine the word representations and its similarity, are knowledge-based and corpus-based methods. The knowledge-based approach uses structure resources such as WordNet \citep{pedersen2004wordnet} consisting of highly relevant information like synonyms, words relation tree and so on. The corpus-based method measures word similarity using sizable raw text corpora as a source data to infer information such as co-occurrence, and the frequency of the words.
 	Techniques such as term frequency and inverse document frequency, built based on document's word distribution, proved to be very useful and was successfully used in an information retrieval system \citep{salton1971smart, deerwester1989computer}. 
 	%It was used for representing the document similarity by considering its distribution of words. 
-	Later, these vectors were used as features in various machine learning algorithms. Context-based meaning extraction hypothesis was successfully used in language modelling \citep{bengio2003neural,collobert2008unified,collobert2011natural,mikolov2011extensions} and word representation models \citep{mikolov2014word2vec,pennington2014glove}. 
+	Later, these vectors were used as features in various machine learning algorithms. The context-based meaning extraction hypothesis was successfully used in language modelling \citep{bengio2003neural,collobert2008unified,collobert2011natural,mikolov2011extensions} and word representation models \citep{mikolov2014word2vec,pennington2014glove}. 
 	
 	
-	Neural models have become more effective in many complex NLP problems such as neural machine translation systems \citep{luong2015effective}, sentiment analysis \citep{socher2011semi}, and text generation \citep{wen2015semantically} . Even though the representations created by the neural models are latent and not interpretable, they were a huge success in capturing the word meaning. These models were capable of learning and using their numeric representations for many other downstream tasks. Models were also proposed to capture sentence-level semantics using these word representations.  \citep{kiros2015skip,conneau2017supervised,shao2017hcti}. The success of these neural networks algorithms applied in semantically complex tasks makes it a potential component of this comparison study. Also, study on the accuracy of semantics captured by these algorithms helps to infer insights that would lead to significant progress in language understanding problems.
+	Neural models have become more effective than traditional machine learning models in many complex NLP problems such as neural machine translation systems \citep{luong2015effective}, sentiment analysis \citep{socher2011semi}, and text generation \citep{wen2015semantically} . Even though the representations created by the neural models are continuous values and not interpretable, they were a huge success in capturing the word meaning. These models were capable of using their numeric representations for many other downstream tasks. Models were also proposed to capture sentence-level semantics using these word representations.  \citep{kiros2015skip,conneau2017supervised,shao2017hcti}. 
 	
 	
 	%    cite Yoav book
@@ -106,12 +122,12 @@
 	\section{Project Overview}
 	\label{proj_overview}
 	Despite the existence of well-established models for generating word representation and the consensus about its usefulness, the existing techniques proposed for learning the sentence representations have not fully captured the complexity of compositional semantics \citep{conneau2017supervised}. In this project, we compared various machine learning techniques used to determine the semantic representation of a text. Semantic Text Similarity (STS) is used as a primary task to evaluate these models  \citep{agirre2012semeval}. STS task was proposed to stimulate research and to encourage the development of new approaches for modelling sentence-level semantics. %    Finding if two sentences are similar in meaning, is a fundamental language understanding problem that is applicable in many NLP applications. 
-	This task can be used to evaluate and investigate the capability of the machine learning techniques proposed for learning text semantics; as it is important to capture the meaning of a sentence to perform well in this task.
+	This task can be used to investigate the capability of the machine learning techniques proposed for learning text semantics; as it is important to capture the meaning of a sentence to perform well in this task.
 	
 	
 	In this project, we compare models that achieved the state of the art performance in Sem-Eval STS shared tasks \citep{cer2017semeval}.  In addition to the comparative study, we will also analyse the internal component of various architectures and their impact on STS task performance.
 	
-	This chapter gives an overview of meaning and the complex nature of language. Chapter \ref{background} presents a background of the techniques used to capture the semantics of a textual data from words to sentences. Chapter 3 discusses the existing sentence representation models and its limitations on the sentence similarity task. Chapter 4  outlays the comparison study and its motivation. It also presents the architecture and the algorithm details of the encoders. Finally, Chapter 5 presents the experiments and its evaluation that establish the sentence encoder's ability to capture accurate representations.
+	This chapter gives an overview of meaning and the complex nature of language. Chapter \ref{background} presents a background of the techniques used to capture the semantics of a textual data from words to sentences. Chapter 3 discusses the existing sentence representation models and their limitations. Chapter 4  outlays the comparison study and its motivation. It also presents the architecture and the algorithmic details of the encoders. Finally, Chapter 5 presents the experiments and its evaluation results that establish the sentence encoder's ability to capture accurate representations.
 	%    There are numerous ways in which words can be combined to generate valid meaning full sentence.  Also, languages are highly ambiguous and variable regarding syntactic and semantics where a sentence can have two different meaning or two sentences with different syntactic structure can have some sense. So just capturing the essence of the words will never help in understanding the text.   
 	
 	
@@ -119,15 +135,14 @@
 
 \chapter{Background}
 \label{background}
-This chapter introduces the technical concepts related to this project. Section \ref{sts} introduces Semantic Textual Similarity (STS) in
-more detail and discusses its application. Section \label{history} and \ref{ml_model} discusses the
-principles of feature-based machine learning and neural networks approach. Section 2.4 and 2.5 discusses their use in sentence encoding.
+This chapter introduces the technical concepts related to this project. Section \ref{sts} introduces Semantic Textual Similarity (STS) task in detail and discusses its application. Section \ref{history} and \ref{ml_model} discusses the
+principles of feature-based machine learning and neural networks approach. Section \ref{word_rep} discusses the word representation models. In section \ref{sent_rep}, we discuss about the existing sentence representation encoder models and theirs usefulness. Subsection \ref{ml_models_rw} presents the classical machine learning models proposed for STS task and the features proposed in their systems to represent semantics.  In Subsection \ref{nu_models_rw}, we discuss about the neural models which gave the best performance in last five years and the comparison studies on these models.
 
 
 \section{Semantic Textual Similarity (STS)}
 \label{sts}
 
-     STS is the task of finding how two sentences are closely related concerning its meaning \citep{agirre2012semeval}. It constitutes as a primary component in many natural language processing (NLP) applications. Until 2012, there was no unified framework available to study problems related to the semantic analysis of text data. Because of this, it was difficult to measure the performance and visualize the impact of different sentence representation approaches on NLP applications. In 2012, the association of Computer Linguistics (ACL) introduced a shared task conference for STS. The major focus of this conference was to define the STS research problem and standardize the dataset for it. This shared task event encouraged extensive evaluation of the approaches proposed every year. \citep{agirre2012semeval}. The STS task has two sub-tasks: 1) Sentence Relatedness, and 2) Recognizing Textual Entailment (RTE). Sentence Relatedness aims to find the semantic similarity score ranging from 0 to 5 between two sentences. 
+     STS is the task of finding how closely related two sentences are concerning their meaning \citep{agirre2012semeval}. It constitutes as a primary component in many natural language processing (NLP) applications such as Text Categorization, Sentiment Analysis and so on. Until 2012, there was no unified framework available to study problems related to the semantic analysis of text data. Because of this, it was difficult to measure the performance and visualize the impact of different sentence representation approaches on NLP applications. In 2012, the Special Interest Group in Computation Semantics (SIGSEM)\footnote{http://www.sigsem.org} introduced a shared task for STS as part of their SemEval workshop\footnote{http://alt.qcri.org/semeval2017/task1/}. The major focus of this conference was to define the STS research problem and standardize the dataset for it. This shared task encouraged extensive evaluation of the submissions consisting different approaches for learning sentence representation. The STS task has two sub-tasks: 1) Sentence Relatedness, and 2) Recognizing Textual Entailment (RTE). Sentence Relatedness aims to find the semantic similarity score ranging from 0 to 5 between two sentences. 
     
     \begin{table}[ht] 
     	\centering
@@ -178,13 +193,13 @@ principles of feature-based machine learning and neural networks approach. Secti
     	}
     \end{table}
     
-    Table \ref{STS score} discusses the reasoning for the similarity score. Recognizing Textual Entailment measures the existence of the meaning overlap between two sentences, and classifies the relationship into three categories: 1) Entailment (E); 2) Contradiction (C); 3) Neutral (N). Table \ref{RTE class} explains the reasoning behind these target labels. 
+    Table \ref{STS score} discusses the reasoning for the similarity score. Recognizing Textual Entailment measures the existence of the meaning overlap between two sentences, and classifies the relationship into three categories: 1) Entailment (E); 2) Contradiction (C); 3) Neutral (N). RTE was a shared task much earlier \citep{dagan2006pascal}\footnote{http://u.cs.biu.ac.il/~nlp/RTE1/Proceedings/}  Table \ref{RTE class} explains the reasoning behind these target labels and the examples in that table are taken from ACL's Textual Entailment Portal\footnote{https://aclweb.org/aclwiki/Textual\_Entailment\_Portal}. 
     
-    In this project, the experiments are built around Semantic Textual Similarity with an objective to study and determine the usefulness of the semantics captured by the encoder algorithms. This task serves to be ideal for this comparison study because to succeed in this task; the representation should consist of proper semantics. 
+    In this project, the experiments are built around Semantic Textual Similarity (STS) with an objective to study the usefulness of the semantics captured by the encoder algorithms. The encoder models should output sentence representation that consist of proper semantics to achieve best performance in STS as this task compares semantic relatedness between two sentences. So, the STS task serves to be ideal for training and evaluating the encoder models explored in this comparison study.  
     
     \begin{table}[ht] 
     	\centering
-    	\caption{Recognizing Textual Entailment (Classification Label) \citep{jurafsky2014speech}}
+    	\caption{Recognizing Textual Entailment (Classification Label)}
     	\label{RTE class} 
     	\resizebox{\columnwidth}{!}{%
     		\begin{tabular}{|c|c|c|}
@@ -221,181 +236,217 @@ principles of feature-based machine learning and neural networks approach. Secti
 \subsection{STS Applications}
 \label{sts_app}
 
-Semantic similarity between two sentences is a fundamental Natural Language Understanding (NLU) problem that is applicable in many NLP tasks such as information retrieval, evaluation of machine translation system, and automatic text summarization etc., \citep{agirre2016semeval}. STS models act as a primary software component in many applications such as image-captioning, automatic short question answer grading, search engines, plagiarism, and newswire headlines etc. \citep{agirre2016semeval}. For example, STS tasks are being used as a plagiarism checker by classifying the input text into following categories: 1) copying and pasting individual sentences
-from Wikipedia; 2) light revision of material copied from Wikipedia; 3) massive change of content from Wikipedia; 4) non-plagiarised answers produced without even looking at Wikipedia \citep{agirre2015semeval}. Similarly, STS can also be used to automatically evaluate the quality of machine translation systems, by comparing the machine-generated translations and its corresponding gold standard translations generated by humans \cite{agirre2015semeval}. 
+Semantic similarity between two sentences is a fundamental Natural Language Understanding (NLU) problem that is applicable in many NLP tasks such as information retrieval, evaluation of machine translation system, automatic text summarization, and so on \citep{agirre2016semeval}. STS models act as a primary software component in many applications such as image-captioning, automatic short question answer grading, search engines, plagiarism, newswire headlines and so on. \citep{agirre2016semeval}. For example, STS tasks are being used as a plagiarism checker by classifying the input text into following categories: 1) copying and pasting individual sentences
+from Wikipedia; 2) light revision of material copied from Wikipedia; 3) massive change of content from Wikipedia; 4) non-plagiarised answers produced without even looking at Wikipedia \citep{agirre2015semeval}. Similarly, STS can also be used to automatically evaluate the quality of machine translation systems, by comparing the machine-generated translations and its corresponding gold standard translations generated by humans \citep{agirre2015semeval}. 
 
 \subsection{Data for STS}
 
-The performance of machine learning models highly depends on the quality of its training data, as the machine learning models are approximated based on the interactions between input and output values. In the case of neural networks, the size of the data has a large influence on its performance as it doesn't get a chance to optimize well without training on various domains or aspects of the problem. In this project, the models are trained using dataset from Standford Natural Language Inference (SNLI) corpus  \citep{bowman2015large}, and Sentences Involving Compositional
+The performance of machine learning models highly depends on the quality of its training data. In this project, the models are trained using dataset from Stanford Natural Language Inference (SNLI) corpus  \citep{bowman2015large}, and Sentences Involving Compositional
 Knowledge (SICK) corpus (released as SemEval 2014 Task 1, \citep{marelli2014semeval}).
 
-The SICK \cite{marelli2014semeval}  was constructed using the human-annotated corpus for Sentence Relatedness and RTE tasks. It has 4500 sentence pairs that include the collection of STS dataset created using corpus from various domains. The training data domains include 
+SICK \citep{marelli2014semeval}  was constructed using the human-annotated corpus for Sentence Relatedness and RTE tasks. It has 4500 sentence pairs from various domains. The training data domains include 
 \begin{enumerate}
-	\item News headlines from the RSS feed of the European Media Monitor
-	\item Image captions from Flickr
-	\item Pairs of answers collected from Stack Exchange
-	\item Student answers paired with correct reference answers from the BEETLE corpus
-	\item Forum discussions about beliefs from the DEFT Committed Belief Annotation dataset
+	\item News headlines from the RSS feed of the European Media Monitor.
+	\item Image captions from Flickr.
+	\item Pairs of answers collected from Stack Exchange.
+	\item Student answers paired with correct reference answers from the BEETLE corpus \cite{dzikovska2010intelligent}.
+	\item Forum discussions about beliefs from the DEFT Committed Belief Annotation dataset (LDC2014E55).
 \end{enumerate}
 
-  SNLI corpus consist of data from Amazon Mechanical Turk, an online marketplace, and Flickr30K corpus consisting 160k captions \citep{bowman2015large}. It was a hand annotated dataset comprising 550k sentence pairs.
+  The SNLI corpus consists of data from Amazon Mechanical Turk, an online marketplace, and Flickr30K corpus consisting 160k captions \citep{bowman2015large}. It was a hand annotated dataset comprising 550k sentence pairs.
 
 \section{Brief History of Meaning Representation}
 \label{history}
 
-Any NLU problem starts with the challenge of describing words and sentences in the form of a machine-understandable representation, i.e. a vectorial representation that encodes its meaning. Historically, many knowledge-based and vector-based approaches have been proposed to estimate vector representations of words. Many algorithms used WordNet, a lexical knowledge-base to measure similarity, word hierarchy etc.. In a corpus-based approach, the representations are built based on the co-occurrence matrix of words in the documents consisting of the raw text corpus. It was also known as the distributional representation as it represents the meaning of the word from the distribution of words that occur around it. All the unique words in documents form a vocabulary $V$ of the model. All the words in the $V$ were used to build the Vector representation. Initially, the term-document matrix was introduced to represent a set of documents as vector, based on its content. In Figure \ref{doc-word}, the term-document matrix consists of four novels as its column and all the unique words from $V$ as its rows. With the word occurrence count in \textit{As You Like it} column in Figure \ref{doc-word}, it's clear that novel belongs to a comedy genre.  This matrix was used to find similar documents as part of an information retrieval system \citep{salton1971smart}, based on the idea that the related documents have almost the same distribution of words resulting in similar vectors.  Each row in this matrix represents the word, but its not very accurate in carrying contextual information. 
+Any NLU problem starts with the challenge of describing words and sentences in the form of a machine-understandable representation, i.e, a representation that encodes its meaning. Historically, many knowledge-based and vector-based approaches have been proposed to estimate representations of words. Many algorithms used WordNet, a lexical knowledge-base to measure similarity, word hierarchy and so on. In a corpus-based approach, the representations were built based on the co-occurrence matrix of words in the documents consisting of the raw text corpus. It is also known as the distributional representation as it represents the meaning of the word from the distribution of words that occur around it. All the unique words in the documents were used to form a vocabulary $V$ of the model. All the words in the $V$ were used to build the Vector representation. Initially, the term-document matrix was introduced to represent a set of documents as vector, based on its content. In Figure \ref{doc-word}, the term-document matrix consists of four novels as its column and all the unique words from $V$ as its rows. With the word occurrence count in \textit{As You Like it} column in Figure \ref{doc-word}, it is clear that novel belongs to comedy genre.  This matrix was used to find similar documents as part of an information retrieval system \citep{salton1971smart}, based on the idea that the related documents have almost the same distribution of words resulting in similar vectors.  Each row in this matrix represents the word, but its not very accurate in carrying contextual information. 
 
 \begin{figure}[!tbp]
 	\centering
-	\begin{minipage}[b]{0.57\textwidth}
+	\begin{minipage}[b]{0.99\textwidth}
 		\centering
-		\caption{ Term-Document Matrix}
+		\caption{ Term-Document Matrix. Figure taken from \cite{jurafsky2014speech}}
 		\label{doc-word}
-		\tcbox{\includegraphics[scale=0.30]{image/doc-word.png}}
+		\tcbox{\includegraphics[scale=0.45]{image/doc-word.png}}
 	\end{minipage}
-	\begin{minipage}[b]{0.57\textwidth}
+	\begin{minipage}[b]{0.99\textwidth}
 		\centering
-		\caption{Term-Context Matrix}
+		\caption{Term-Context Matrix. Figure taken from \cite{jurafsky2014speech}}
 		\label{word-word}
-		\tcbox{\includegraphics[scale=0.30]{image/word-word.png}}    
+		\tcbox{\includegraphics[scale=0.45]{image/word-word.png}}    
 	\end{minipage}
 \end{figure}
 
-Term-context matrix was introduced to handle this limitation and measure the similarity between words.  It used vocabulary words as its columns as well as its rows. Given the size of the vocabulary $|V|$, the term-context matrix carries the word co-occurrence count, within a specific window size,  with a dimension $|V| \times |V|$ as shown in Figure \ref{word-word}. These representations are also called Sparse Vector Representations as most of the matrix cell values are zero. They mostly capture syntactic information rather than the semantics of the word as the window size gets smaller. The difference in orientation of two vectors denotes the measure of similarity between words. Usage of a sparse vector model for any semantic analysis task was computationally complex. To overcome this issue, many models were proposed to generate short and dense representations as: 1) dimensionality reduction using singular value decomposition; 2) neural network approaches like skip-gram and Continous Bag of Word (CBOW). In this project, we will focus on the models that use neural networks for creating words and sentence representations, as the latter method is more computationally efficient than the former approach \citep{jurafsky2014speech}.
+Term-context matrix was introduced to handle this limitation and measure the similarity between words.  It used vocabulary words as its columns as well as its rows. Given the size of the vocabulary $|V|$, the term-context matrix carried the word co-occurrence count, within a specific window size,  with a dimension $|V| \times |V|$ as shown in Figure \ref{word-word}. These representations were also called Sparse Vector Representations as most of the matrix cell values are zero. They mostly capture syntactic information rather than the semantics of the word as the window size gets smaller. The difference in orientation of two vectors denotes the measure of similarity between words. Usage of a sparse vector model for any semantic analysis task was computationally complex. To overcome this issue, many models were proposed to generate short and dense representations as: 1) dimensionality reduction using singular value decomposition; 2) neural network approaches like skip-gram and Continuous Bag of Word (CBOW). In this project, we will focus on the models that use neural networks for creating words and sentence representations.
+%, as the latter method is more computationally efficient than the former approach \citep{jurafsky2014speech}.
 
-\section{Machine Learning models}
+\section{Machine Learning Models}
 \label{ml_model}
 
-The learning theory and pattern recognition in AI gave rise to the field of machine learning \citep{jurafsky2014speech}. The main objective of the machine learning algorithms is to learn from the previous data and predicts future data based on its previous knowledge. It learns a hypothesis consisting of weight parameters, which map the input features to output or target values. For any training set with input and output $\{(x_{i},y_{i})\}_{i=1}^{n}\}$, these algorithms learn a model \textit{h(x) = y} from a collection of statistical feature set, extracted from the input in the training dataset. Then, it makes predictions on the unseen data.  While training , the parameters are optimized based on an error rate of training time output $\bar{y_{i}}$ against true output $y_{i}$, for \textit{k} features $<x^{1}_{i},x^{2}_{i},..,x^{k}_{i}>$ extracted from the input $x_{i}$. The data with discrete outputs such as RTE tasks are segregated as the classification problem, and  the data with the continuous value output such as sentence relatedness, are classified as Regression problem. 
+The learning theory and pattern recognition in AI gave rise to the field of machine learning \citep{jurafsky2014speech}. The main objective of the machine learning algorithms is to learn from the previous data and predicts future data based on its previous knowledge. It learns a hypothesis consisting of weight parameters, which map the input features to output or target values. For any training set with input and output $\{(x_{i},y_{i})\}_{i=1}^{n}$, these algorithms learn a model \textit{h(x) = y} from a collection of statistical feature set, extracted from the input in the training dataset. Then, it makes predictions on the unseen data.  While training, the parameters are optimized based on an error rate of training time output $\bar{y_{i}}$ against true output $y_{i}$, for \textit{k} features $ \langle x^{1}_{i} ,x^{2}_{i},..,x^{k}_{i} \rangle  $ extracted from the input $x_{i}  $. The data with discrete outputs such as RTE tasks are segregated as the classification problem, and  the data with the continuous value output such as sentence relatedness, are classified as Regression problem. 
 
-\subsection{Traditional ML models}
+\subsection{Traditional ML Models}
 
 In this project, the ensemble of machine learning algorithms such as Support Vector Machine, Random Forest, and Gradient Boosting, is used for learning an RTE classifier and a sentence relatedness task-based regressor. 
 
 \begin{figure}[!tbp]
 	\centering
-	\caption{A simple Decision Tree}
+	\caption{A Simple Decision Tree. Figure taken from \cite{miller1991contextual}}.
 	\label{tree}
 	\tcbox{\includegraphics[scale=0.50]{image/tree.png}}
 \end{figure}
 
 
-Random Forest is an ensemble classifier that consists of a collection decision trees. Decision Tree is a tree with leaf and decision nodes that represent the function that takes a vector of feature values, and outputs a single target value. The output value can be discrete or continuous. It decides the prediction based on a specific sequence of rules. Each internal node corresponds to a condition applied to the training set, using any one of the input features, that splits the data as shown in Figure \ref{tree}. Although decision tree performs well, it is prone to over-fit as the decision node rules are built from the distribution of the training data. Therefore, it does not generalize well on the unseen data while testing. But, Random forest does not over-fit as it is an ensemble of decision trees, constructed from the sub-samples of the training data as shown in Figure \ref{rf}. 
+Random Forest is an ensemble classifier that consists of a collection decision trees. A Decision Tree is a tree with leaf and decision nodes that represent the function that takes a vector of feature values, and outputs a single target value. The output value can be discrete or continuous. It predicts based on a specific sequence of rules. Each internal node corresponds to a condition applied to the training set, using any one of the input features, that splits the data as shown in Figure \ref{tree}. Although decision tree performs well, it is prone to overfit as the decision node rules are built from the distribution of the training data. Therefore, it does not generalize well on the unseen data while testing. But, Random forest does not overfit as it is an ensemble of decision trees, constructed from the sub-samples of the training data as shown in Figure \ref{rf}. 
 
 \begin{figure}[!tbp]
 	\centering
-	\caption{Random Forest}
+	\caption{Random Forest. Figure taken from \cite{machado2015variables}}.
 	\label{rf}
 	\tcbox{\includegraphics[scale=0.40]{image/rf.jpg}}
 \end{figure}
 
-Support Vector Machine (SVM) algorithms apply to both linear and non-linear data. It is one of the most popular robust algorithms which performs well even with the small quantity of data .i.e with less prior knowledge about the problem domain. The critical trick that contributes to its robustness is maximum margin separator, a decision boundary with the most significant possible distance between the hypothesis and the training data points. This decision boundary helps the model to generalize well on unseen data. SVM handles linearly non-separable input data points, by expanding the hypothesis space, by transforming the input data into higher dimensional space. The data points are projected to a higher dimension using a kernel function. In higher dimension, a linear separating hyper-plane is created using kernel function to classify the input data with its class label. This separating hyper-plane is a non-linear line in the original space. 
+Support Vector Machine (SVM) algorithms apply to both linear and non-linear data. It is one of the most popular robust algorithms which performs well even with the small quantity of data .i.e, with less prior knowledge about the problem domain. The critical trick that contributes to its robustness is maximum margin separator, a decision boundary with the most significant possible distance between the hypothesis and the training data points. This decision boundary helps the model to generalize well on unseen data. SVM handles linearly non-separable input data points, by expanding the hypothesis space, by transforming the input data into higher dimensional space. The data points are projected to a higher dimension using a kernel function. In higher dimension, a linear separating hyper-plane is created using kernel function to classify the input data with its class label. This separating hyper-plane is a non-linear line in the original space. 
 
-Boosting algorithm is an ensemble of a set of learning algorithms that combines many base models that have limited prediction ability. Initially the boosting algorithm focused on binary classification $c(x)= sin(f(x))$ with response $\bar{y} \in \{-1,1\} $ where  
+Boosting algorithm is an ensemble of a set of learning algorithms that combines many base models that have limited prediction ability. Initially the boosting algorithm focused on binary classification $c(x)= sigmoid(f(x))$ with response $\bar{y} \in \{-1,1\} $ where  
 
 \begin{align}
-f(x) =     \sum_{i=1}^{N} \varTheta_{i} c_{i}(x)
+f(x) =     \sum_{i=1}^{N} \theta_{i} c_{i}(x)
 \end{align}
 
 and $c_{i}$ are the base learning models,
 
-The boosting algorithm learns the model by assigning weights $\varTheta$ to the data and training the weak classifiers against the weighted data-set. At each iteration, the weights are optimized in a way that the mis-classified data points get higher weights.
+The boosting algorithm learns the model by assigning weights $\theta$ to the data and training the weak classifiers against the weighted data-set. At each iteration, the weights are optimized in a way that the mis-classified data points get higher weights.
 
-Performance of all these algorithms crucially depends on the features selected to represent the sequence. For example, choosing feature/attributes such as pos-tags proportion, syntactical structure equivalence, and word taxonomy etc. to train a model for STS task would obviously give a better performance than a model trained on only the word count feature. The extraction of each attribute takes a long time and finding the interactions between this feature, specifically for a task further slows down the training process. Most of the time, the model is provided with n incomplete or over specified feature set. If an algorithm can learn the attributes by itself, the training process can be automated more efficiently, and it helps in solving many NLP tasks. Neural networks are one such algorithm which can learn the feature on it own.
+Performance of all these algorithms crucially depends on the features selected to represent the sequence. For example, choosing feature/attributes such as pos-tags proportion, syntactical structure equivalence, word taxonomy and so on. to train a model for STS task would obviously give a better performance than a model trained on only the word count feature. The extraction of each attribute takes a long time and finding the interactions between this feature, specifically for a task further slows down the training process. Most of the time, the model is provided with n incomplete or over specified feature set. If an algorithm can learn the attributes by itself, the training process can be automated more efficiently, and it helps in solving many NLP tasks. Neural networks are one such algorithm which can learn the feature on it own.
 
-Since 1980, various neural models have been proposed. Initially, neural models did not perform well in any task as they learn the feature by itself and require an enormous amount of data to generalize for unseen data. Recent insights in optimization, advances in parallel computing, and the availability of large datasets encouraged these architectures to achieve state of the art performance. 
+Since 1980, various neural models have been proposed. Initially, neural models did not perform well in any task as they learn the feature by itself and require an enormous amount of data to generalize for unseen data. Recent insights in optimization, advances in parallel computing, and the availability of large datasets improved these architectures performance. 
 
-
-\subsection{Neural Networks}
-
-A neural network is a directed graph with neurons as its node. Neurons are computational units connected by directed links. Each link has a weight that determines its importance or strength. Similarly, all the computational units consist of activation functions that are applied to the input. The activation function can be any linear or non-linear function such as sigmoid $(\sigma)$, hyperbolic tangent (tanh), and rectified linear units (RELU) etc. So, an output of any computational units is a function over the sum of the weighted inputs. Consider a computational units with activation function $f$ that takes inputs $x_{1},x_{2},...,x_{n}$ with weights $w_{1},w_{2},...,w_{n}$ and bias $b$ as shown in Figure \ref{neuron}. It is formally expressed as:
-
-\begin{figure}[!tbp]
+\begin{figure}[!htb]
 	\centering
 	\caption{A simple neuron}
 	\label{neuron}
 	\tcbox{\includegraphics[scale=0.50]{image/neuron.jpg}}
 \end{figure}
 
+\subsection{Neural Network}
+
+Neural network models are machine learning models that consist of directed graph with neurons as its node. Neurons are computational units connected by directed links. Each link has a weight that determines its importance or strength. Similarly, all the computational units consist of activation functions that are applied to the input. The activation function can be any linear or non-linear function such as sigmoid $(\sigma)$, hyperbolic tangent (tanh), rectified linear units (ReLU) and so on. So, an output of any computational units is a function over the sum of the weighted inputs. Consider a computational units with activation function $f$ that takes inputs $x_{1},x_{2},...,x_{n}$ with weights $w_{1},w_{2},...,w_{n}$ and bias $b$ as shown in Figure \ref{neuron}. It is formally expressed as:
+
 \begin{align}
-z & = \sum_{i=1}^{n} wx_i + b \\
+z & = \sum_{i=1}^{n} wx_i + b_i \\
 y & = f(z)
 \end{align}
 
-
- A simple neural network with two inputs $a$ and $b$, one hidden unit $c$, and an output unit $d$, is visualized as shown in Figure \ref{net}. Consider a sigmoidal function as the activation function in node $c$ and $d$. This network can be trained by optimising its weights $[W_{ac}, W_{bc}, W_{cd}]$ based on an objective function. The training has two phases: forward pass and backward pass.
-
-
-
-\begin{figure}[h]
+\begin{figure}[!htbp]
 	\centering
-	\caption{Neural Network}
-	\label{net}
-	\tcbox{\includegraphics[scale=0.44]{image/Trace_Back_Prop.jpg}}
-\end{figure} 
+	\caption{A simple network for word classification. Figure taken from \cite{bowman2016modeling}}
+	\label{network}
+	\tcbox{\includegraphics[scale=0.35]{image/simple_network.png}}
+\end{figure}
 
-
-
-\subsubsection*{Forward Pass}
-
-For node c, $in_{c}$ is computed from the given weights and the input. The $in_{c}$ is fed into the activation function to get the output $A_{c}$. The output $A_{d}$ of Node $d$ is computed in the same way.
-\begin{align} 
-in_{c}    & = W_{ac} \times a + W_{bc} \times b + W_{oc} \\
-A_{c} & = \frac{1}{1+exp(-in_{c})} \\
-in_{d}    & = W_{cd} \times A_c + W_{od} \\
-A_{d} & = \frac{1}{1+exp(-in_{d})} 
-\end{align}
-
-%For Node d, $in_{d}$ is computed from the given weights and the output $A_{c}$ of the previous node c. The $in_{d}$ is feed into the activation function to get the output $A_{d}$  
-%\begin{align*} 
+%Most of the machine learning algorithms that deal with the word or text representations are neural network models. 
+Figure \ref{network} shows a simple neural network used for word classification. This network predicts if the word belongs to positive, neutral or negative class. This network consist of two hidden $tanh$ layers with parameters $M$ and bias $b$. While training, the appropriate word representation from the vocabulary is feed as the input. This input is then passed through the hidden layers first and then passes through the softmax layer which produce probability distribution over the given output classes. By comparing predicted output against the target output, the loss of the model is calculated. With the calculated loss, the model's parameters are updated by using back-propagation algorithm. The training is carried out until the model reaches its global optimum using the given training set.
+% A simple neural network with two inputs $a$ and $b$, one hidden unit $c$, and an output unit $d$, is visualized as shown in Figure \ref{net}. Consider a sigmoidal function as the activation function in node $c$ and $d$. This network can be trained by optimising its weights $[W_{ac}, W_{bc}, W_{cd}]$ based on an objective function.
+% 
+% The training has two phases: forward pass and backward pass.
 %
+%
+%
+%\begin{figure}[h]
+%	\centering
+%	\caption{Neural Network}
+%	\label{net}
+%	\tcbox{\includegraphics[scale=0.44]{image/Trace_Back_Prop.jpg}}
+%\end{figure} 
+%
+%
+%
+%\subsubsection*{Forward Pass}
+%
+%For node c, $in_{c}$ is computed from the given weights and the input. The $in_{c}$ is fed into the activation function to get the output $A_{c}$. The output $A_{d}$ of Node $d$ is computed in the same way.
+%\begin{align} 
+%in_{c}    & = W_{ac} \times a + W_{bc} \times b + W_{oc} \\
+%A_{c} & = \frac{1}{1+exp(-in_{c})} \\
+%in_{d}    & = W_{cd} \times A_c + W_{od} \\
+%A_{d} & = \frac{1}{1+exp(-in_{d})} 
+%\end{align}
+%
+%%For Node d, $in_{d}$ is computed from the given weights and the output $A_{c}$ of the previous node c. The $in_{d}$ is feed into the activation function to get the output $A_{d}$  
+%%\begin{align*} 
+%%
+%%\end{align*}
+%
+%\subsubsection*{Backward Pass for weights adjustments}
+%The total loss of the networks is computed using the objective function $L = \frac{1}{2} (y - A_{d})^{2}$, where y is an actual output and $A_{d}$ is the predicted output. The gradient of loss $L$ is calculated concerning all the weights.
+%
+%For example, gradient of loss computed with respect to $W_{cd}$, 
+%
+%\begin{align*} 
+%\frac{\partial L}{\partial W_{cd}} & = \frac{\partial L}{\partial A_{d}} \times \frac{\partial A_{d}}{\partial in_{d}} \times \frac{\partial in_{d}}{\partial W_{cd}}    \\
+%& = \delta_{d} \times  \frac{\partial in_{d}}{\partial W_{cd}}  \\
+%& = \delta_{d} \times  \frac{\partial ( W_{cd} \times A_c + W_{od})}{\partial W_{cd}}
 %\end{align*}
+%\begin{align}
+%& = \delta_{d} \times  A_c
+%\end{align}  
+%% the rate of change of loss (gradient) \textit{with respect to} all the weights are calculated. 
+%where $\delta_{d}$ is a modification error. Weights are updated based on the gradients as shown below.
+%%The weight update rule in between layers i and j are 
+%
+%\begin{align} 
+%W_{c,d} \leftarrow W_{c,d} + \alpha \times A_{c} \times \delta_{d}
+%\end{align}
+%
+%where $\delta_{d}$ is a modification error,
+%
+%%\begin{center}
+%%    
+%% gradient of Loss w.r.t $A_{d}$ $\times$ gradient of activation output $A_{d}$ with respect to $in_{d}$.
+%%\end{center}
 
-\subsubsection*{Backward Pass for weights adjustments}
-The total loss of the networks is computed using the objective function $L = \frac{1}{2} (y - A_{d})^{2}$, where y is an actual output and $A_{d}$ is the predicted output. The gradient of loss $L$ is calculated concerning all the weights.
+%If there is more than one output unit in the layer, the partial derivative of the error across all of the output units, is equal to the sum of the partial derivatives of the error concerning each of the output units.
 
-For example, gradient of loss computed with respect to $W_{cd}$, 
+%A simple feed-forward neural network accepts only a fixed length input. This makes them unsuitable for working with language data. By changing the sequence input, it is impossible to capture word order information. One of the major challenge of neural networks is to design neural network architecture that handles the input data that has no fixed length. To feed a sequence as an input, the representations of each word in the sentence should be transformed using additional operations such as average or sum to transform it to fixed size representation. 
+%%Earlier, neural models proposed used have many hidden layers as it approximates any function.
+%Although the word representations from the pre-trained models are effective to transform the varying length sentences to fixed representation, the information about the word order are impossible to recover. This limitation is handled by including a neural network model to encode sentence from word representations and preserve the word order. 
 
-\begin{align*} 
-\frac{\partial L}{\partial W_{cd}} & = \frac{\partial L}{\partial A_{d}} \times \frac{\partial A_{d}}{\partial in_{d}} \times \frac{\partial in_{d}}{\partial W_{cd}}    \\
-& = \delta_{d} \times  \frac{\partial in_{d}}{\partial W_{cd}}  \\
-& = \delta_{d} \times  \frac{\partial ( W_{cd} \times A_c + W_{od})}{\partial W_{cd}}
-\end{align*}
+There are various forms of neural network architecture considered for sentence encoding. In this project, we specifically focus on Recurrent Neural Networks (RNN) and Convolution Neural Networks (CNN).
+
+\subsubsection*{Recurrent Neural Networks}
+RNNs are a class of neural network architecture that are well suited for working sequential data such as sentences, documents and so on. They allow for representing inputs of arbitrary length in fixed-size vectors by incorporating the structural information of the input. In these networks, the output at a given time step is conditioned on the entire history of inputs. This characteristic of the network aid in handling long-range dependencies, particularly in the gated variants such as GRU \citep{cho2014learning} and LSTM \citep{hochreiter1997long}.  As discussed in \cite{goldberg2016primer}, a simple RNN can be mathematically defined as follows:
+
 \begin{align}
-& = \delta_{d} \times  A_c
-\end{align}  
-% the rate of change of loss (gradient) \textit{with respect to} all the weights are calculated. 
-where $\delta_{d}$ is a modification error. Weights are updated based on the gradients as shown below.
-%The weight update rule in between layers i and j are 
-
-\begin{align} 
-W_{c,d} \leftarrow W_{c,d} + \alpha \times A_{c} \times \delta_{d}
+RNN(s_0,x_{1:n}) &= s_{1:n},  y_{1:n} \\
+s_i &= R(s_{i-1},x_i) \\
+y_i &= O(s_i)
 \end{align}
+\[ 
+x_i \in \mathbb{R}^{d_{in}}, y_i \in \mathbb{R}^{d_{out}}, h_i \in \mathbb{R}^{f({d_{out}})} \]
 
-where $\delta_{d}$ is a modification error,
+where $x_{1:n}$ is the input vector, $y_{1:n}$ is the output vector and $s_{i}$ is the state vector at time-step $i$. $R$ and $O$ are non linear function such as $sigmoid$ or $tanh$.
 
-%\begin{center}
-%    
-% gradient of Loss w.r.t $A_{d}$ $\times$ gradient of activation output $A_{d}$ with respect to $in_{d}$.
-%\end{center}
 
-If there is more than one output unit in the layer, the partial derivative of the error across all of the output units, is equal to the sum of the partial derivatives of the error concerning each of the output units.
+%Any Recurrent networks accepts input in sequential order by updating its hidden state after processing each input. With this characteristics, it allows sequence with varying length and keeps track of the order.
 
-A simple feedforward neural accepts fixed length input, and the length of the sentences are varying. To feed a sequence as an input, the vector representations of each word in the sentence should be transformed using additional operations such as average or sum. By changing the sequence input, it is impossible to capture word order information. Recurrent neural networks handle this case by employing recursive computational units as per the sequence length.
-%Earlier, neural models proposed used have many hidden layers as it approximates any function.
 
-\section{Word Vector Representation}
+\subsubsection*{Convolutional Neural Networks(CNN)}
+CNN architectures are designed to identify and combine important local predictors in a large structure inputs, regardless of their position, to generate fixed length vector representations.\citep{goldberg2016primer}. In the beginning, Convolution neural networks were predominantly used in computer vision for image recognition. Recently it has been proven to be effective on the task that handles sequential inputs such as document classification \citep{johnson2015effective}, short-text categorization \citep{wang2015semantic}, paraphrase identification \citep{yin2015convolutional} and so on. 
 
-Firth's hypothesis of representing each word meaning by using its nearby words, was successfully used in many statistical NLP techniques. For instance, Brown Clustering \citep{brown1992practical} , Latent Dirichlet Allocation \citep{blei2003latent} etc used word co-occurrence count as its primary component. In the field of deep learning, \cite{bengio2003neural} proposed a language model based on a neural network that predicts the next word for the given previous words in a sequence. They also noticed that this prediction model helped in learning a vector representation for words called word embeddings or word representations.
+For sequence inputs, a simple CNN splits the input into multiple windows consisting of k words. Then it applies convolution function using filter parameters, followed by a non-linear function to transform a group of words in a window to a vector representation. The output from convolution layer is passed through either max or average pooling layer that combines the representation from the various windows into a single representation. Finally, the resulting d-dimensional vector is feed into a fully connected neural network for further prediction based on the task. 
+
+\section{Word Representation}
+\label{word_rep}
+
+Firth's hypothesis of representing each word meaning by using its nearby words, was successfully used in many statistical NLP techniques. For instance, Brown Clustering \citep{brown1992practical} , Latent Dirichlet Allocation \citep{blei2003latent} and so on were used word co-occurrence count as its primary component. In the field of deep learning, \cite{bengio2003neural} proposed a language model based on a neural network that predicts the next word for the given previous words in a sequence. They also noticed that this prediction model helped in learning a vector representation for words called word embeddings or word representations.
 %The representations were learnt by starting with the random vectors and shifting its vector closer to the vector of its similar words throughout the training process\footnote{wrong. The vector moves close to words with similar meaning. }. 
 Later in 2008, \cite{collobert2008unified} showed the usefulness of word representations in various downstream NLP tasks.
 %the efficient use of pre-trained word vectors in different work was explained by. 
-Inspired by these models, \cite{mikolov2014word2vec} proposed two novel methods: 1) Skip-Gram with Negative Sampling (SGNS); 2) Continous Bag of Words(CBOW) models for learning word representations. The SGNS model is discussed in detail below, as it is widely adopted and used as an input for many sentence representations model \citep{kiros2015skip}.
+Inspired by these models, \cite{mikolov2014word2vec} proposed two novel methods: 1) Skip-Gram with Negative Sampling (SGNS); 2) Continous Bag of Words(CBOW) models for learning word representations. The SGNS model is discussed in detail below, as it is widely adopted and used as an input for many models trained for NLP tasks such as Sentence Relatedness, Paraphrase detection, and so on. \citep{kiros2015skip}.
 %objective has been adopted by a sentence representation model and made an important contribution to learn a generalizable sentence representation. This model was demonstrated to be inexpensive compared to previous models and performed very well in capturing the general syntactical and semantic information. The training objective of these models is to learn word vector representations that are good at predicting the surrounding words. The detailed architecture of the skip-gram model is shown in figure \ref{skipgram}. 
 
 \begin{figure}[!tbp]
 	\centering
-	\caption{Training samples for skip-gram - Words pairs from raw corpus}
+	\caption{Training samples for skip-gram - Words pairs from raw corpus. Figure taken from \cite{jurafsky2014speech}}
 	\label{train_sam}
 	\tcbox{\includegraphics[scale=0.70]{image/train_samples.png}}
 	
@@ -405,7 +456,7 @@ Inspired by these models, \cite{mikolov2014word2vec} proposed two novel methods:
 
 \begin{figure}[h]
 	\centering
-	\caption{Context and Word matrices \citep{jurafsky2014speech}}
+	\caption{Context and Word matrices. Figure taken from \cite{jurafsky2014speech}}.
 	\label{C_W_matrics}	
 	\tcbox{\includegraphics[scale=0.50]{image/cbows.png}}
 \end{figure}
@@ -421,34 +472,77 @@ p(w_{k} | w_{j}) = y_{k} = \frac{\exp( c_{k} \cdot v_{j})}{\sum_{i=1}^{|v|} \exp
 \end{align}
 
 
-The output of the network is the vector $1\times|V|$ consisting of the probability distribution of each word in the whole vocabulary. Each probability value in the vector position denotes the likelihood of a word corresponding to the same position in the vocabulary. Cost function $L$ tunes the weight parameters in this network by using equation \ref{eq2}
+The output of the network is the vector $1\times|V|$ consisting of the probability distribution of each word in the whole vocabulary. Each probability value in the vector position denotes the likelihood of a word corresponding to the same position in the vocabulary. Cost function $L$ is used to tune the weight parameters in this network by using equation \ref{eq2}
 \begin{align}
 \label{eq2}
-L = - \log ( p(w_{O,1}, wO,2, . . . , w0,C|wI))
+L = - \log ( p(w_{O_1}, w_{O_2}, . . . , w_{O_C}|wI))
 \end{align} 
 
+where $j$ in $w_{O_j}$ denotes the index of $j$-th output context word. 
 
-The derivative of $L$ with respect to input units of the output layer and hidden layer, constitute the prediction error. The learning algorithm is started with the randomized word and context matrices (weight parameters of this network). Optimizer algorithms such as Stochastic Gradient Descent are used to tune the weight parameters using error back-propagation to broadcast the gradient through the network. Later, the Skip-Gram model was improved by replacing the soft-max function in the output layer with Negative Sampling. This model provided state of the art performance while testing for semantic and syntactic word similarities. \citep{mikolov2014word2vec}. 
+
+The derivative of $L$ with respect to input units of the output layer and hidden layer, constitute the prediction error. The learning algorithm is started with the randomized word and context matrices (weight parameters of this network). Optimizer algorithms such as Stochastic Gradient Descent are used to tune the weight parameters using error back-propagation to broadcast the gradient through the network. Later, the Skip-Gram model was improved by replacing the soft-max function (Eq 2.10) in the output layer with Negative Sampling. This model provided state-of-the-art performance while testing for semantic and syntactic word similarities. \citep{mikolov2014word2vec}. 
 
 
 \begin{figure}[!tbp]
 	\centering
-	\caption{Skip-gram Model \citep{jurafsky2014speech}}
+	\caption{Skip-gram Model. Figure taken from \cite{jurafsky2014speech}}.
 	\label{skipgram}	
 	\tcbox{\includegraphics[scale=0.50]{image/skip-gram.png}}
 \end{figure}
 
+
 \section{Sentence Representation Model}
-As word representation models became very useful and predominantly used, a natural next step was to extend such approaches to build sentence encoders. The main objective of sentence encoders was to learn an accurate sentence representation that would capture its semantics using previously trained word representation.
-%As the models proposed for learning word representations are well-established models and proved to be successful in their performance; recent research has focused models that can learn a general sentence representations that would capture its proper semantics using previously trained word representations. 
-The vector representations can be learned by using two approaches 1) Supervised models \citep{conneau2017supervised} 2) Unsupervised models \citep{kiros2015skip}. Skip-gram model is unsupervised learning as its objective function was to optimise the word representations. In this type of learning, general information is captured. The knowledge obtained by these models can be transferred to any NLP task that needs to process a sequence. 
+\label{sent_rep}
+
+Despite developing a number of learning algorithms for representing words and sentences, generating high quality and efficient sentence representations remains an unsolved problem \citep{conneau2017supervised}. An efficient sentence representation that consists of the whole meaning with context is important as it can be used across various tasks with minimal adaptation. This property results in a smooth transfer of the learning to train any NLP task. We focus on the STS task, as \cite{conneau2017supervised} demonstrated that natural language inference tasks appear to capture more generalizable sentence representation using Transfer learning.
 
 
-Supervised learning of vector representations is training a model on a pre-defined task, with defined input-output samples where the model parameters are optimised based on the task. The word representations are learned in internal states as the model is trained on an STS task. In this type of learning, the model learns the information that is specific to the task and fails to capture general knowledge. All proposed models aim to generate an accurate and generic sentence representation that consists of the whole meaning of the context. These generic representations are vital as they can be used for various tasks with minimal adaptation. This property results in the smooth transfer of learning to the model that learns any specific task. By promoting Transfer Learning, the training complexity and training time for particular tasks, decreases.  
+\subsection{Traditional Machine Learning Models}
+\label{ml_models_rw}
+
+For decades, traditional machine learning algorithms such as support vector machine or logistic regression were to used to solve any NLP tasks. In 2012, supervised models based on the lexical and syntactic features of the sentence pair, showed promising results on measuring semantic relatedness. These systems gave 52\%\textendash59\% correlation on various data-sets by using regression models consisting of various similarity measures as its input features. The unsupervised models did well for next two years in row using the WordNet knowledge and the LSA similarity measures which assume that the words with closer meaning highly co-occur in the text corpora. 
+
+\cite{han2013umbc_ebiquity} proposed three approaches that involved 1) LSA similarity model, 2) semantic similarity model based on the alignments quality of the sentences, and 3) support vector regression model that had features from different combinations of similarity measures, and the measures from two other core models. It was observed that using the n-gram overlap feature increased LSA similarity model. Out of three models \citep{han2013umbc_ebiquity}, the alignment based system gave 59\% - 74.6\% Pearson Correlation on four different data-sets. Using this model's alignment quality as one of the features in the Support Vector Regression model improved the correlation score to 78\%.  Various supervised models using uni-gram (one word) or bi-gram (two words) overlap, vector distance, and cosine similarity of sentence embedding, were proposed \citep{agirre2015semeval}.   
+
+\cite{tian2017ecnu} proposed a system that adapted ensemble learning techniques to solve the Textual Entailment and STS tasks, using the same set of features. The combination of classical NLP models like Support Vector Machine, Random Forest, Gradient Boost and a deep learning model are used in this system. For classical NLP models, single sentence and sentence pairs feature sets, are hand engineered based on properties like N-gram overlap, syntax, alignments, word sequence, word dependency, word representations and so on. In SEM-EVAL 2017, this mixed ensemble model gave 81 \% Pearson Correlation, outperforming all the neural models presented in that shared-task event.
+
+Although using hand-crafted features in the above mentioned models works, it has some drawbacks such as tuning the features extracted on addressing the corpus from new domains, high computational complexity in hand engineering the features, effective feature selection and so on. Recent approaches in deep learning continue to prove that the problem of semantic text matching can be handled in an efficient way \citep{cer2017semeval}. The problem of semantic word matching can be extended to solve the problem of the semantic sentence match by using deep learning approaches. This helps when it comes to effectively learning the word meanings in the sentence individually and deriving a meaningful sentence representation from the word vectors. 
+
+
+%As word representation models became very useful and predominantly used, a natural next step was to extend such approaches to build sentence encoders. The main objective of sentence encoders was to learn an accurate sentence representation that would capture its semantics using previously trained word representation.
+%%As the models proposed for learning word representations are well-established models and proved to be successful in their performance; recent research has focused models that can learn a general sentence representations that would capture its proper semantics using previously trained word representations. 
+%The vector representations can be learned by using two approaches 1) Supervised models \citep{conneau2017supervised} 2) Unsupervised models \citep{kiros2015skip}. Skip Thought \citep{kiros2015skip} model is a unsupervised model, trained for language model objective and not trained for task that involves semantics analysis.  In this type of learning, general information is captured. The knowledge obtained by these models can be transferred to any NLP task that needs to process a sequence. Even though being a unsupervised model, this model performed well in STS task but under-performs compared to the models trained on the semantics related task. 
+%
+%
+%Supervised learning of vector representations is training a model on a pre-defined task, with defined input-output samples where the model parameters are optimised based on the task. The word representations are learned in internal states as the model is trained on an STS task. In this type of learning, the model learns the information that is specific to the task and fails to capture general knowledge. All proposed models aim to generate an accurate and generic sentence representation that consists of the whole meaning of the context. These generic representations are vital as they can be used for various tasks with minimal adaptation. This property results in the smooth transfer of learning to the model that learns any specific task. By promoting Transfer Learning, the training complexity and training time for particular tasks, decreases.  
+
+\subsection{Neural Models}
+\label{nu_models_rw} 
+
+This section discusses the top ranking neural models presented in Sem-Eval 2017 that have been proposed to build sentence representations and predict sentence relatedness.
+
+\cite{kiros2015skip} proposed the Skip-Thought model based on skip-gram objective from \cite{mikolov2014word2vec}. For any three consecutive sentences in the document $S_{i-1}, S_{i}, S_{i+1}$, the Skip-Thought model predicts the previous sentence $S_{i-1}$, and next sentence $S_{i+1}$ given any sentence $S_{i}$.
+This work focuses on training an encoder-decoder model. A variant of recurrent networks consisting of gated recurrent units (GRU) \citep{cho2014learning} is used as an encoder to map input sentences into a generic sentence representation. RNN with conditioned GRU is used as a language model to decode the sentence representation and predict surrounding sentences $S_{i-1}$ and $S_{i+1}$. In evaluating a semantic relatedness task, Skip-Thought outperformed all systems proposed in a shared task SemEval 2014 \citep{marelli2014semeval}.
+%and was outperformed by dependency Tree-LSTM model.
+
+\cite{tai2015improved} proposed a recurrent neural networks(RNN) with tree based LSTM units with two variants Child-Sum Tree-LSTM and N-ary Tree LSTM. Given a sentence syntactic structure in a form dependency tree of the words, Tree-LSTM networks are capable of integrating the child node's information. The Tree-LSTM units in each node t consists of input gate $i_{t}$, output gate $o_{t}$, a cell unit $c_{t}$ and a hidden output $h_{t}$. Unlike Standard LSTM, the parent node has one forget gate $f_{tk}$ for each child node \textit{k} in the Tree-LSTM. This property allows selective usage of child information. Previously proposed RNN models with sequential LSTM units, have limited ability to capture the meaning difference in the two sentences raised due to word order and syntactical structures. Tree-LSTM addresses this issue by computing its hidden layer output as a function of the outputs from its children hidden units and input vector. 
+
+In modelling semantic relatedness, the input $x_{t}$ denotes the word vectors of the sentence parse tree. The proposed model retains the information of more distant words from the current words compared to other existing models. These properties make the model effective in highlighting the semantic heads in the sentence. It also captures the relatedness of two phrases which have no word overlap. With these properties, Tree LSTM performs better than existing sequential RNN-LSTM models, and models with hand engineered features on predicting the semantic relatedness of two sentences. But one major downside is that the dependency tree-LSTM relies on parser for dependency tree input, which is computationally expensive to collect and does not exist for all languages making it inefficient in cross-lingual sentence representations.
+
+
+
+\cite{shao2017hcti} presented a simple Convolutional neural network model for STS tasks. This model constsis of CNN model and fully connected neural network (FCNN). CNN takes pre-trained word vectors from Glove \citep{pennington2014glove} enhanced with handcrafted features as its input. It enhances word vector to task specific forms in the convolutional layer, and max-pooling generates the task-dependent sentence representation. FCNN generates the similarity score ranging from 0-5. This model ranked third in SemEval-2017 with a 78 \% correlation on STS tasks. 
+
+
+\cite{pagliardini2017unsupervised} proposed a simple unsupervised objective Sent2Vec, to train a generic distributed representation for sentences. The main contribution of Sent2Vec is its low computational cost for both training and inference, relative to other existing state-of-the-art models. This model is an extension of CBOW training objective from Word2Vec \citep{mikolov2014word2vec}, to sentence context.
+
+
+\cite{conneau2017supervised} investigated the performance of various supervised encoders in learning universal sentence representations. They hypothesized that textual entailment task is a good choice for learning universal representations and demonstrated the hypothesis with various encoder models. To prove that the sentence representations learned are universal, the representations learned from unsupervised and proposed hypothesis was used in 12 different transfer tasks, such as Caption-Image retrieval, Paraphrase detection, Entailment/semantic relatedness, sentiment analysis and so on. As the result of their experiments, Bi-LSTM with max-pooling trained on Natural Language Inference Task (Textual Entailment), generated the best sentence representations, and outperformed SkipThought \citep{kiros2015skip} and FastSent \citep{hill2016learning}.
 
 \section{Summary}
 
-This chapter present the technical background of Natural language understanding through word representations to sentence representations.This chapter also discussed about the successful word representation model in details. This model was used as a base component to develop other word and sentence representation models. Next Chapter discuss about the exiting models proposed for extracting sentence representation.
+This chapter present the technical background of Natural language understanding through word representations to sentence representations.This chapter also discussed about the successful word representation model in details. This model was used as a base component to develop other word and sentence representation models. This chapter has reviewed the pro and cons of the best performing models proposed in last five years. The research in semantics extraction is progressing using both classical machine learning and neural networks model. The models that took advantage of both classical machine learning and neural models using ensemble techniques showed good performance. The neural models that used enhanced word representation by concatenating the actual word representation and the alignment features of two sentence has also showed promising results. Next chapter discusses about the sentence encoder model's architecture compared in this project.
 
 %\subsubsection{STS Features and Accurracy}
 %
@@ -459,64 +553,20 @@ This chapter present the technical background of Natural language understanding 
 % 
 
 
-\chapter{Related Work}
-\label{related_work}
-
-
-Despite developing a number of learning algorithms for representing words and sentences, generating high quality and efficient sentence representations remains an unsolved problem \citep{conneau2017supervised}. An efficient sentence representation that consists of the whole meaning with context is important as it can be used across various tasks with minimal adaptation. This property results in a smooth transfer of the learning to train any NLP task. We focus on the STS task, as \cite{conneau2017supervised} demonstrated that natural language inference tasks appear to capture more generalizable sentence representation using Transfer learning. This chapter discusses the existing models and comparison studies in order to compare and study different models used for STS tasks and to infer how they impact in learning good sentence representations.
-
-In this chapter, we discuss about the existing sentence representation encoder models and theirs usefulness. Section \ref{ml_models_rw} presents the classical machine learning models proposed for STS task and the features proposed in their systems to represent semantics.  In section \ref{nu_models_rw}, we discuss about the neural models which gave the best performance in last five years and the comparison studies on these models.
-
-\section{Traditional Machine Learning Models}
-\label{ml_models_rw}
-
-For decades, traditional machine learning algorithms such as support vector machine or logistic regression were to used to solve any NLP tasks. In 2012, supervised models based on the lexical and syntactic features of the sentence pair, showed promising results on measuring semantic relatedness. These systems gave 52\% - 59\% correlation on various data-sets by using regression models consisting of various similarity measures as its input features. The unsupervised models did well for next two years in row using the WordNet knowledge and the LSA similarity measures which assume that the words with closer meaning highly co-occur in the text corpora. 
-
-\cite{han2013umbc_ebiquity} proposed three approaches that involved 1) LSA similarity model, 2) semantic similarity model based on the alignments quality of the sentences, and 3) support vector regression model that had features from different combinations of similarity measures, and the measures from two other core models. It was observed that using the n-gram overlap feature increased LSA similarity model. Out of three models proposed by \cite{han2013umbc_ebiquity}, the alignment based system gave 59\% - 74.6\% Pearson Correlation on four different data-sets. Using this model's alignment quality as one of the features in the Support Vector Regression model improved the correlation score to 78 \%.  Various supervised models using uni-gram (one word) or bi-gram (two words) overlap, vector distance, and cosine similarity of sentence embedding, were proposed \citep{agirre2015semeval}.   
-
-\cite{tian2017ecnu} proposed a system that adapted ensemble learning techniques to solve the Textual Entailment and STS tasks, using the same set of features. The combination of classical NLP models like Support Vector Machine, Random Forest, Gradient Boost and a deep learning model are used in this system. For classical NLP models, single sentence and sentence pairs feature sets, are hand engineered based on properties like N-gram overlap, syntax, alignments, word sequence, word dependency, word representations etc.. In SEM-EVAL 2017, this mixed ensemble model gave 81 \% Pearson Correlation, outperforming all the neural models presented in that shared-task event.
-
-Although using hand-crafted features in the above mentioned models works, it has some drawbacks such as tuning the features extracted on addressing the corpus from new domains, high computational complexity in hand engineering the features, and effective feature selection etc.. Recent approaches in deep learning continue to prove that the problem of semantic text matching can be handled in an efficient way \citep{cer2017semeval}. The problem of semantic word matching can be extended to solve the problem of the semantic sentence match by using deep learning approaches. This helps when it comes to effectively learning the word meanings in the sentence individually and deriving a meaningful sentence representation from the word vectors.  
-
-\section{Neural Models}
-\label{nu_models_rw} 
-
-This section discusses the top ranking neural models presented in Sem-Eval 2017 that have been proposed to build sentence representations and predict sentence relatedness.
-
-\cite{kiros2015skip} proposed the Skip-Thought model based on skip-gram objective from \cite{mikolov2014word2vec}. For any three consecutive sentences in the document $S_{i-1}, S_{i}, S_{i+1}$, the Skip-Thought model predicts the previous sentence $S_{i-1}$, and next sentence $S_{i+1}$ given any sentence $S_{i}$.
-This work focuses on training an encoder-decoder model. A variant of recurrent networks consisting of gated recurrent units (GRU) \citep{cho2014learning} is used as an encoder to map input sentences into a generic sentence representation. RNN with conditioned GRU is used as a language model to decode the sentence representation and predict surrounding sentences $S_{i-1}$ and $S_{i+1}$. In evaluating a semantic relatedness task, Skip-Thought outperformed all systems proposed in a shared task SemEval 2014 \citep{marelli2014semeval}.
-%and was outperformed by dependency Tree-LSTM model.
-
-\cite{tai2015improved} proposed a recurrent neural networks(RNN) with tree based LSTM units with two variants Child-Sum Tree-LSTM and N-ary Tree LSTM. Given a sentence syntactic structure in a form dependency tree of the words, Tree-LSTM networks are capable of integrating the child node's information. The Tree-LSTM units in each node t consists of input gate $i_{t}$, output gate $o_{t}$, a cell unit $c_{t}$ and a hidden output $h_{t}$. Unlike Standard LSTM, the parent node has one forget gate $f_{tk}$ for each child node \textit{k} in the Tree-LSTM. This property allows selective usage of child information. Previously proposed RNN models with sequential LSTM units, have limited ability to capture the meaning difference in the two sentences raised due to word order and synactical structures. Tree-LSTM addresses this issue by computing its hidden layer output as a function of the outputs from its children hidden units and input vector. 
-
-In modelling semantic relatedness, the input $x_{t}$ denotes the word vectors of the sentence parse tree. The proposed model retains the information of more distant words from the current words compared to other existing models. These properties make the model effective in highlighting the semantic heads in the sentence. It also captures the relatedness of two phrases which have no word overlap. With these properties, Tree LSTM performs better than existing sequential RNN-LSTM models, and models with hand engineered features on predicting the semantic relatedness of two sentences. But one major downside is that the dependency tree-LSTM relies on parser for dependency tree input, which is computationally expensive to collect and does not exist for all languages making it inefficient in cross-lingual sentence representations.
-
-
-
-\cite{shao2017hcti} presented a simple Convolutional neural network model for STS tasks. This model constsis of CNN model and fully connected neural network (FCNN). CNN takes pre-trained word vectors from Glove \cite{pennington2014glove} enhanced with handcrafted features as its input. It enhances word vector to task specific forms in the convolutional layer, and max-pooling generates the task-dependent sentence representation. FCNN generates the similarity score ranging from 0-5. This model ranked 3rd in SemEval-2017 with a 78 \% correlation on STS tasks. 
-
-
-\cite{pagliardini2017unsupervised} proposed a simple unsupervised objective Sent2Vec, to train a generic distributed representation for sentences. The main contribution of Sent2Vec is its low computational cost for both training and inference, relative to other existing state-of-art models. This model is an extension of CBOW training objective from Word2Vec \citep{mikolov2014word2vec}, to sentence context.
-
-
-\cite{conneau2017supervised} investigated the performance of various supervised encoders in learning universal sentence representations. They hypothesized that textual entailment task is a good choice for learning universal representations and demonstrated the hypothesis with various encoder models. To prove that the sentence representations learned are universal, the representations learned from unsupervised and proposed hypothesis was used in 12 different transfer tasks, such as Caption-Image retrieval, Paraphrase detection, Entailment/semantic relatedness, and sentiment analysis etc.. As the result of their experiments, Bi-LSTM with max-pooling trained on Natural Language Inference Task (Textual Entailment), generated the best sentence representations, and outperformed SkipThought \cite{kiros2015skip} and FastSent \cite{hill2016learning}.
-
-\section{Summary}
-
-This chapter has reviewed the pro and cons of the best performing models proposed in last five years. The research in semantics extraction is progressing using both classical machine learning and neural networks model. The models that took advantage of both classical machine learning and neural models using ensemble techniques showed good performance. The neural models that used enhanced word representation by concatenating the actual word representation and the alignment features of two sentence has also showed promising results. Next chapter discusses about the proposed study in this project.
-
-\chapter{Proposed Work}
+\chapter{State-of-the-art Methods in Semantic Similarity }
 \label{proposed_work}
 
-In recent times, a wide variety of encoders for learning sentence representation have been proposed by NLP researchers. However, there is a lack of understanding about the characteristics of different encoding techniques that can capture useful, accurate semantic information \citep{conneau2017supervised}. In feature based machine learning models, hand crafting and selecting optimal features is hard. Although neural models learn the feature by itself, they suffer from an inherent bias toward the task and data-set that they are trained on.
+In recent times, a wide variety of encoders for learning sentence representation have been proposed by NLP researchers. 
+%However, there is a lack of understanding about the characteristics of different encoding techniques that can capture useful, accurate semantic information \citep{conneau2017supervised}. 
+In feature based machine learning models, hand crafting and selecting optimal features is hard. Although neural models learn the features by itself, they suffer from an inherent bias toward the task and data-set that they are trained on.
 %captures the bias in the dataset effectively. 
-This feature is a downside because it learns the task very well and fails to capture generic useful information during the training time, leading to poor generalization. On the contrary, neural models trained independent of any task give more importance to general information. But, it fails to specialize the model for any specific task. Many factors affect how the basic semantics of a sentence are being captured during training. 
+This is a problem because it learns the task very well and fails to capture generic useful information during the training time, leading to poor generalization. On the contrary, neural models trained independent of any task such as the language model based objectives yields representations that give more importance to general information. But, it fails to specialize the model for any specific task. Many factors affect how the basic semantics of a sentence are being captured during training. 
 
- In this project, we perform a systematic comparison of different encoder techniques and assess their ability to capture semantics of the sentence, based on their performance in STS tasks. To investigate the performance, various models such as support vector machine (SVM), Random Forest (RF), Convolutional Neural Network Encoder \citep{shao2017hcti} and Bi-LSTM RNN with max-pooling \citep{conneau2017supervised} were implemented. These encoder models achieved good accuracy in STS task, and it outperformed the state-of-the-art encoders in SemEval 2017 conference \citep{cer2017semeval}. \cite{conneau2017supervised} demonstrated that Recognizing Textual Entailment (RTE) task trained using Standford Natural Language Inference (SNLI) corpus  \citep{bowman2015large}, captures semantics very well. Based on this inference, the neural models were trained using SNLI data-set, and Sentences Involving Compositional
+ In this project, we considered models that performed well in SEMEVAL(2017) shared task-1  to narrow down the focus of this study. Skip Thought \citep{kiros2015skip} is an unsupervised model, trained for language modelling objective and is not trained for any particular task. Despite being a unsupervised model, it performed reasonably well in STS task but is outperformed by the models that are trained on the semantics related task.  We perform a systematic comparison of different encoder techniques and assess their ability to capture semantics of the sentence, based on their performance in STS tasks. To investigate the performance, various models such as support vector machine (SVM), Random Forest (RF), Convolutional Neural Network Encoder \citep{shao2017hcti} were implemented. We extended Bi-LSTM RNN with max-pooling from \cite{conneau2017supervised}'s implementation \footnote{https://github.com/facebookresearch/InferSent} to integrate sentence relatedness decoder, as their original implementation was designed to work with RTE task. These encoder models achieved good accuracy in STS task, and it outperformed the state-of-the-art encoders in SemEval 2017 conference \citep{cer2017semeval}. \cite{conneau2017supervised} demonstrated that Recognizing Textual Entailment (RTE) task trained using Standford Natural Language Inference (SNLI) corpus  \citep{bowman2015large}, captures semantics very well. Based on this inference, the neural models were trained using SNLI data-set, and Sentences Involving Compositional
  Knowledge (SICK) corpus \citep{marelli2014semeval}, for semantic relatedness and RTE tasks.
  
  		
- Similarly, the encoders' architecture for both task dependent and independent neural models also impacts learning in different ways. This comparison study on these encoder's architecture and performance on STS task primarily focus on understanding for following:
+ Similarly, the encoders' architecture for both task dependent and independent neural models also impacts learning in different ways. This comparison study on the encoder's architecture and performance in STS task primarily focus on understanding for following:
 
 \begin{itemize}
 	\item Encoder's ability to capture semantics.
@@ -526,38 +576,35 @@ This feature is a downside because it learns the task very well and fails to cap
 Above two objectives of this comparison study answer the following question that helps in improving the models that already constitute the state of the art in sentence encoding.
 
 \begin{itemize}
-	\item Which encoder techniques perform well in learning accurate sentence representations ?
-	\item Among classical machine learning models, what are the features contribute more to prediction ?
-	\item What are the optimal hyper-parameters of the encoder model that helps in better performance ?
-	\item Since the dimension has direct effect on the memory requirements and processing time, where dimension has a good trade-off between accuracy and training time ?
-	\item What is the preferable neural network architecture for learning generic sentence representations that can aid in transfer learning ?
+	\item Which encoder techniques perform well in learning accurate sentence representations?
+	\item Among classical machine learning models, what are the features contribute more to prediction?
+	\item What are the optimal hyper-parameters of the encoder model that helps in better performance?
+	\item The dimension of the representations has a direct effect on the memory requirements and processing time. So, what is the trade-off between accuracy and training time w.r.t dimensions?
+	\item What is the preferable neural network architecture for learning generic sentence representations that can aid in transfer learning?
 \end{itemize}
 
 
- 
-
-\section*{Learning Methods}
 %	\subsection{Feature Engineering}
-This section describes the architecture of a various learning methods that are investigated for its ability in extracting sentence representation. 
+In next section, the architecture of a various learning methods are discussed. These models are investigated for its ability in extracting sentence representation. 
 
 \section{Ensemble Model}
 \label{ensemble}
 
-	This section discusses about the architecture details of an ensemble model proposed by \cite{tian2017ecnu}. This model adapts a combination method to intergrate the prediction of traditional ML algorithms such as support vector machine (SVM), Random Forest (RF), Gradiant Boosting (GB) and a neural network algorithm such as deep averaging network. This project explores the combined performance of SVM , RF and GB as mentioned in \citep{tian2017ecnu}. Given \textit{n} training data with input and output $ \{(x_i,y_i)\}^{n}_{i=1} $, these models focus on estimating a function (hypothesis) \textit{h(x)=y} that maps input to output. In STS task, with sentence pair as the input, a standard approach is to represent the sentence pair in the form of similarity features. Therefore,  effective feature representations that capture semantic and synactic matching degree are hand engineered. 
+	This section presents the architecture details of an ensemble model proposed by \cite{tian2017ecnu}. This model adapts a combination method to intergrate the prediction of traditional ML algorithms such as support vector machine (SVM), Random Forest (RF), Gradiant Boosting (GB) and a neural network algorithm such as deep averaging network. This project explores the combined performance of SVM , RF and GB as mentioned in \cite{tian2017ecnu}. Given \textit{n} training data with input and output $ \{(x_i,y_i)\}^{n}_{i=1} $, these models focus on estimating a function (hypothesis) \textit{h(x)=y} that maps input to output. In STS task, with sentence pair as the input, a standard approach is to represent the sentence pair in the form of similarity features. Therefore,  effective feature representations that capture semantic and synactic matching degree are hand engineered. 
 	
-	With these feature representations as input, the predictions are done based on the hypothesis \textit{h(x) = W . X} where X is the similarity feature vector and W is the corresponding weight vector.  The model learns an appropriate weight for each feature while training. In Ensemble approach, various models trained on sentence relatedness task with continous outputs, are optimizied based on the average of the score returned by them. In the case of classification tasks such as RTE, the models are optimised based on the majority voting of their classifications. The architecture diagram of this model is shown in Figure \ref{ensemble}.
+	With these feature representations as input, the predictions are done based on the hypothesis \textit{h(x) = $W \cdot X$} where X is the similarity feature vector and W is the corresponding weight vector.  The model learns an appropriate weight for each feature while training. In Ensemble approach, various models trained on sentence relatedness task with continous outputs, are optimizied based on the average of the score returned by them. In the case of classification tasks such as RTE, the models are optimised based on the majority voting of their classifications. The architecture diagram of this model is shown in Figure \ref{ensemble}.
 	
 	\begin{figure}[!tbp]
 		\centering
-		\caption{Ensemble Model \citep{tian2017ecnu}}
+		\caption{Ensemble Model. Figure taken from \cite{tian2017ecnu}}.
 		\label{ensemble}
 		\tcbox{\includegraphics[scale=0.40]{image/Ensemble.png}}
 	\end{figure}
 	
 	\subsection{Features}
-	For this ensemble model, the features of a sentence pair is extracted based on the length of two sentences, n-gram overlap, syntactic structure, alignment and machine translation metrics. N-Gram represents the group of \textit{n} consecutive character/words/sequence in a corpus. For the STS task, the  sequence of words or phrase overlaps are useful in expressing the common expression between two sentences. In this project, the normalised n-gram overlap is extracted in both word and character level. Similarly the longest common sub-sequence, prefix and suffix are computed to extract the sequeunce similarity. To estimate accurate similarity, the words are lemmatized where the words are replaced with its root word. 
+	For this ensemble model, the features of a sentence pair is extracted based on the length of two sentences, \textit{n}-gram overlap, syntactic structure, alignment and machine translation metrics. N-Gram represents the group of \textit{n} consecutive character/words/sequence in a corpus. For the STS task, the  sequence of words or phrase overlaps are useful in expressing the common expression between two sentences. In this project, the normalised n-gram overlap is extracted in both word and character level. Similarly the longest common sub-sequence, prefix and suffix are computed to extract the sequence similarity. To estimate accurate similarity, the words are lemmatized where the words are replaced with its root word. 
 	
-	Although the sequence of words overlap information can give a good indication of similarity, it fails to capture the word dependencies in a sentence which primarily influence the sentence meaning. The syntactical structure of a sentence is captured in the form of tree and the number of common subtree, constitutes the feature set. Further, the monoligual word alignment proportion is extracted as a feature. This feature maps the words between two sentences based on their meaning, parts of speech tag, and the synactic structure. The alignment features include normal alignment proportion, pos tag based weighted proportion. Other features include various WordNet based and word vector representation based similarities measures, such as
+	Although the sequence of words overlap information can give a good indication of similarity, it fails to capture the word dependencies in a sentence which primarily influence the sentence meaning. The syntactical structure of a sentence is captured in the form of tree and the number of common subtree, constitutes the feature set. Further, the monolingual word alignment proportion is extracted as a feature. This feature maps the words between two sentences based on their meaning, POS tag, and the synactic structure. The alignment features include normal alignment proportion, POS tag based weighted proportion. Other features include various WordNet based and word vector representation based similarities measures, such as
 	
 	\begin{itemize}
 		\item \textbf{Levenshtein distance} : It signifies the number of minimum edits required to convert one sequence to the other. This is also known as Path distance. This feature  implies the sequence is more similar when the distance is shorter. 
@@ -582,7 +629,7 @@ This section describes the architecture of a various learning methods that are i
 	
 	where function $f$ maps sentence pairs to a vector
 	representation, in which each dimension expresses a certain type of
-	similarity between the input sentence pair such as lexical, syntactic, semantic etc. The weight vector,
+	similarity between the input sentence pair such as lexical, syntactic, semantic and so on. The weight vector,
 	$w$ is a parameter of the model that is learned during the training and $h$ denotes the STS prediction model.
 	
 	The RTE task is a classification problem that consists of three target clasess  \textit{ C =\{entailment, contradiction, neutral\}}. A classifier function $\gamma$ is learned to map the sentence pair to its corresponding RTE class labels \textit{C}.
@@ -590,7 +637,7 @@ This section describes the architecture of a various learning methods that are i
 	In ensemble of SVM, RF and GB, their predictions are combined into one final prediction using the Stacking algorithm. In stacking, the training set is split to several subsets and each model is trained and tested on one of those subsets. Finally the predictions are fed into an outer model with their actual target value for its training. This outer classifier combines the prediction of SVM, RF and GB.
 	
 	
-\section{Convoutional Neural Network}
+\section{Convolutional Neural Network}
 	This section explains the convolution neural networks (CNN) based learning model used for semantic sentence similarity. The two main components of this model are (CNN) based sentence representation model, and fully connected neural networks (FCNN) used for STS task. The CNN architecture consists of two convolution networks that work parallel to mapping the two sentences to a vector space. The vectors of the sentence pairs are used by FCNN to classify their sentence similarity score. In the following, we first describe our sentence model for mapping sentence pairs to their intermediate representations and then explain how these representations are used to classify the relatedness score.
 	
 	\subsection{Sentence Model using CNN}
@@ -602,45 +649,45 @@ This section describes the architecture of a various learning methods that are i
 		\begin{figure}[hbp]
 			\centering
 			\label{CNN_1}
-			\caption{CNN Sentence Model \cite{severyn2015learning}}
+			\caption{CNN Sentence Model. Figure taken from \cite{severyn2015learning}}.
 			\tcbox{\includegraphics[scale=0.20]{image/CNN_sentModel.png}}
 		\end{figure}
 		
 	
-	The idea behind the convolution layer is to learn the features which identified the relationship between n-gram of the sentence using weight vectors \textit{m} $\in \mathbb{R}^{|m|}$ . The $1 \times 1$ weight vector \textit{m} also known as filters of the convolution is used. This convolution operation is followed by applying the Relu activation function to learn non-linear decision boundaries. This filters out the insignificant features learned in previous operation. The output from the convolution layer is passed to the max pooling layer with pool size (1, $|S|$) where the semantic information learned is aggregated, and reduces representation dimension from $1 \times |S| \times 300$ (word vec dimension) to $1 \times 300$ (word vec dimension). The convolution layers along with RELU activation function and max pooling acts as a non linear  feature detector for the given sentence. The output sentence representation from CNN is used to find the Semantic Difference Matrix by performing a series of operations on the two sentence vector. 
+	The idea behind the convolution layer is to learn the features which identified the relationship between n-gram of the sentence using weight vectors \textit{m} $\in \mathbb{R}^{|m|}$ . The $1 \times 1$ weight vector \textit{m} also known as filters of the convolution is used. This convolution operation is followed by applying the ReLU activation function to learn non-linear decision boundaries. This filters out the insignificant features learned in previous operation. The output from the convolution layer is passed to the max pooling layer with pool size (1, $|S|$) where the semantic information learned is aggregated, and reduces representation dimension from $1 \times |S| \times 300$ (word vec dimension) to $1 \times 300$ (word vec dimension). The convolution layers along with ReLU activation function and max pooling acts as a non linear  feature detector for the given sentence. The output sentence representation from CNN is used to find the Semantic Difference Matrix by performing a series of operations on the two sentence vector. 
 		
 	
 	\subsubsection*{Semantic Difference Matrix}
 	The semantic difference matrix is generated by concatenating the vector difference and vector product of a two sentence representation. This matrix is used to classify the similarity measure using fully connected neural network (FCNN) with 2 dense layers. 
 	
-		\begin{align*} 
-			SDV & =(|SV_{1}- SV_{2}|.(SV_{1} \circ SV_{2})) \\
-		\end{align*}
+		\begin{align} 
+			SDV & =(|SV_{1}- SV_{2}|,(SV_{1} \otimes SV_{2}))
+		\end{align}
 	
 	\begin{figure}[hbp]
 		\centering
-		\caption{Hyperparameters for FCNN \cite{shao2017hcti}}
+		\caption{Hyper-parameters for FCNN. Figure taken from \cite{shao2017hcti}}.
 		\label{params}
 		\tcbox{\includegraphics[scale=0.40]{image/hyperparameters.png}}
 	\end{figure}
 	
 	\subsection{Similarity Measure using FCNN}
 	
-	 This network consists of one hidden layer consisting of 300 computational nodes, and an output layer with 6 nodes. The hidden layer applies a \textit{tanh} activation function and the output layer applies softmax layer. The softmax layer calculates the probability over the six score labels. The hyper parameters of this network is shown in Figure \ref{params}.
+	 This network consists of one hidden layer consisting of 300 dimensional vector, and an output layer with 6 nodes. The hidden layer applies a \textit{tanh} activation function and the output layer applies softmax layer. The softmax layer calculates the probability over the six score labels. The hyper parameters of this network are shown in Figure \ref{params}.
 	 
 	 The maximal point is calculated from the probability distribution over six score labels. Finally, the model is trained and optimised using the root mean squared loss of target and predicted continous value. 
 	 
 	 \section{Recurrent Neural Network}
-	 This section desecribes the architecture of InferSent, a variant of recurrent neural network (RNN) proposed for RTE task \citep{conneau2017supervised}. This model outperformed all the existing state-of-the-art models such as SkipThought, FastSent etc, in extracting accurate sentence embedding. InferSent consists of a bi-directional Long-Short Time Memory (LSTM) based RNN sentence encoder and a fully connected neural network based decoder as shown in Figure \ref{bilstm}. The architecture of encoder is discussed in the following section. 
+	 This section desecribes the architecture of InferSent, a variant of recurrent neural network (RNN) proposed for RTE task \citep{conneau2017supervised}. This model outperformed all the existing state-of-the-art models such as SkipThought, FastSent and so on, in extracting accurate sentence embedding. InferSent consists of a bi-directional Long-Short Time Memory (LSTM) based RNN sentence encoder and a fully connected neural network based decoder as shown in Figure \ref{bilstm}. The architecture of encoder is discussed in the following section. 
 	 
 	\subsection{Bi-LSTM with max pooling}
-	Generally, RNN has the ability to accept input of arbitary length and return a fixed dimensional vector. Also, it is capable of propogating the previously processed input's information while processing a word in the given sequence at timestep \textit{t}.
+	Generally, RNN has the ability to accept input of arbitrary length and return a fixed dimensional vector. Also, it is capable of propagating the previously processed input's information while processing a word in the given sequence at timestep \textit{t}.
 	This encoder architecture consists of bi-directional RNN which reads the sentence in two opposite directions. It is capable of remembering the past and future context information of a sequence at any time step. The objective of this network is to extract generic sentence representation for a given word representations of the words present in the sentence.  
 	
 	
 	\begin{figure}[!tbp]
 		\centering
-		\caption{A Single LSTM cell \citep{SeqMod2018Andrew}}
+		\caption{A Single LSTM cell. Figure taken from \cite{SeqMod2018Andrew}}.
 		\label{lstm}
 		\tcbox{\includegraphics[scale=0.40]{image/LSTM.png}}
 	\end{figure}
@@ -649,7 +696,7 @@ This section describes the architecture of a various learning methods that are i
 	
 	\begin{figure}[!tbp]
 		\centering
-		\caption{A Bi-LSTM Network \citep{conneau2017supervised}}
+		\caption{A Bi-LSTM Network. Figure taken from \cite{conneau2017supervised}}.
 		\label{bilstm}
 		\tcbox{\includegraphics[scale=0.40]{image/Bi-LSTM.png}}
 	\end{figure}
@@ -659,7 +706,7 @@ This section describes the architecture of a various learning methods that are i
 	After extracting the sentence representation $\{u,v\}$  for the sentence pair $\{S_{1},S_{2}\}$, the semantic difference matrix is computed by concatenation, element-wise product and absolute element-wise difference of $u$ and $v$ as shown in equation 5.2 .
 	
 	\begin{align} 
-	SDV & =([u,v],|u - v|,(u \ast v)) 
+	SDV & =([u,v],|u - v|,(u \otimes v)) 
 	\end{align}
 	
 	\subsubsection{Textual Entailment Classifier}
@@ -669,19 +716,19 @@ This section describes the architecture of a various learning methods that are i
 	The whole encoder decoder architecture is trained  and optimised using the categorical cross-entropy as its loss function. With the probabilties from the decoder's softmax layer, one hot vector is calculated by assigning 1 to the class with maximum probability and 0 to others. It is compared to the target one hot vector as its a multi-class classification while calculating loss.
 	
 	\section{Summary}
-	In this chapter, the motivation and objective of the comparison study was discussed. Also, this chapter presented the architectural details of the models involved in the comparison study. Chapter 5 outlays the experiments to answer the questions stated in this chapter.
+	In this chapter, the motivation and objective of the comparison study was discussed. We also presented the architectural details of the models involved in the comparison study. In the next chapter, we outlay the experiments to answer the questions stated in this chapter.
 	
 	  
 	 
-\chapter{Experiments and Results}
+\chapter{Experimental Results}
 \label{results}
 
- In this chapter, we discuss the results of our comparison study. The goal of our study is to compare the ability of traditional Machine Learning (ML) to neural model, in capturing semantic representation of sentences. All the models are trained for Sentence Relatedness and Recognising Textual Entailment (RTE) tasks. In traditional ML models, handcrafted features are extracted from given a sentence pair, to represent semantics of sentence pairs, used to learn and predict their similarity. In the case of neural models, an encoder learns the sentence representations that allows a decoder to learn and predict their semantic similarity. %judge how two sentences are semantically similar or whether two sentences have meaning overlap. 
+ In this chapter, we discuss the results of our comparison study. All the models are trained for Sentence Relatedness and Recognising Textual Entailment (RTE) tasks. In traditional ML models, handcrafted features are extracted from given a sentence pair, to represent semantics of sentence pairs, used to learn and predict their similarity. In the case of neural models, an encoder learns the sentence representations that allows a decoder to learn and predict their semantic similarity. %judge how two sentences are semantically similar or whether two sentences have meaning overlap. 
  To perform better in these tasks, the encoder model should effectively capture the compositional meaning of the given sentence. 
  
  This chapter is orgainsed as follows. Section \ref{eval} and \ref{exp_setup} discusses about evaluation metric and experiment setup. In section \ref{performance}, we evaluate the performance of various sentence encoders in sentence relatedness and RTE tasks. Section \ref{parameter-tune} present the experiments that are performed to tune the hyper-parameter of the encoder architecture and presents the optimal parameter for best performance. Section \ref{fests} and \ref{TL} presents the experiments related to feature selection and Transfer Learning.
  
- \section{Evaluation metric}
+ \section{Evaluation Metric}
  \label{eval}
  
  The performance of the models is evaluated on STS tasks using \textbf{accuracy of its prediction}. The accuracy is measured using \textbf{Pearson Correlation} between the predicted similarity scores and gold scores created, using humans judgement. 
@@ -708,18 +755,19 @@ This section describes the architecture of a various learning methods that are i
  		\hline
  		\multicolumn{1}{|c|}{\textbf{Algorithms}} & \textbf{\begin{tabular}[c]{@{}c@{}}Sentence Relatedness\\  (Regression Problem)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}RTE\\ (Classification Problem)\end{tabular}}                 \\ \hline
  		& Bounded output : 0 - 5                                                                      & 3 Class Labels : {[}0,1,2{]}                                                                 \\ \hline
- 		SVM                                       & \begin{tabular}[c]{@{}c@{}}Support Vector Classifier \\ ( Kernel: Polynomial)\end{tabular}        & \begin{tabular}[c]{@{}c@{}}Support Vector Regressor\\ (Kernel : Polynomial)\end{tabular}           \\ \hline
- 		Random Forest                             & RFClassifier ( estimators = 200)                                                            & RFRegressor ( estimators = 200)                                                              \\ \hline
- 		Gradient Boosting                         & GBClassifier ( estimators = 200)                                                            & GBRegressor ( estimators = 200)                                                              \\ \hline
- 		Ensemble              performed                    & Voting based classifier                                                                     & \begin{tabular}[c]{@{}c@{}}Stacking Model\\  ( meta-model  : Linear Regression)\end{tabular} \\ \hline
+ 		SVM                                       & \begin{tabular}[c]{@{}c@{}}Support Vector Regressor \\ ( Kernel: Polynomial)\end{tabular}        & \begin{tabular}[c]{@{}c@{}}Support Vector Classifier\\ (Kernel : Polynomial)\end{tabular}           \\ \hline
+ 		Random Forest                             & 
+ 		RFRegressor ( estimators = 200)                                                              &                                                   RFClassifier ( estimators = 200)         \\ \hline
+ 		Gradient Boosting                         & GBRegressor ( estimators = 200)                                                           & GBClassifier ( estimators = 200)                                                       \\ \hline
+ 		Ensemble              performed                    &\begin{tabular}[c]{@{}c@{}}Stacking Model  classifier\\  ( meta-model  : Linear Regression)\end{tabular}                                                      & Voting based classifier \\ \hline
  	\end{tabular}
  \end{table}
  
   We trained and evaluated the sentence encoder models using Stanford Natural Language Inference (SNLI) corpus \citep{bowman2015large} for RTE task and Sentences Involving Compositional Knowledge (SICK) \citep{marelli2014semeval} data-set for sentence relatedness task. 
  
-  The ensemble model is implemented using SciKit-Learn library. The data pre-processing are performed utilizing NLTK-toolkit; a python-based library \citep{bird2004nltk}. The pre-processing steps includes stop-words removal, replacing words with its root words, and extracting similarity measures, mentioned in section \ref{ensemble}. The features based on alignment and syntactical tree structure properties are created using Standford-coreNLP \citep{manning2014stanford}.
+  The ensemble model is implemented using SciKit-Learn library. The data pre-processing are performed utilizing NLTK-toolkit; a Python-based library \citep{bird2004nltk}. The pre-processing steps includes stop-words removal, replacing words with its root words, and extracting similarity measures, mentioned in section \ref{ensemble}. The features based on alignment and syntactical tree structure properties are created using Standford-coreNLP \citep{manning2014stanford}. 
   
-   The neural models are implemented using Keras\footnote{https://keras.io/} and PyTorch\footnote{http://pytorch.org}. Keras is a python-based high-level neural networks API that runs on top of TensorFlow\footnote{https://github.com/tensorflow/tensorflow}. PyTorch is a python package that faciliates to building dynamic neural networks architecture. The neural models were trained using a machine with 8 $\times$ CPUs, 32GB RAM and 1 $\times$ NVIDIA Tesla P100 GPU from Compute Canada \footnote{https://www.computecanada.ca/} to perform the comparison study. Tesla P100 GPU has a computing speed of $\sim 4.7$ teraflops \footnote{http://www.nvidia.ca/object/tesla-p100.html} whereas the Core i7 CPU-7700 has a computing speed of $\sim$ 100 gigaflops.
+   The neural models are implemented using Keras\footnote{https://keras.io/} and PyTorch\footnote{http://pytorch.org}. Keras is a Python-based high-level neural networks API that runs on top of TensorFlow\footnote{https://github.com/tensorflow/tensorflow}. PyTorch is a Python package that faciliates to building dynamic neural networks architecture. For Bi-LSTM network, the \cite{conneau2017supervised}'s implemention\footnote{https://github.com/facebookresearch/InferSent} was used. I extended this implementation to integrate with sentence relatedness decoder as their original implementation was designed to work with RTE task. The neural models were trained using a machine with eight CPUs, 32GB RAM and one NVIDIA Tesla P100 GPU from Compute Canada \footnote{https://www.computecanada.ca/} to perform the comparison study. Tesla P100 GPU has a computing speed of  approximately 4.7 teraflops \footnote{http://www.nvidia.ca/object/tesla-p100.html} whereas the Core i7 CPU-7700 has a computing speed of approximately 100 gigaflops.
  
  
  
@@ -751,7 +799,7 @@ Table \ref{neu_perf} and \ref{Ml_perf} shows the test performance of various mod
 	\label{Ml_perf}
 	\begin{tabular}{|l|l|l|l|}
 		\hline
-		\multicolumn{2}{|c|}{\textbf{Algorithms}}                            & \textbf{RTE (Test)} & \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Sentence Relatedness\\  (Test)\end{tabular}}} \\ \hline
+		\multicolumn{2}{|c|}{\textbf{Algorithms}}                            &\textbf{\begin{tabular}[c]{@{}c@{}}RTE\\  (Test - Accuracy \%)\end{tabular}} & \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Sentence Relatedness\\  (Test - $r\times$   100)\end{tabular}}} \\ \hline
 		\multicolumn{1}{|c|}{Single ML Model} & Support Vector Machine (SVM) & 75.2                & 76.2                                                                                                 \\ \cline{2-4} 
 		& Random Forest (RF)           & 75.4                & 77.5                                                                                                 \\ \cline{2-4} 
 		& Gradient Boosting (GB)       & 76.7                & 77.5                                                                                                 \\ \hline
@@ -761,13 +809,14 @@ Table \ref{neu_perf} and \ref{Ml_perf} shows the test performance of various mod
 
  Among classical ML algorithms, Gradient Boosting (GB) performs better than random forest. This could be because the Random Forest(RF) reduces the error by lowering its variance to handle over-fitting, and the bias in prediction caused due to under-fitting stays fixed. In GB, weights are optimised in such a way that both bias and variance are minimised. This reduces the possibility of a model to under-fit or over-fit to the training data.
 
-\begin{table}[]
+\begin{table}[h]
 	\centering
 \caption{Performance of Neural Model in RTE and Sentence Relatednes Task}
 \label{neu_perf}
 	\begin{tabular}{|l|l|l|l|l|}
 		\hline
-		\multicolumn{1}{|c|}{\textbf{Algorithms}} & \multicolumn{2}{c|}{\textbf{RTE}} & \multicolumn{2}{l|}{\textbf{Sentence Relatedness}} \\ \hline
+		\multicolumn{1}{|c|}{\textbf{Algorithms}} &
+		 &\textbf{\begin{tabular}[c]{@{}c@{}}RTE\\  (Test - Accuracy \%)\end{tabular}} & \multicolumn{2}{l|}{\textbf{\begin{tabular}[c]{@{}c@{}}Sentence Relatedness\\  (Test - $r\times$   100)\end{tabular}}}  \\ \hline
 		& Train           & Test            & Train                    & Test                    \\ \hline
 		CNN                                       & 71.6            & 61.3            & 69.6                     & 61.4                    \\ \hline
 		Hierarchical CNN                          & 73              & 79.84           & \multicolumn{1}{c|}{-}   & \multicolumn{1}{c|}{-}  \\ \hline
@@ -776,7 +825,7 @@ Table \ref{neu_perf} and \ref{Ml_perf} shows the test performance of various mod
 \end{table}
 
 
-The convolutional network did not perform well in either of the tasks. It was observed that the testing accuracy of the CNN model was very low compared to the training accuracy, meaning that the model is over fitting the data. The CNN model architecture was updated such that three convolution layers followed by a max pooling layer was added, to investigate if there is any improvement in the performance. Inspired from self-hierarchical sentence model \citep{zhao2015self}, the final sentence representation was derived from concatenating the output from all the max-pooling layers. The hierarchical CNN showed better performance than single layer CNN model and all classical ML algorithms.
+The convolutional network did not perform well in either of the tasks. It was observed that the testing accuracy of the CNN model was very low compared to the training accuracy, meaning that the model is overfitting the data. The CNN model architecture was updated such that three convolution layers followed by a max pooling layer was added, to investigate if there is any improvement in the performance. Inspired from self-hierarchical sentence model \citep{zhao2015self}, the final sentence representation was derived from concatenating the output from all the max-pooling layers. The hierarchical CNN showed better performance than single layer CNN model and all classical ML algorithms.
 
 
 % Please add the following required packages to your document preamble:
@@ -790,13 +839,13 @@ The convolutional network did not perform well in either of the tasks. It was ob
 
 This experiment aims to find the optimal hyper-parameters of the neural model's architecture that can contribute to better performance. The hyper-parameters are the external configuration of a model that helps in estimating the weight and bias variables of the model. For this experiment, we studied the following hyper-parameters: optimizers, dropout rates, sentence representation dimensions, and learning rates. The updates to the  weights and the biases of the networks are heavily dependant on the hyper-parameters.
 
-There are various optimizer functions that help in optimizing the network's learnable parameter. In this experiment, we compare a non-adaptive optimizer such as Stochastic Gradient Descent (SGD) with an adaptive one such as Adam. Both these optimizers focus on minimizing the loss of the model. The learning rate determines the step size that is taken by the optimizer to reach the global minima, and dropouts are used to overcome the over-fitting issue by ignoring the randomly chosen hidden units.
+There are various optimizer functions that help in optimizing the network's learnable parameter. In this experiment, we compare a non-adaptive optimizer such as Stochastic Gradient Descent (SGD) with an adaptive one such as Adam. Both these optimizers focus on minimizing the loss of the model. The learning rate determines the step size that is taken by the optimizer to reach the global minima. Learning rate controls how much the weights have to be adjusted with respect to the loss gradient. Dropouts determines the percentage of hidden units ignored while training. They are used to overcome the over-fitting issue by ignoring the randomly chosen hidden units.
 
 \subsection{Analysis}
 
 Table \ref{lr-opt}, and Table \ref{sent_dim} report the results of our experiments on optimal hyper parameters. These experiments were performed on our best performing model- BiLSTM RNN with the max pooling layer. For this model, the network did not converge at all when the Adam optimizer was used. The training was stopped in 4 epochs as the loss of the network did not decrease.  But, the same network converged to optimal solution when we used SGD as reported by \cite{conneau2017supervised}. 
 
-For SGD, the network was trained with three different learning rates \textit{[0.1,0.01,0.001]}, two dropout rates \textit{[0.2,0.5]} for 21 epochs each. When using 0.1 learning rate,  the network achieved its maximum accuracy within 8 epochs. Lower learning rates took longer time to converge and did not achieve global optima as shown in Figure \ref{lr-opt}. For dropouts, no difference was found in output performance under both the settings as the model was not over-fitting.
+For SGD, the network was trained with three different learning rates [0.1,0.01,0.001], two dropout rates [0.2,0.5] for 21 epochs each. When using 0.1 learning rate,  the network achieved its maximum accuracy within 8 epochs. Lower learning rates took longer time to converge and did not achieve global optima as shown in Figure \ref{lr-opt}. For dropouts, no difference was found in output performance under both the settings as the model was not over-fitting.
 
 %When lower learning rates, we achieve slightly lower performance but takes almost twice the time to train. 
 %
@@ -806,18 +855,20 @@ For SGD, the network was trained with three different learning rates \textit{[0.
 
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
-\begin{table}[]
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table}[h]
 	\centering
 	\caption{Learning rate - optimizers}
 	\label{lr-opt}
 	\begin{tabular}{|l|l|l|l|l|}
 		\hline
-		Optimizer            & Learning  Rate & Epochs & \multicolumn{2}{l|}{RTE Task} \\ \hline
-		&                &        & dev           & test          \\ \hline
-		Adam                 & 0.1            & 4      & 57.2          & 57.15         \\ \hline
-		\multirow{3}{*}{SGD} & 0.1            & 8     & 83.98         & \textbf{84.35}         \\ \cline{2-5} 
-		& 0.01           & 13     & 83.49         & 83.28         \\ \cline{2-5} 
-		& 0.001          & 21     & 78.17         & 77.86         \\ \hline
+		\textbf{Optimizer}   & \textbf{Learning  Rate} & \textbf{Epochs} & \multicolumn{2}{l|}{\textbf{\begin{tabular}[c]{@{}l@{}}RTE Task\\ (Accuracy \%)\end{tabular}}} \\ \hline
+		&                         &                 & dev                               & test                                                       \\ \hline
+		Adam                 & 0.1                     & 4               & 57.2                              & 57.15                                                      \\ \hline
+		\multirow{3}{*}{SGD} & 0.1                     & 8               & 83.98                             & \textbackslash{}textbf\{84.35\}                            \\ \cline{2-5} 
+		& 0.01                    & 13              & 83.49                             & 83.28                                                      \\ \cline{2-5} 
+		& 0.001                   & 21              & 78.17                             & 77.86                                                      \\ \hline 
 	\end{tabular}
 \end{table}
 
@@ -860,7 +911,7 @@ Table \ref{sent_dim} presents the effects of using different dimensions for sent
 
 In this section, the importance of handcrafted features and their impact on the performance of ML techniques are studied. Table \ref{ensemblefeatures} reports the performance of the Ensemble model with different input features. We chose the ensemble model as it was the best performing traditional ML algorithm. Unlike neural network based models, the performance of these algorithms heavily depends on hand-crafted features. 
 
-As discussed in Section 4.1.1, the input features used in this model are categorised as : n-gram overlap, sequence features, word representation features and word alignment features. We observe highest accuracy when the model is given all categories of features, indicating that all features contribute to the prediction.
+As discussed in Section 4.1.1, the input features used in this model are categorised as : \textit{n}-gram overlap, sequence features, word representation features and word alignment features. We observe highest accuracy when the model is given all categories of features, indicating that all features contribute to the prediction.
 
 
 Among the different categories of features, we find that similarity scores based on the word representations of input sentences performs the best with 70.6\% test accuracy. This is because we use neural-network based pre-trained word representations, that extracts semantics at word level. Sequence features, such as longest common sub-sequence, prefix and suffix do not contribute much to the overall performance. This can be due to fact that semantically similar sentences may have no sequence overlap.
@@ -905,33 +956,44 @@ Among the different categories of features, we find that similarity scores based
 \label{TL}
 
 %\subsection{Experimental setup}
-This section reports on the ability of Bi-LSTM RNN and CNN models to aid in transfer learning. \cite{conneau2017supervised} showed that models trained on SNLI dataset captures universal representations of sentences that can be transferred to other tasks. Convolutional neural networks have achieved outstanding success in tranfer learning on ImageNet classification. We train Hierarchical CNN model and Bi-LSTM RNN with max pooling on SNLI dataset for RTE task and evaluate the encoder performance on sentence relatedness task. Here RTE is the source task and the sentence relatedness is the target task. In this experiment, the  dataset of source task does not overlap with the dataset of the target task to measure the generalizability of the trained model.  We use STS benchmark dataset \citep{cer2017semeval} for target task.  This target dataset consists of 8628 sentence pairs, from different domains such as image captions, news headlines, and user forums and their similarity scores.
+This section reports on the ability of Bi-LSTM RNN and CNN models to aid in transfer learning. \cite{conneau2017supervised} showed that models trained on SNLI dataset captures universal representations of sentences that can be transferred to other tasks. The SNLI dataset have five hunderd thousand hand annotated sentence pair. These reasons provided a strong foundation to use this dataset to train the encoders(source model) that will be used for transfer learning. Convolutional neural networks have achieved outstanding success in tranfer learning on ImageNet classification. We train Hierarchical CNN model and Bi-LSTM RNN with max pooling on SNLI dataset for RTE task and evaluate the encoder performance on sentence relatedness task. Here RTE is the source task and the sentence relatedness is the target task. In this experiment, the  dataset of source task does not overlap with the dataset of the target task to measure the generalizability of the trained model.  We use STS benchmark dataset \citep{cer2017semeval} for target task.  This target dataset consists of 8628 sentence pairs, from different domains such as image captions, news headlines, and user forums and their similarity scores.
 
-\begin{table}[htb]
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table}[]
 	\centering
 	\caption{Transfer Learning}
 	\label{transfer}
-	\begin{tabular}{|l|l|l|l|}
+	\begin{tabular}{|l|l|l|l|l|}
 		\hline
-		\multicolumn{2}{|c|}{\textbf{Algorithms}}            & \multicolumn{2}{c|}{\textbf{Sentence Relatedness}}               \\ \hline
-		&             & \multicolumn{1}{c|}{\textbf{Train}} & \multicolumn{1}{c|}{\textbf{Test}} \\ \hline
-		\multirow{2}{*}{\textbf{Neural Model}} & Hierarchical CNN         & 71.2                                & 68.4                               \\ \cline{2-4} 
-		& Bi-LSTM RNN & 78                                  & 74                                 \\ \hline
+		\multicolumn{2}{|c|}{\textbf{Algorithms}}        & \textbf{\begin{tabular}[c]{@{}l@{}}RTE\\ (Accuracy \%)\end{tabular}} & \multicolumn{2}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Sentence Relatedness\\ (r x 100)\end{tabular}}} \\ \hline
+		&                  & Train                                                                & \multicolumn{1}{c|}{Train}                         & \multicolumn{1}{c|}{Test}                         \\ \hline
+		\multirow{2}{*}{Neural Model} & Hierarchical CNN & 79.8                                                                 & 71.2                                               & 68.4                                              \\ \cline{2-5} 
+		& Bi-LSTM RNN      & \textbf{84.3}                                                        & \textbf{78}                                        & \textbf{74}                                       \\ \hline
 	\end{tabular}
 \end{table}
-
 
 %\subsection{Analysis}
 Despite this success of CNN model in transfer learning, Bi-LSTM RNN with the max pooling layer outperforms the hierarchical CNN model by a considerable margin as shown  in Table \ref{transfer}. This result shows that the representations captured by Bi-LSTM RNN with max pooling has higher quality features for similarity and classification task.
 
+\section{Comparison with the Original Models}
+
+The models implemented and the experiments performed has some modifications when compared to the original models reported in SEMEVAL 2017 in terms of data set and the model architecture. They report the test performance of the models on Sentence Relatedness Task. The detailed differences are reported below.
+
+\begin{itemize}
+	\item \textbf{Ensemble Models} - Originally, \cite{tian2017ecnu}'s model was designed as a ensemble of RF, GB, SVM, Deep Averaging Network and a LSTM network. This model achieved  0.81 $r$ for sentence relatedness task. In this project, I considered the ensemble of RF, GB, SVM to measure the performance of traditional machine learning models. 	This ensemble model gave 0.75 $r$ for sentence relatedness task.  
+	\item \textbf{Bi-LSTM} - In \citeauthor{conneau2017supervised}'s work, they implemented Bi-LSTM model to train only on RTE task with 4096 dimensional LSTM layer. Their model achieved 84.5\% accuracy in RTE task. This implementation was modified to train on both RTE and Sentence Relatedness task with 2048 dimensional LSTM layer. The modified model achieved 84.35 \% accuracy in RTE task which is very close to the original model's accuracy. Their model that was reported in shared task 2017 for Sentence Relatedness, was trained on RTE task. In this work, the learning gained by training on  RTE is transferred to Sentence relatedness task. \citeauthor{conneau2017supervised}'s model achieved  0.1 $r$ more than the model used in this project.
+	\item \textbf{CNN} - \cite{shao2017hcti}'s model was designed to accepted 302 dimensional word representation which includes  300 dimensions of glove word embedding,  1 dimension of overlap count and 1 dimension of word alignment score between two sentence. This model achieved 0.78 $r$  for sentence relatedness task. We couldn't reproduce the same results in our implementation for this project.
+\end{itemize}	
+
 \section{Summary}
 
-In this chapter, we performed various experiments on three models on RTE and sentence relatedness task. Out of all the models, Bi-LSTM RNN with the max-pooling layer, achieved best performance in extracting the semantic representation. The optimal hyper-parameters and the impact of various dimensions of sentence representation on the performance, were studied for the best performing model. In classical ML models, Alignment and similarity features contributed more to the prediction. Next chapter presents the conclusion of this comparative study.
+In this chapter, we performed various experiments on three models on RTE and sentence relatedness task. Out of all the models, Bi-LSTM RNN with the max-pooling layer, achieved best performance in extracting the semantic representation. The optimal hyper-parameters and the impact of various dimensions of sentence representation on the performance were studied for the best performing model. In classical ML models, alignment and similarity features contributed more to the prediction. Next chapter presents the conclusion of this comparative study.
 
 
 \chapter{Conclusion}
 
-Recently, applications based on language understanding domain have been commercially a huge success, particularly dialogue assistants. Language understanding serves as a primary component in many NLP applications such as dialogue assistant, search engine, plagiarism checker, information extraction etc. There is a growing need for more accurate language understanding models to fulfil the requirements of these applications. 
+Recently, applications based on language understanding domain have been commercially a huge success, particularly dialogue assistants. Language understanding serves as a primary component in many NLP applications such as dialogue assistant, search engine, plagiarism checker, information extraction and so on. There is a growing need for more accurate language understanding models to fulfil the requirements of these applications. 
 %Building a general-purpose techniques for understanding text will require a considerable progress. 
 %In current trends, machine learning models consistently outperform other techniques in understanding the compositional meaning of the text. With further progress in this research direction, these models are capable of solving the major open problems in the field of Natural Language Processing.
 
@@ -944,11 +1006,11 @@ In this project, we performed a comparison study of  different existing models o
 The experiments and the results of our comparison study is presented in Chapter \ref{results}. Here, we summarise our findings:
 
 \begin{itemize}
-	\item For both STS task and RTE task, BiLSTM RNN with max pooling proposed in \cite{conneau2017supervised} outperforms other models. Gradient boosting and ensemble model (SVM + RF + GB) gave the best performance among the traditional ML algorithms.
+	\item \textbf{Which encoder techniques perform well in learning accurate sentence representations?} For both STS task and RTE task, BiLSTM RNN with max pooling proposed in \cite{conneau2017supervised} outperforms other models. Gradient boosting and ensemble model (SVM + RF + GB) gave the best performance among the traditional ML algorithms.
 	%Hierarchical CNN with four convolution layer showed good results, but it did not outperform the Bi-LSTM model. CNN model took a long time to converge to the global optimum when compared to Bi-LSTM.
-	\item For traditional ML models, the selection of features plays vital role in the performance of the model. It is important to exclude the feature that makes a negative contribution to the prediction. From the experiment results, all the features contributed to the learning and there was no need for feature selection.  Similarity features based on pre-trained word representation had more impact on performance followed  alignment based features.
-	\item For neural model, we note that using 2048-dimensional embedding yields the best performance but only by a small margin. Network with larger dimensions take longer time to converge as the network complexity increases.
-	\item Transfer learning allows us to exploit the knowledge gained while solving a task (source) and to apply it in different, but related task (target). This learning is very useful in cases where training data is scarce. In the experiment \ref{TL}, Hierarchical CNN and Bi-LSTM RNN was compared for their performance in transfer learning by training it in RTE task and applying the gained knowledge to sentence relatedness task.  Although CNNs are good choice for transfer learning in image domain, they are out performed by RNN networks in language domain.
+	\item \textbf{Among classical machine learning models, what are the features contribute more to prediction?} For traditional ML models, the selection of features plays vital role in the performance of the model. It is important to exclude the feature that makes a negative contribution to the prediction. From the experiment results, all the features contributed to the learning and there was no need for feature selection.  Similarity features based on pre-trained word representation had more impact on performance followed  alignment based features.
+	\item \textbf{Since the dimension has direct effect on the memory requirements and processing time, where dimension has a good trade-off between accuracy and training time?} For neural model, we note that using 2048-dimensional embedding yields the best performance but only by a small margin. Network with larger dimensions take longer time to converge as the network complexity increases.
+	\item \textbf{What is the preferable neural network architecture for learning generic sentence representations that can aid in transfer learning?} Transfer learning allows us to exploit the knowledge gained while solving a task (source) and to apply it in different, but related task (target). This learning is very useful in cases where training data is scarce. In the experiment \ref{TL}, Hierarchical CNN and Bi-LSTM RNN was compared for their performance in transfer learning by training it in RTE task and applying the gained knowledge to sentence relatedness task.  Although CNNs are good choice for transfer learning in image domain, they are out performed by RNN networks in language domain.
 	
 \end{itemize}
  

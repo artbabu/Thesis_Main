@@ -40,6 +40,11 @@ Blei, D.~M., Ng, A.~Y., and Jordan, M.~I. (2003).
 \newblock Latent dirichlet allocation.
 \newblock {\em Journal of machine Learning research}, 3(Jan):993--1022.
 
+\bibitem[Bowman, 2016]{bowman2016modeling}
+Bowman, S.~R. (2016).
+\newblock {\em MODELING NATURAL LANGUAGE SEMANTICS IN LEARNED REPRESENTATIONS}.
+\newblock PhD thesis, STANFORD UNIVERSITY.
+
 \bibitem[Bowman et~al., 2015]{bowman2015large}
 Bowman, S.~R., Angeli, G., Potts, C., and Manning, C.~D. (2015).
 \newblock A large annotated corpus for learning natural language inference.
@@ -86,16 +91,37 @@ Conneau, A., Kiela, D., Schwenk, H., Barrault, L., and Bordes, A. (2017).
 \newblock In {\em Proceedings of the 2017 Conference on Empirical Methods in
   Natural Language Processing}, pages 670--680.
 
+\bibitem[Dagan et~al., 2006]{dagan2006pascal}
+Dagan, I., Glickman, O., and Magnini, B. (2006).
+\newblock The pascal recognising textual entailment challenge.
+\newblock In {\em Machine learning challenges. evaluating predictive
+  uncertainty, visual object classification, and recognising tectual
+  entailment}, pages 177--190. Springer.
+
 \bibitem[Deerwester et~al., 1989]{deerwester1989computer}
 Deerwester, S.~C., Dumais, S.~T., Furnas, G.~W., Harshman, R.~A., Landauer,
   T.~K., Lochbaum, K.~E., and Streeter, L.~A. (1989).
 \newblock Computer information retrieval using latent semantic structure.
 \newblock US Patent 4,839,853.
 
+\bibitem[Dzikovska et~al., 2010]{dzikovska2010intelligent}
+Dzikovska, M.~O., Bental, D., Moore, J.~D., Steinhauser, N.~B., Campbell,
+  G.~E., Farrow, E., and Callaway, C.~B. (2010).
+\newblock Intelligent tutoring with natural language support in the beetle ii
+  system.
+\newblock In {\em Proceedings of the 5th European conference on Technology
+  enhanced learning conference on Sustaining TEL: from innovation to learning
+  and practice}, pages 620--625. Springer-Verlag.
+
 \bibitem[Firth, 1957]{firth1957synopsis}
 Firth, J.~R. (1957).
 \newblock A synopsis of linguistic theory, 1930-1955.
 \newblock {\em Studies in linguistic analysis}.
+
+\bibitem[Goldberg, 2016]{goldberg2016primer}
+Goldberg, Y. (2016).
+\newblock A primer on neural network models for natural language processing.
+\newblock {\em Journal of Artificial Intelligence Research}, 57:345--420.
 
 \bibitem[Han et~al., 2013]{han2013umbc_ebiquity}
 Han, L., Kashyap, A.~L., Finin, T., Mayfield, J., and Weese, J. (2013).
@@ -118,6 +144,19 @@ Hill, F., Cho, K., and Korhonen, A. (2016).
   Chapter of the Association for Computational Linguistics: Human Language
   Technologies}, pages 1367--1377.
 
+\bibitem[Hochreiter and Schmidhuber, 1997]{hochreiter1997long}
+Hochreiter, S. and Schmidhuber, J. (1997).
+\newblock Long short-term memory.
+\newblock {\em Neural computation}, 9(8):1735--1780.
+
+\bibitem[Johnson and Zhang, 2015]{johnson2015effective}
+Johnson, R. and Zhang, T. (2015).
+\newblock Effective use of word order for text categorization with
+  convolutional neural networks.
+\newblock In {\em Proceedings of the 2015 Conference of the North American
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies}, pages 103--112.
+
 \bibitem[Jurafsky and Martin, 2014]{jurafsky2014speech}
 Jurafsky, D. and Martin, J.~H. (2014).
 \newblock {\em Speech and language processing}, volume~3.
@@ -135,6 +174,12 @@ Luong, T., Pham, H., and Manning, C.~D. (2015).
 \newblock Effective approaches to attention-based neural machine translation.
 \newblock In {\em Proceedings of the 2015 Conference on Empirical Methods in
   Natural Language Processing}, pages 1412--1421.
+
+\bibitem[Machado et~al., 2015]{machado2015variables}
+Machado, G., Mendoza, M.~R., and Corbellini, L.~G. (2015).
+\newblock What variables are important in predicting bovine viral diarrhea
+  virus? a random forest approach.
+\newblock {\em Veterinary research}, 46(1):85.
 
 \bibitem[Manning et~al., 2014]{manning2014stanford}
 Manning, C., Surdeanu, M., Bauer, J., Finkel, J., Bethard, S., and McClosky, D.
@@ -166,6 +211,11 @@ Mikolov, T., Sutskever, I., Chen, K., Corrado, G., and Dean, J. (2013).
 \newblock In {\em Proceedings of the 26th International Conference on Neural
   Information Processing Systems-Volume 2}, pages 3111--3119. Curran Associates
   Inc.
+
+\bibitem[Miller and Charles, 1991]{miller1991contextual}
+Miller, G.~A. and Charles, W.~G. (1991).
+\newblock Contextual correlates of semantic similarity.
+\newblock {\em Language and cognitive processes}, 6(1):1--28.
 
 \bibitem[Ng, 2018]{SeqMod2018Andrew}
 Ng, A. (2018).
@@ -233,6 +283,15 @@ Tian, J., Zhou, Z., Lan, M., and Wu, Y. (2017).
 \newblock In {\em Proceedings of the 11th International Workshop on Semantic
   Evaluation (SemEval-2017)}, pages 191--197.
 
+\bibitem[Wang et~al., 2015]{wang2015semantic}
+Wang, P., Xu, J., Xu, B., Liu, C., Zhang, H., Wang, F., and Hao, H. (2015).
+\newblock Semantic clustering and convolutional neural network for short text
+  categorization.
+\newblock In {\em Proceedings of the 53rd Annual Meeting of the Association for
+  Computational Linguistics and the 7th International Joint Conference on
+  Natural Language Processing (Volume 2: Short Papers)}, volume~2, pages
+  352--357.
+
 \bibitem[Wen et~al., 2015]{wen2015semantically}
 Wen, T.-H., Gasic, M., Mrk{\v{s}}i{\'c}, N., Su, P.-H., Vandyke, D., and Young,
   S. (2015).
@@ -240,6 +299,13 @@ Wen, T.-H., Gasic, M., Mrk{\v{s}}i{\'c}, N., Su, P.-H., Vandyke, D., and Young,
   spoken dialogue systems.
 \newblock In {\em Proceedings of the 2015 Conference on Empirical Methods in
   Natural Language Processing}, pages 1711--1721.
+
+\bibitem[Yin and Sch{\"u}tze, 2015]{yin2015convolutional}
+Yin, W. and Sch{\"u}tze, H. (2015).
+\newblock Convolutional neural network for paraphrase identification.
+\newblock In {\em Proceedings of the 2015 Conference of the North American
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies}, pages 901--911.
 
 \bibitem[Zhao et~al., 2015]{zhao2015self}
 Zhao, H., Lu, Z., and Poupart, P. (2015).
